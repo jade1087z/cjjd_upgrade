@@ -1,0 +1,83 @@
+#wrapper {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    .topLogo {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        width: 100%;
+        max-height: 60px;
+        transition: top 0.4s ease-in-out;
+        background-color: var(--white);
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid var(--gray);
+        padding: 40px 0;
+        .topLogo .header_logo {
+            width: 100%;
+            text-align: center;
+            .topLogo .header_logo img {
+                width: 120px;
+                padding: 1.1rem;
+            }
+        }
+        .nav-up {
+            top: -120px;
+        }
+        .nav-down {
+            top: 0px;
+        }
+    }
+    #header {
+        &.bottomHeader {
+            display: none;
+
+            width: 100%;
+            height: auto;
+            background-color: var(--white);
+            border-top: 1px solid var(--gray);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            .header_logo img {
+                width: 120px;
+                padding: 1.1rem;
+            }
+
+            .header_nav ul {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                li {
+                    width: calc(100% / 5);
+                    &:hover a {
+                        color: var(--mcolorUp);
+                    }
+                    &:active a {
+                        color: var(--mcolor);
+                    }
+                    a {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        font-size: 0.85rem;
+                        padding: 1.5rem 1.2rem;
+                        transition: all 0.3s;
+                        width: 100%;
+                        color: var(--black);
+                        svg {
+                            font-size: 1.5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

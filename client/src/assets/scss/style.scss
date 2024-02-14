@@ -1,0 +1,15 @@
+@import "setting/reset.scss";
+@import "setting/common.scss";
+
+// section
+
+// layout
+@import "section/layout/header";
+@import "section/layout/mobaile";
+@import "section/layout/aside";
+
+// contents
+@import "section/contents/contents";
+
+// commu
+@import "section/commu/board.scss";
