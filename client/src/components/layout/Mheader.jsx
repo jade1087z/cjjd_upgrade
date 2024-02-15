@@ -31,7 +31,7 @@ const Mheader = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to="../alcohol/alcohol.php">
+                            <Link to="/aclist">
                                 <FontAwesomeIcon icon={faHeart} /> 술 리뷰
                             </Link>
                         </li>
@@ -46,7 +46,7 @@ const Mheader = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to="../mypage/mypage.php">
+                            <Link to="/mypage">
                                 <FontAwesomeIcon icon={faUser} /> 마이페이지
                             </Link>
                         </li>

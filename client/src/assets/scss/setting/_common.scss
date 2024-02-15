@@ -14,6 +14,9 @@
     --mcolorUp: #09d665;
     --scolor: #4f4f4f;
     --bgcolor: #f4f4f4;
+
+    --goodColor: #8a3fc6;
+    --abvColor: #ff8d24;
 }
 
 html {
@@ -56,16 +59,14 @@ html {
     padding: 1.2rem;
     margin-bottom: 1.5rem;
     background-color: var(--white);
-}
-
-.boxStyle h4 {
-    font-size: 1rem;
-    font-weight: bold;
-    color: var(--black);
-}
-
-.boxStyle h4 span {
-    color: var(--red);
+    h4 {
+        font-size: 1rem;
+        font-weight: bold;
+        color: var(--black);
+    }
+    span {
+        color: var(--red);
+    }
 }
 
 /* 사이드에 들어가는 초록 버튼 */

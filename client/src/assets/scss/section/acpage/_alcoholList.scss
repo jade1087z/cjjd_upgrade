@@ -1,0 +1,140 @@
+/* ___________________________alcohol_search___________________________ */
+.alcohol_search {
+    position: relative;
+}
+.alcohol_search label {
+    position: absolute;
+    right: 0.8rem;
+    font-size: 1.6rem;
+    padding: 1rem;
+    display: inline-block;
+    color: var(--mcolor);
+    cursor: pointer;
+}
+/* ___________________________alcohol_select___________________________ */
+
+.alcohol_select {
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 3rem;
+    ul {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: calc(100% / 6.2);
+            height: 2.8rem;
+            line-height: 2.8rem;
+            font-size: 1rem;
+            text-align: center;
+            transition: all 0.2s;
+            &:hover {
+                background-color: var(--black400);
+            }
+            &.active {
+                background-color: var(--mcolor);
+                color: var(--white);
+            }
+            a {
+                display: block;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+/* ____________________________alcohol_item____________________________ */
+.alcohol_item {
+    width: 100%;
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+        li {
+            width: 23.8%;
+            margin: 0.6%;
+            display: flex;
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            &:hover img {
+                transform: scale(1.1);
+            }
+            .item_img {
+                background-color: rgb(243, 243, 243);
+                width: 100%;
+                margin-bottom: 1rem;
+                overflow: hidden;
+                img {
+                    padding: 0.8rem;
+                    transition: all 0.4s;
+                }
+            }
+            .item_info {
+                width: 100%;
+                margin-bottom: 1rem;
+                h4 {
+                    font-size: 1.1rem;
+                    margin-bottom: 5;
+                }
+                p {
+                    font-size: 0.85rem;
+                    color: var(--black200);
+                }
+            }
+            .item_summary ul {
+                display: flex;
+                li {
+                    margin-right: 0.6rem;
+                    font-weight: 700;
+                    font-size: 0.85rem;
+                    line-height: 1;
+                    span {
+                        margin-left: 0.3rem;
+                    }
+                    &.summary_good span,
+                    &.summary_good svg {
+                        color: var(--mcolor) !important;
+                    }
+                    &.summary_comment span,
+                    &.summary_comment svg {
+                        color: var(--goodColor) !important;
+                    }
+                    &.summary_abv span,
+                    &.summary_abv svg {
+                        color: var(--abvColor) !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1150px) {
+    .alcohol_item > ul > li {
+        width: 31.7%;
+        margin: 0.8%;
+    }
+}
+@media (max-width: 600px) {
+    .alcohol_item > ul > li {
+        width: 47.6%;
+        margin: 1.2%;
+    }
+    .alcohol_select {
+        box-shadow: 1px 1px 4px #6d6d6d31;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 0;
+        li {
+            background-color: #fff;
+            border: 1px solid #f7f7f7;
+            border-radius: 0;
+            width: 33.33%;
+            height: 3rem;
+            line-height: 3rem;
+        }
+    }
+}

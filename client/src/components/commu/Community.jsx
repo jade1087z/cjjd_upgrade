@@ -31,7 +31,7 @@ const Community = () => {
                     </li>
                     <li>
                         <Link
-                            to="board_view.php?boardId=<?= $board['boardId'] ?>"
+                            to="/view"
                             data-boardId="<?= $board['boardId'] ?>"
                         >
                             <div className="board_info">
@@ -49,6 +49,7 @@ const Community = () => {
                         </Link>
                     </li>
                 </ul>
+                
 
                 <div className="board_page_option">
                     <div className="board_pages">

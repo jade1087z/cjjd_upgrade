@@ -1,0 +1,158 @@
+.alcohol_thumbnail {
+    width: 100%;
+    min-height: 7.5rem;
+    background-color: #eee;
+    background: url(../../../img/alcohol_bg.jpg) no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.alcohol_desc {
+    @include Dfjsb;
+    align-items: center;
+    .alcohol_img {
+        width: 45%;
+        padding: 1.2rem;
+    }
+
+    .alcohol_detail {
+        @include Dfjsb;
+        width: 55%;
+        padding: 2rem 1rem;
+        flex-direction: column;
+        h4 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        p {
+            font-size: 1rem;
+            color: var(--black200);
+            margin-bottom: 1.5rem;
+        }
+        em {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            height: 9rem;
+            padding: 1rem;
+            overflow-y: auto;
+            background-color: var(--white100);
+            border: 1px solid var(--gray);
+            color: var(--black100);
+            border-radius: 5px;
+        }
+        .good_btn {
+            cursor: pointer;
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            color: var(--white);
+            font-size: 1.1rem;
+            background-color: var(--mcolor);
+            transition: all 0.2s;
+            svg {
+                margin-right: 0.2rem;
+            }
+            &:hover {
+                background-color: var(--mcolorUp);
+                color: var(--white);
+            }
+        }
+    }
+}
+
+/* __________________________alcohol_summary__________________________ */
+.alcohol_summary {
+    padding: 1.2rem 0;
+    ul {
+        display: flex;
+        padding: 0.5rem 1rem;
+        li {
+            font-size: 1.1rem;
+            width: 33.333%;
+            display: flex;
+            align-items: center;
+            flex-direction: column-reverse;
+            margin-right: 0;
+            border-right: 1px solid #ddd;
+            &:last-child {
+                border-right: none;
+            }
+            &:hover span {
+                color: var(--white);
+            }
+            &.summary_good:hover span {
+                background-color: var(--mcolor) !important ;
+            }
+            &.summary_comment:hover span {
+                background-color: var(--goodColor);
+            }
+            &.summary_abv:hover span {
+                background-color: var(--abvColor);
+            }
+            &.summary_good p {
+                color: var(--mcolor) !important ;
+            }
+            &.summary_comment p {
+                color: var(--goodColor);
+            }
+            &.summary_abv p {
+                color: var(--abvColor);
+            }
+            svg {
+                margin-right: 0.2rem;
+            }
+            span {
+                width: 50px;
+                height: 50px;
+                text-align: center;
+                line-height: 50px;
+                font-size: 0.9rem;
+                display: block;
+                border-radius: 50%;
+                margin-bottom: 1rem;
+                background-color: #eee;
+                color: var(--black200);
+                transition: all 0.4s;
+            }
+        }
+    }
+}
+
+@media (max-width: 1150px) {
+    .alcohol_desc {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+    .alcohol_img {
+        width: 70%;
+        padding: 1.2rem;
+    }
+    .alcohol_detail {
+        width: 100%;
+        padding: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+@media (max-width: 600px) {
+    .alcohol_detail em {
+        height: 7rem;
+    }
+    .review_wrap .review_text strong {
+        width: 25%;
+    }
+    .review_wrap li .review_text p {
+        width: 65%;
+    }
+
+    .review_add textarea {
+        width: 70%;
+    }
+    .review_add button {
+        width: 28%;
+    }
+}

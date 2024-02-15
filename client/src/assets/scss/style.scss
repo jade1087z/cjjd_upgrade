@@ -1,5 +1,6 @@
 @import "setting/reset.scss";
 @import "setting/common.scss";
+@import "setting/mixin.scss";
 
 // section
 
@@ -13,3 +14,14 @@
 
 // commu
 @import "section/commu/board.scss";
+@import "section/commu/boardView.scss";
+@import "section/commu/boardReview.scss";
+@import "section/commu/boardWrite.scss";
+
+// acpage
+@import "section/acpage/rank";
+@import "section/acpage/alcoholList";
+@import "section/acpage/alcoholView";
+
+// mypa ge
+@import "section/user/mypage";

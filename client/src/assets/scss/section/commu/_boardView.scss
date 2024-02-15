@@ -1,0 +1,233 @@
+.board_view {
+    .view_wrap {
+        margin-top: 20px;
+        padding: 20px;
+
+        .view_top {
+            @include Dfjsb;
+
+            h5 {
+                font-weight: 800;
+                font-size: 1.35rem;
+                white-space: nowrap; // 텍스트를 한 줄에 표시
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+        .view_box {
+            @include Dfjsb;
+
+            margin-top: 5px;
+            padding-top: 5px;
+
+            .user_info {
+                width: 55%;
+
+                .user_info_box {
+                    p {
+                        font-size: 1rem;
+                        display: inline-block;
+                        margin: 5px 0;
+                        cursor: pointer;
+
+                        &:hover {
+                            text-decoration: underline;
+                            text-underline-position: under;
+                        }
+                    }
+                }
+            }
+            .view_info {
+                .info_list {
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+
+                    svg {
+                        margin-right: 5px;
+                        color: #ddd;
+
+                        &.like {
+                            color: var(--mcolor);
+                        }
+                        &:hover {
+                            text-decoration: underline;
+                            text-underline-position: under;
+                        }
+                    }
+
+                    div {
+                        padding-right: 15px;
+                        font-weight: bold;
+                        font-size: 0.9rem;
+                        position: relative;
+                        line-height: 2.3rem;
+
+                        em {
+                            color: var(--red);
+                            font-weight: bold;
+                            font-size: 1rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .board_desc {
+        @include Dfjc;
+
+        align-items: center;
+        .board_detail {
+            @include Dfjsb;
+            width: 100%;
+            padding: 1.5rem 1rem;
+            flex-direction: column;
+            border-top: 1px dashed var(--gray);
+            border-bottom: 1px dashed var(--gray);
+
+            span {
+                font-size: 1rem;
+                color: var(--black200);
+                margin-bottom: 1.5rem;
+            }
+            em {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.5;
+                height: 9rem;
+                padding: 1rem 1rem 1rem 1.5rem;
+                font-weight: 600;
+                overflow-y: auto;
+                color: var(--black100);
+            }
+        }
+    }
+    /* 추천 버튼  */
+    .comment_summary {
+        padding: 20px 0 10px 0;
+        border-top: 1px dashed var(--gray);
+        text-align: right;
+
+        .button_list {
+            button {
+                padding: 15px 25px;
+                font-family: "Roboto";
+                font-weight: 500;
+                line-height: 1rem;
+                border-radius: 6px;
+                display: inline-block;
+                font-size: 1rem;
+                letter-spacing: 0.5px;
+                background: var(--gray);
+                color: var(--white);
+                cursor: pointer;
+                margin-left: 5px;
+
+                &.good {
+                    background: var(--mcolor);
+                    color: var(--white);
+                    &:hover {
+                        background-color: var(--mcolorUp);
+                    }
+                }
+                &:hover {
+                    background-color: var(--black300);
+                }
+            }
+        }
+    }
+
+    // 하단 리뷰탭
+}
+
+/* 반응형 */
+@media (max-width: 1150px) {
+    .board_desc {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        .board_detail {
+            width: 100%;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    }
+
+    .alcohol_img {
+        width: 70%;
+        padding: 1.2rem;
+    }
+}
+
+@media (max-width: 650px) {
+    .view_wrap {
+        padding: 0 !important;
+    }
+
+    .back_list {
+        margin-top: 5px;
+        button {
+            margin-left: 0;
+            padding: 7px 12px;
+        }
+    }
+    .info_list svg {
+        bottom: 12% !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .board_detail em {
+        height: 7rem;
+    }
+
+    .view_heart img {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    .review_wrap .review_text strong {
+        width: 25%;
+    }
+    .review_wrap li .review_text p {
+        width: 65%;
+    }
+    .review_add button {
+        width: 28%;
+    }
+    .review_add textarea {
+        width: 70%;
+    }
+}
+
+@media (max-width: 420px) {
+    .view_wrap {
+        margin-top: 0;
+        padding: 5px 0 0 0;
+        .view_box {
+            margin-top: 0;
+            flex-direction: column;
+            align-items: baseline;
+            .view_info {
+                padding-left: 15px;
+            }
+        }
+    }
+
+    .board_detail {
+        padding: 0;
+        em {
+            padding: 5px 0;
+        }
+    }
+    .back_list {
+        margin-top: 5px;
+    }
+
+    .button_list > button {
+        margin-left: 0;
+        padding: 10px 10px;
+    }
+}

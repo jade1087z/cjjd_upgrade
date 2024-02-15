@@ -7,6 +7,10 @@ import Main from "./components/contents/Main";
 import Aside from "./components/layout/Aside";
 import Community from "./components/commu/Community";
 import View from "./components/commu/view/View";
+import Write from "./components/commu/write/Write";
+import AcList from "./components/acpage/list/AcList";
+import AcVIiew from "./components/acpage/view/AcVIiew";
+import Mypage from "./components/user/mypage/Mypage";
 
 const App = () => {
     return (
@@ -20,6 +24,10 @@ const App = () => {
                             <Route path="/" element=<Main /> />
                             <Route path="/community" element=<Community /> />
                             <Route path="/view" element=<View /> />
+                            <Route path="/write" element=<Write /> />
+                            <Route path="/aclist" element=<AcList /> />
+                            <Route path="/acview" element=<AcVIiew /> />
+                            <Route path="/mypage" element=<Mypage /> />
                         </Routes>
                     </section>
                 </main>
