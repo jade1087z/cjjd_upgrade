@@ -1,17 +1,49 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
+import SelectOption3 from "./SelectOption3";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 const Write = () => {
+    const navigate = useNavigate();
+    const cancle = (e) => {
+        if (window.confirm("글 작성을 취소하시겠습니까?")) {
+            navigate("/");
+        }
+    };
+
+    const [category, setCategory] = useState("자유게시판");
+    const [title, setTilte] = useState("");
+    const [contents, setContents] = useState("");
+
+    const post = (e, category, title, contents) => {
+        e.preventDefault();
+        console.log(category);
+        const body = {
+            boardCategory: category,
+            boardTitle: title,
+            boardContents: contents,
+        };
+
+        axios
+            .post("/api/post/write", body)
+            .then((res) => {
+                if (res.data.success) {
+                    console.log("axios succ");
+                } else {
+                    console.log("axios false");
+                }
+            })
+            .catch((err) => {
+                console.log(err, "aixos ERR");
+            });
+    };
+
     return (
         <>
             <div className="best_list boxStyle roundCorner shaDow ">
                 <div className="board">
                     <div className="board_form">
-                        <form
-                            action="board_writeSave.php"
-                            method="post"
-                            enctype="multipart/form-data"
-                        >
+                        <div className="form">
                             <legend className="blind"></legend>
                             <div className="form_box">
                                 <div className="board_title">
@@ -19,35 +51,14 @@ const Write = () => {
                                 </div>
                                 <div className="board_text">
                                     <div className="post">
-                                        <div className="selectBox3">
-                                            <FontAwesomeIcon
-                                                icon={faAngleDown}
-                                            />
-                                            <input
-                                                type="hidden"
-                                                id="boardCategory"
-                                                name="boardCategory"
-                                                value="자유게시판"
-                                            />
-                                            <button
-                                                className="label"
-                                                onclick="document.getElementById('boardCategory').value = this.textContent;"
-                                            >
-                                                자유게시판
-                                            </button>
-                                            <ul className="optionList">
-                                                <li className="optionItem">
-                                                    자유게시판
-                                                </li>
-                                                <li className="optionItem">
-                                                    일기장
-                                                </li>
-                                                <li className="optionItem">
-                                                    술 신청하기
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <label for="boardFile" className="link">
+                                        <SelectOption3
+                                            category={category}
+                                            setCategory={setCategory}
+                                        />
+                                        <label
+                                            htmlFor="boardFile"
+                                            className="link"
+                                        >
                                             이미지를 업로드 해주세요.!!
                                         </label>
                                         <input
@@ -59,7 +70,7 @@ const Write = () => {
                                         />
                                     </div>
                                     <div className="post_title">
-                                        <label for="boardTitle"></label>
+                                        <label htmlFor="boardTitle"></label>
                                         <input
                                             type="text"
                                             id="boardTitle"
@@ -73,35 +84,41 @@ const Write = () => {
                                     </div>
                                     <div className="contents_wrap">
                                         <div className="board_contents">
-                                            <label for="boardContents"></label>
+                                            <label htmlFor="boardContents"></label>
                                             <textarea
                                                 id="boardContents"
                                                 name="boardContents"
                                                 cols="50"
                                                 rows="1"
                                                 className="board_input_contents inputStyle placeholder"
-                                                placeholder="원하는 술을 신청해주세요"
+                                                placeholder="내용을 입력하세요"
                                             ></textarea>
                                         </div>
                                     </div>
                                     <div className="create">
                                         <button
-                                            type="submit"
                                             className="sideBtn mt50 mr20"
-                                            onclick="window.location.href='board.php'"
+                                            onClick={(e) => cancle(e)}
                                         >
                                             <h2>취소</h2>
                                         </button>
                                         <button
-                                            type="submit"
                                             className="sideBtn mt50 submit"
+                                            onClick={(e) =>
+                                                post(
+                                                    e,
+                                                    category,
+                                                    title,
+                                                    contents
+                                                )
+                                            }
                                         >
                                             <h2>작성 완료</h2>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

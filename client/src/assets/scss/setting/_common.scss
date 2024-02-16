@@ -71,6 +71,8 @@ html {
 
 /* 사이드에 들어가는 초록 버튼 */
 .sideBtn {
+    display: block;
+    text-align: center;
     width: 100%;
     margin-top: 20px;
     background-color: var(--mcolor);

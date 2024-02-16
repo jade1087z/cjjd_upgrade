@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faIcons } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const Aside = () => {
     return (
@@ -33,16 +33,13 @@ const Aside = () => {
                             <Link to="../login/logout.php">로그아웃</Link>
                         </li>
                         <li>
-                            <Link to="../mypage/mypage.php">마이페이지</Link>
+                            <Link to="/mypage">마이페이지</Link>
                         </li>
                     </ul>
                 </div>
-                <button
-                    className="sideBtn"
-                    onclick="location.href='../board/board_write.php'"
-                >
+                <Link to={"/write"} className="sideBtn">
                     새 글쓰기
-                </button>
+                </Link>
             </div>
 
             {/*<div className="info_box side_box roundCorner shaDow">
