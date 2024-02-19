@@ -15,27 +15,29 @@ const Write = () => {
     const [title, setTilte] = useState("");
     const [contents, setContents] = useState("");
 
-    const post = (e, category, title, contents) => {
+    const post = async (e, category, title, contents) => {
         e.preventDefault();
-        console.log(category);
-        const body = {
-            boardCategory: category,
-            boardTitle: title,
-            boardContents: contents,
-        };
-
-        axios
-            .post("/api/post/write", body)
-            .then((res) => {
-                if (res.data.success) {
-                    console.log("axios succ");
-                } else {
-                    console.log("axios false");
-                }
-            })
-            .catch((err) => {
-                console.log(err, "aixos ERR");
-            });
+        if (window.confirm("게시글을 업로드할까요?")) {
+            console.log(category);
+            const body = {
+                boardCategory: category,
+                boardTitle: title,
+                boardContents: contents,
+            };
+            await axios
+                .post("/api/post/write", body)
+                .then((res) => {
+                    if (res.data.success) {
+                        alert("글 작성이 완료되었습니다.");
+                        navigate("/community");
+                    } else {
+                        console.log("axios false");
+                    }
+                })
+                .catch((err) => {
+                    console.log(err, "aixos ERR");
+                });
+        }
     };
 
     return (
@@ -79,6 +81,9 @@ const Write = () => {
                                             rows="1"
                                             className="board_input_title inputStyle"
                                             placeholder="제목을 작성해주세요"
+                                            onChange={(e) =>
+                                                setTilte(e.currentTarget.value)
+                                            }
                                             required
                                         />
                                     </div>
@@ -91,6 +96,11 @@ const Write = () => {
                                                 cols="50"
                                                 rows="1"
                                                 className="board_input_contents inputStyle placeholder"
+                                                onChange={(e) =>
+                                                    setContents(
+                                                        e.currentTarget.value
+                                                    )
+                                                }
                                                 placeholder="내용을 입력하세요"
                                             ></textarea>
                                         </div>

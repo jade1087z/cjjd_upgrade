@@ -65,6 +65,9 @@
         .board_date,
         .board_view {
             width: 10%;
+            span {
+                color: var(--black200);
+            }
         }
     }
 }

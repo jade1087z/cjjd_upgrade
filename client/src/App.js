@@ -23,7 +23,7 @@ const App = () => {
                         <Routes>
                             <Route path="/" element=<Main /> />
                             <Route path="/community" element=<Community /> />
-                            <Route path="/view" element=<View /> />
+                            <Route path="/view/:boardId" element=<View /> />
                             <Route path="/write" element=<Write /> />
                             <Route path="/aclist" element=<AcList /> />
                             <Route path="/acview" element=<AcVIiew /> />
