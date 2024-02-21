@@ -5,10 +5,8 @@ export const postAll = async () => {
         .get("/api/post/list")
         .then((res) => {
             if (res.status === 200) {
-                console.log(res.data.postList);
                 return res.data.postList;
             } else {
-                console.log(res.data.success);
                 console.log("else error", res);
                 return [];
             }

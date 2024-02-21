@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import boardDetail from "./boardDetail";
 import { format } from "date-fns";
 import CommentArea from "./CommentArea";
 import PostData from "./PostData";
+import goodBtn from "./gootBtn";
 const View = () => {
+
     const params = useParams().boardId;
     const [post, setPost] = useState();
+    const [btnLike, setBtnLike] = useState()
+   
     useEffect(() => {
+        let isMounted = true
         const fetchPost = async () => {
-            const data = await boardDetail(params);
-            if (data && data[0]) {
+            const data = await boardDetail(params, setBtnLike);
+            if (data && data[0] && isMounted) {
                 const formattedPost = {
                     ...data[0],
                     regTime: format(new Date(data[0].regTime), "MM.dd"),
@@ -20,8 +23,17 @@ const View = () => {
                 setPost(formattedPost);
             }
         };
+
         fetchPost();
-    }, [params]);
+        return () => {
+            isMounted = false
+        }
+    }, []);
+
+    console.log(btnLike)
+    
+    
+
     return (
         <>
             <div className="board_view boxStyle roundCorner shaDow">
@@ -29,13 +41,15 @@ const View = () => {
                     <Link to="board.php">자유게시판</Link>
                 </h4>
 
-                <PostData post={post} />
+                <PostData post={post} params={params} btnLike={btnLike} setBtnLike={setBtnLike}/>
 
                 <div className="comment_summary">
                     <div className="button_list">
                         <button className="delete">삭제하기</button>
                         <button className="modify">수정하기</button>
-                        <button className="good">추천하기</button>
+                        <button className="good"
+                        onClick={(e) => goodBtn(e, params, btnLike, setBtnLike, setPost)}
+                        >추천하기</button>
                     </div>
                 </div>
             </div>

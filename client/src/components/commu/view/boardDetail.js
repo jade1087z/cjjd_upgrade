@@ -1,11 +1,11 @@
 import axios from "axios";
-export const boardDetail = async (params) => {
+export const boardDetail = async (params, setBtnLike) => {
     console.log(params);
     return await axios
         .get(`/api/post/view/${params}`)
         .then((res) => {
             if (res.data.success) {
-                console.log("axios ok");
+                setBtnLike(res.data.isLiked)
                 return res.data.post;
             } else {
                 console.log("axios fail");

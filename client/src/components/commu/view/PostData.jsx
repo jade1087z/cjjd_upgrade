@@ -2,8 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import goodBtn from "./gootBtn";
 
-const PostData = ({ post }) => {
+const PostData = ({ post, params, btnLike, setBtnLike, setPost }) => {
     return (
         <>
             {post ? (
@@ -29,7 +30,7 @@ const PostData = ({ post }) => {
                                     <div className="view_num boardRegtime">
                                         {post.regTime}
                                     </div>
-                                    <FontAwesomeIcon icon={faHeart} />
+                                    <FontAwesomeIcon icon={faHeart} className={btnLike ? 'like' : ''} onClick={(e) => goodBtn(e, params, btnLike, setBtnLike, setPost )} />
                                     <div className="view_num boardLike">
                                         추천수: <em>{post.boardLike}</em>
                                     </div>
@@ -57,7 +58,7 @@ const PostData = ({ post }) => {
                 <>
                     <div className="view_wrap">
                         <div className="view_top">
-                            <h5> TITLE</h5>
+                            <h5> </h5>
                         </div>
 
                         <div className="view_box">
@@ -73,7 +74,7 @@ const PostData = ({ post }) => {
                             <div className="view_info">
                                 <div className="info_list">
                                     <div className="view_num boardRegtime">
-                                        <em>regtime</em>
+                                        <em>s</em>
                                     </div>
                                     <FontAwesomeIcon icon={faHeart} />
                                     <div className="view_num boardLike">

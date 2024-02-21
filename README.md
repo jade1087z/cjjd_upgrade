@@ -1,7 +1,11 @@
+\*\* 02.21
+-   view 페이지 다듬고 댓글 기능 -> 좋아요, 조회수 기능 해결하기
+
+
 \*\* 02.19
 내일 할 일
 
--   view 페이지의 다듬고 댓글 기능 -> 좋아요, 조회수 기능 해결하기
+-   view 페이지 다듬고 댓글 기능 -> 좋아요, 조회수 기능 해결하기
 
 오늘 한 일
 
@@ -30,3 +34,94 @@ npm i @reduxjs/toolkit
 npm i nodemon
 npm i mysql
 npm i express
+
+- 외래 키
+-- 외래 키 검사 해제
+SET FOREIGN_KEY_CHECKS=0;
+
+-- 외래 키 검사 재활성화
+SET FOREIGN_KEY_CHECKS=1;
+
+- TABLE 
+CREATE TABLE drinkMember(
+  myMemberId INT(10) UNSIGNED AUTO_INCREMENT,
+  youId VARCHAR(20) NOT NULL,
+  youPass VARCHAR(20) NOT NULL,
+  youName VARCHAR(5) NOT NULL,
+  youNick VARCHAR(10) NOT NULL,
+  youEmail VARCHAR(40) NOT NULL,
+  youBirth INT(8) NOT NULL,
+  youAddress VARCHAR(80) NOT NULL,
+  youImgFile VARCHAR(100) DEFAULT NULL,
+  youImgSize VARCHAR(100) DEFAULT NULL,
+  memberDelete BOOLEAN DEFAULT 1,
+  regTime INT(20) NOT NULL,
+  PRIMARY KEY(myMemberID)
+) CHARSET=utf8;
+
+CREATE TABLE drinkBoard (
+  boardId INT(10) UNSIGNED AUTO_INCREMENT,
+  myMemberId INT(10) UNSIGNED NOT NULL,
+  boardCategory VARCHAR(10) NOT NULL,
+  boardTitle VARCHAR(255) NOT NULL,
+  boardContents LONGTEXT NOT NULL,
+  boardAuthor VARCHAR(10) NOT NULL,
+  boardView INT(100) NOT NULL,
+  boardLike INT(100) NOT NULL,
+  boardComment INT(100) NOT NULL,
+  boardImgFile VARCHAR(100) DEFAULT NULL,
+  boardImgSize VARCHAR(100) DEFAULT NULL,
+  boardDelete BOOLEAN DEFAULT 1,
+  regTime INT(40) NOT NULL,
+  PRIMARY KEY (boardId)
+) CHARSET=utf8;
+
+ALTER TABLE drinkBoard ADD CONSTRAINT FK_myMemberId FOREIGN KEY (myMemberId) REFERENCES drinkMember(myMemberId) ON DELETE CASCADE;
+
+CREATE TABLE drinkLikes (
+  likeId INT(10) UNSIGNED AUTO_INCREMENT,
+  myMemberId INT(10) UNSIGNED,
+  boardId INT(10) NOT NULL,
+  acId INT(10) UNSIGNED,
+  likeCategory VARCHAR(10) NOT NULL,
+  likeDelete BOOLEAN DEFAULT 1,
+  regTime INT(40) NOT NULL,
+  PRIMARY KEY (likeId)
+) CHARSET=utf8;
+
+ALTER TABLE drinkLikes ADD CONSTRAINT FK_myMemberId FOREIGN KEY (myMemberId) REFERENCES drinkMember(myMemberId) ON DELETE SET NULL, ADD CONSTRAINT FK_acId FOREIGN KEY (acId) REFERENCES drinkList(acId) ON DELETE SET NULL;
+
+CREATE TABLE drinkComment (
+  commentId INT(10) UNSIGNED AUTO_INCREMENT,
+  myMemberId INT(10) UNSIGNED,
+  boardId INT(10) NOT NULL,
+  acId INT(10) UNSIGNED,
+  commentCategory VARCHAR(10) NOT NULL,
+  commentName VARCHAR(20) NOT NULL,
+  commentPass VARCHAR(20) NOT NULL,
+  commentMsg VARCHAR(225) NOT NULL,
+  commentDelete BOOLEAN DEFAULT 1,
+  regTime INT(20) NOT NULL,
+  PRIMARY KEY (commentId)
+) CHARSET=utf8;
+
+ALTER TABLE drinkComment ADD CONSTRAINT FK_myMemberId FOREIGN KEY (myMemberId) REFERENCES drinkMember(myMemberId) ON DELETE SET NULL, ADD CONSTRAINT FK_acId FOREIGN KEY (acId) REFERENCES drinkList(acId) ON DELETE SET NULL;
+
+CREATE TABLE drinkList (
+  acId INT(10) UNSIGNED AUTO_INCREMENT,
+  acCategory VARCHAR(10) NOT NULL,
+  acImgPath VARCHAR(255) NOT NULL,
+  acName VARCHAR(40) NOT NULL,
+  acCompany VARCHAR(20) NOT NULL,
+  acDesc LONGTEXT NOT NULL,
+  acView INT(100) NOT NULL,
+  acLike INT(100) NOT NULL,
+  acComment INT(100) NOT NULL,
+  acAbv FLOAT NOT NULL,
+  acDelete BOOLEAN DEFAULT 1,
+  PRIMARY KEY (acId)
+) CHARSET=utf8;
+
+ALTER TABLE drinkList ADD CONSTRAINT FK_myMemberId FOREIGN KEY (myMemberId) REFERENCES drinkMember(myMemberId) ON DELETE CASCADE;
+
+ALTER TABLE drinkLikes ADD CONSTRAINT FK_myMemberId FOREIGN KEY (myMemberId) REFERENCES drinkMember(myMemberId) ON DELETE CASCADE, ADD CONSTRAINT FK_acId FOREIGN KEY (acId) REFERENCES drinkList(acId) ON DELETE CASCADE;

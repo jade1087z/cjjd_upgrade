@@ -20,7 +20,6 @@ const Community = () => {
                     JSON.stringify(formattedPostList)
                 ) {
                     setPostList(formattedPostList);
-                    console.log(formattedPostList);
                 }
             }
         };
