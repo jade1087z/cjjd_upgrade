@@ -19,6 +19,15 @@
 -   게시글 카테고리
 -   SQL Injection 보안 이슈: 현재 쿼리 문자열에 직접 변수를 삽입하고 있습니다. 이런 방식은 SQL Injection 공격에 취약하므로, 대신에 파라미터화된 쿼리(parameterized query)나 prepared statement를 사용하는 것이 좋습니다.
 
+
+
+\*\* 02.22 - typescript
+npm i -g typescript
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+tsc --init
+server 
+npm install --save-dev typescript @types/node @types/express
+
 \*\* 02.14
 리팩토링 시작 날짜
 클라이언트 라이브러리 설치
@@ -29,12 +38,14 @@ npm i http-proxy-middleware
 npm i react-router-dom
 npm i react-redux
 npm i @reduxjs/toolkit
+npm install react-places-autocomplete
 
 서버단 라이브러리 설치
 npm i nodemon
 npm i mysql
 npm i express
-
+npm install --save-dev ts-node-dev
+npm install jsonwebtoken bcryptjs
 - 외래 키
 -- 외래 키 검사 해제
 SET FOREIGN_KEY_CHECKS=0;

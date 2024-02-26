@@ -1,0 +1,128 @@
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import goodBtn from "../../../axios/post/view/gootBtn";
+interface PrevPost {
+    boardId: number;
+    myMemberId: number;
+    boardCategory: string;
+    boardTitle: string;
+    boardContents: string;
+    boardAuthor: string;
+    boardView: number;
+    boardLike: number;
+    boardComment: number;
+    boardImgFile: string | null;
+    boardImgSize: string | null;
+    boardDelete: number;
+    regTime: Date | string ;
+}
+
+interface PostDataProps {
+    post: PrevPost | null;
+    params: number | string | undefined
+    btnLike: boolean;
+    setBtnLike: (liked: boolean) => void;
+    setPost: (post: PrevPost) => void;
+}
+
+const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPost}) => {
+
+    return (
+        <>
+            {post ? (
+                <>
+                    <div className="view_wrap">
+                        <div className="view_top">
+                            <h5> {post.boardTitle}</h5>
+                        </div>
+
+                        <div className="view_box">
+                            <div className="user_info not_user">
+                                <div className="user_info_box">
+                                    <Link to="board_member_info.php?boardId=<?= $boardId ?>">
+                                        <p>
+                                            <em>{post.boardAuthor}</em>님의
+                                            게시글 더보기
+                                        </p>
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="view_info">
+                                <div className="info_list">
+                                    <div className="view_num boardRegtime">
+                                        {post.regTime instanceof Date ? post.regTime.toISOString() : post.regTime}
+                                    </div>
+                                    <FontAwesomeIcon icon={faHeart} className={btnLike ? 'like' : ''} 
+                                    onClick={(e:React.MouseEvent<SVGSVGElement>) => goodBtn(e, params, btnLike, setBtnLike, setPost)} />
+                                    <div className="view_num boardLike">
+                                        추천수: <em>{post.boardLike}</em>
+                                    </div>
+                                    <div className="view_num">
+                                        조회수: <em>{post.boardView}</em>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="board_desc">
+                        <div className="board_detail">
+                            <div className="board_desc_img">
+                                <img
+                                    src="../assets/DBIMG/<?= $boardInfo['boardImgFile'] ?>"
+                                    alt="<?= $boardInfo['boaldTitle'] ?>"
+                                />
+                            </div>
+                            <em className="scrollStyle"></em>
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div className="view_wrap">
+                        <div className="view_top">
+                            <h5> </h5>
+                        </div>
+
+                        <div className="view_box">
+                            <div className="user_info not_user">
+                                <div className="user_info_box">
+                                    <Link to="board_member_info.php?boardId=<?= $boardId ?>">
+                                        <p>
+                                            <em></em>님의 게시글 더보기
+                                        </p>
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="view_info">
+                                <div className="info_list">
+                                    <div className="view_num boardRegtime">
+                                        <em>s</em>
+                                    </div>
+                                    <FontAwesomeIcon icon={faHeart} />
+                                    <div className="view_num boardLike">
+                                        추천수: <em>0</em>
+                                    </div>
+                                    <div className="view_num">
+                                        조회수: <em>0</em>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="board_desc">
+                        <div className="board_detail">
+                            <div className="board_desc_img"></div>
+                            <em className="scrollStyle"></em>
+                        </div>
+                    </div>
+                </>
+            )}
+        </>
+    );
+};
+
+export default PostData;

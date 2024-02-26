@@ -1,0 +1,170 @@
+.join__body {
+}
+
+#join__wrap {
+    background-color: #ecfbec;
+    background-image: url("../../../img/vector_line.png");
+    background-size: cover;
+    background-position: center;
+
+    #main {
+        width: 35%;
+        min-width: 500px;
+        padding: 40px 0;
+        margin: 0 auto;
+        height: 100%;
+
+        .join__form {
+            display: flex;
+            flex-wrap: wrap;
+            height: auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 5px 5px 0px rgba(0, 53, 7, 0.3);
+            .form {
+                margin: 0 auto;
+                width: 80%;
+                .header__box {
+                    text-align: center;
+                    margin: 50px auto;
+                    a {
+                        font-size: 40px;
+                        margin-bottom: 10px;
+                    }
+                    p {
+                        margin-top: 10px;
+                    }
+                }
+                .check {
+                    @include Dfjsb;
+                    flex-wrap: wrap;
+                    label {
+                        width: 100%;
+                    }
+                    input {
+                        width: 68%;
+                    }
+                }
+                label {
+                    display: block;
+                    font-size: 1.2rem;
+                    margin-bottom: 10px;
+                    span {
+                        font-size: 16px;
+                    }
+                }
+                input {
+                    font-size: 14px;
+                    outline: none;
+                    border: 1px solid #414141a6;
+                    border-radius: 10px;
+                    width: 100%;
+                    height: 3rem;
+                    padding: 10px;
+                    margin-bottom: 10px;
+                }
+                .email__area {
+                    .youAddress1 {
+                        margin-bottom: 0;
+                    }
+                    .youAddress3 {
+                        font-size: 15px;
+                        margin-top: 10px;
+                    }
+                }
+                .check {
+                    .check__btn {
+                        @include FCCC;
+                        @include CHBTN;
+                        width: 30%;
+                        height: 3rem;
+                        cursor: pointer;
+                    }
+                    .check__msg {
+                        margin: 5px 0 10px 0;
+                        font-size: 14px;
+                        color: var(--red);
+                    }
+                }
+
+                .join__btn {
+                    @include FCCC;
+                    flex-wrap: wrap;
+                    .check__btn {
+                        @include CHBTN;
+                        width: 40%;
+                        padding: 15px 20px;
+                        cursor: pointer;
+                        margin: 10px 5px 40px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    #main {
+        width: 90%;
+        min-width: 400px;
+    }
+    .header__box {
+        text-align: center;
+    }
+    .header__box a {
+        margin-top: 20px;
+        font-size: 35px;
+        margin-bottom: 20px;
+    }
+    .header__box p {
+        font-size: 14px;
+    }
+    .join__form form {
+        width: 85%;
+    }
+    .scroll__style::-webkit-scrollbar {
+        width: 5px;
+    }
+}
+
+.blind {
+    display: none;
+}
+
+/* required */
+.required::after {
+    content: " *";
+    color: #a82c2c;
+}
+
+/* layer */
+
+#layer {
+    position: fixed;
+    overflow: hidden;
+    z-index: 1;
+    -webkit-overflow-scrolling: touch;
+}
+#layer img {
+    position: absolute;
+    right: -3px;
+    top: -3px;
+    width: 20px;
+    height: 20px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+/* join__collect */
+
+.collect_box {
+    background-color: #fff;
+    max-width: 800px;
+    width: 60%;
+    height: 500px;
+    margin: 0 auto;
+    display: flex;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 0px rgba(0, 53, 7, 0.3);
+}
