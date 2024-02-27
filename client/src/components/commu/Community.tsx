@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
  import { postAll} from "../../axios/post/listAll";
 import SearchList from "./SearchList";
 import { format } from "date-fns";
-import { Post } from "./interface/postInterface";
+import { Post } from "../../interface/postInterface";
 
 const Community: React.FC = () => {
     const [postList, setPostList] = useState<Post[]>([]);

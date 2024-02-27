@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import CommentArea from "./CommentArea";
 import PostData from "./PostData";
 import goodBtn from "../../../axios/post/view/gootBtn";
-import { Post } from "../interface/postInterface";
+import { Post } from "../../../interface/postInterface";
 
 interface RouteParams {
     [key: string]: string | undefined;

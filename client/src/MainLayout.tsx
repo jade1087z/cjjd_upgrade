@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/layout/Header";
 import Mheader from "./components/layout/Mheader";
@@ -10,7 +10,12 @@ import AcList from "./components/acpage/list/AcList";
 import AcVIiew from "./components/acpage/view/AcVIiew";
 import Mypage from "./components/user/mypage/Mypage";
 import Community from "./components/commu/Community";
-const MainLayout = () => {
+import { RootState } from './reducer/store';
+import { useSelector } from 'react-redux';
+import AsideNot from './components/layout/AsideNot';
+
+const MainLayout:React.FC = () => {
+    const user = useSelector((state: RootState) => state.user)
     return (
         <div id="wrapper">
             <Header />
@@ -28,7 +33,7 @@ const MainLayout = () => {
                     </Routes>
                 </section>
             </main>
-            <Aside />
+            {user.youId==='' ? <AsideNot/>: <Aside/>  }
         </div>
     )
 }

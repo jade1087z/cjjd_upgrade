@@ -1,5 +1,5 @@
 import axios, { AxiosResponse }  from "axios";
-import { Post } from "../../../components/commu/interface/postInterface";
+import { Post } from "../../../interface/postInterface";
 
 
 export const boardDetail = async(params: number | string | undefined, setBtnLike: (liked: boolean) => void) => {

@@ -3,28 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import goodBtn from "../../../axios/post/view/gootBtn";
-interface PrevPost {
-    boardId: number;
-    myMemberId: number;
-    boardCategory: string;
-    boardTitle: string;
-    boardContents: string;
-    boardAuthor: string;
-    boardView: number;
-    boardLike: number;
-    boardComment: number;
-    boardImgFile: string | null;
-    boardImgSize: string | null;
-    boardDelete: number;
-    regTime: Date | string ;
-}
+import { Post } from "../../../interface/postInterface";
 
 interface PostDataProps {
-    post: PrevPost | null;
+    post: Post | null;
     params: number | string | undefined
     btnLike: boolean;
     setBtnLike: (liked: boolean) => void;
-    setPost: (post: PrevPost) => void;
+    setPost: (post: Post) => void;
 }
 
 const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPost}) => {
