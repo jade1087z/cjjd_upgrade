@@ -29,3 +29,25 @@
 {"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'undefined' in 'where clause'","sql":"SELECT * FROM drinkmember WHERE undefined = NULL","sqlMessage":"Unknown column 'undefined' in 'where clause'","sqlState":"42S22"}
 {"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'undefined' in 'where clause'","sql":"SELECT * FROM drinkmember WHERE undefined = NULL","sqlMessage":"Unknown column 'undefined' in 'where clause'","sqlState":"42S22"}
 {"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'undefined' in 'where clause'","sql":"SELECT * FROM drinkmember WHERE undefined = NULL","sqlMessage":"Unknown column 'undefined' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_PARSE_ERROR","errno":1064,"level":"error","message":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'youId = '임종한2'' at line 1","sql":"SELECT * FROM dirnkmember WHWER youId = '임종한2'","sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'youId = '임종한2'' at line 1","sqlState":"42000"}
+{"code":"ER_PARSE_ERROR","errno":1064,"level":"error","message":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'youId = '임종한2'' at line 1","sql":"SELECT * FROM drinkmember WHWER youId = '임종한2'","sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'youId = '임종한2'' at line 1","sqlState":"42000"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}

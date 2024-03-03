@@ -1,9 +1,10 @@
+require('dotenv').config()  // env file loading
+
 // express
 import express from "express";
 import path from "path";
 import postRouter from "./router/post";
 import userRouter from "./router/user";
-
 const app = express();
 const port = 5050;
 

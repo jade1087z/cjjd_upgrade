@@ -1,3 +1,9 @@
+@mixin backImg {
+    background-color: #ecfbec;
+    background-image: url("../../../img/vector_line.png");
+    background-size: cover;
+    background-position: center;
+}
 @mixin Dfjc {
     display: flex;
     justify-content: center;
@@ -20,6 +26,9 @@
     color: #fff;
     font-size: 1rem;
     background-color: #03c75a;
+    &:hover {
+        background-color: var(--mcolorUp); 
+    }
 }
 
 @mixin selectBox3 {

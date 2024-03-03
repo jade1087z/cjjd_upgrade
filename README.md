@@ -46,6 +46,8 @@ npm i mysql
 npm i express
 npm install --save-dev ts-node-dev
 npm install jsonwebtoken bcryptjs
+npm install dotenv
+
 - 외래 키
 -- 외래 키 검사 해제
 SET FOREIGN_KEY_CHECKS=0;

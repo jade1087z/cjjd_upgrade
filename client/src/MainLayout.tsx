@@ -16,6 +16,9 @@ import AsideNot from './components/layout/AsideNot';
 
 const MainLayout:React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
+    console.log(user, 'redux user')
+    const youId = user.youId;
+    
     return (
         <div id="wrapper">
             <Header />
@@ -33,7 +36,7 @@ const MainLayout:React.FC = () => {
                     </Routes>
                 </section>
             </main>
-            {user.youId==='' ? <AsideNot/>: <Aside/>  }
+            { youId=== '' ||youId=== undefined ? <AsideNot/>: <Aside/>  }
         </div>
     )
 }

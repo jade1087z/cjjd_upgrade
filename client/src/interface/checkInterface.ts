@@ -1,7 +1,7 @@
 export interface checkInterface {
-    idCheck: boolean;
-    nickCheck: boolean;
-    emailCheck: boolean;
-    checkPass:boolean;
+    idCheck: boolean | null;
+    nickCheck: boolean | null;
+    emailCheck: boolean | null;
+    checkPass:boolean | null;
     setCheck: (value: boolean) => void;
 }
