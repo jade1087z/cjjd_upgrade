@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import SelectOption3 from "./SelectOption3";
 import { useNavigate } from "react-router-dom";
 import post from "../../../axios/post/post";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/store";
 
 const Write: React.FC = () => {
+    const user = useSelector((state:RootState) => state.user)
+    const myMemberId = user?.myMemberId;
+    const author = user?.youNick;
+   
     const navigate = useNavigate();
     const cancle = (e: React.MouseEvent) => {
         if (window.confirm("글 작성을 취소하시겠습니까?")) {
@@ -14,9 +20,6 @@ const Write: React.FC = () => {
     const [category, setCategory] = useState<string>("자유게시판");
     const [title, setTitle] = useState<string>("");
     const [contents, setContents] = useState<string>("");
-
-    
-
     return (
         <>
             <div className="best_list boxStyle roundCorner shaDow ">
@@ -89,7 +92,9 @@ const Write: React.FC = () => {
                                                     category,
                                                     title,
                                                     contents,
-                                                    navigate
+                                                    navigate,
+                                                    myMemberId,
+                                                    author
                                                 )
                                             }
                                         >

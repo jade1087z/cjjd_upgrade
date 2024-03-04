@@ -8,6 +8,7 @@ export const getUserInfo = async (token: string) => {
             }
         });
         if (response.status === 200) {
+            console.log( response.data.userInfo)
             return response.data.userInfo;
         } else {
             throw new Error('user not authenticated');
@@ -16,8 +17,6 @@ export const getUserInfo = async (token: string) => {
         console.log(error)
         return null
     }
-
-
 }
 
 export default getUserInfo

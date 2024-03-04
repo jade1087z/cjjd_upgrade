@@ -16,8 +16,11 @@ import AsideNot from './components/layout/AsideNot';
 
 const MainLayout:React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
-    console.log(user, 'redux user')
-    const youId = user.youId;
+    const youId = user?.youId;
+    if (user) {
+        console.log(user, 'redux user');
+      }
+    // user 값이 있을때만 
     
     return (
         <div id="wrapper">
@@ -36,7 +39,8 @@ const MainLayout:React.FC = () => {
                     </Routes>
                 </section>
             </main>
-            { youId=== '' ||youId=== undefined ? <AsideNot/>: <Aside/>  }
+            { !youId ? <AsideNot/> : <Aside/> }
+            {/* youId가 없는 경우 logout = asideNot */}
         </div>
     )
 }

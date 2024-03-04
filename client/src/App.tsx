@@ -6,7 +6,7 @@ import Login from "./components/user/login/Login";
 import getUserInfo from "./axios/user/getUserInfo";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUser } from "./reducer/user";
+import {  setUser } from "./reducer/user";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 
 const App: React.FC = () => {
@@ -18,7 +18,7 @@ const App: React.FC = () => {
             if (token) {
                 const user = await getUserInfo(token);
                 dispatch(setUser(user))
-            }
+            } 
         }
         userInfo()
     }, [dispatch])

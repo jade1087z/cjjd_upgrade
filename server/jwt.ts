@@ -1,7 +1,7 @@
 import jwt, { Secret } from "jsonwebtoken"
 
 interface Payload {
-    userId: string,
+    youId: string;
     exp: number
 }
 

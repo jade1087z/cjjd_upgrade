@@ -4,26 +4,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducer/store";
-import {logOut} from "../../reducer/user";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
-
+import {clearUser} from '../../reducer/user'
 const Aside: React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
-    const dispatch = useDispatch<ThunkDispatch<any, any, AnyAction>>();
-    const navigate = useNavigate();
-    
+    const dispatch = useDispatch<ThunkDispatch<any, any, AnyAction>>();    
 
     const logout = (e: React.MouseEvent) => {
         
         e.preventDefault()
         if(window.confirm('로그아웃 하시겠습니까?')){
             localStorage.removeItem('accessToken');
-            dispatch(logOut(user))
+            dispatch(clearUser())
         }
     }
-
    
-
     return (
         <aside id="side_wrap">
             <div className="search_box side_box roundCorner shaDow">

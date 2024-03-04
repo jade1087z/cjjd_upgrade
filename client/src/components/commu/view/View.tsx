@@ -6,12 +6,16 @@ import CommentArea from "./CommentArea";
 import PostData from "./PostData";
 import goodBtn from "../../../axios/post/view/gootBtn";
 import { Post } from "../../../interface/postInterface";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducer/store";
 
 interface RouteParams {
     [key: string]: string | undefined;
 }
 
 const View: React.FC = () => {
+    const user = useSelector((state:RootState) => state.user)
+    const myMemberId = user?.myMemberId
     const { boardId } = useParams<RouteParams>();
     const params: number | string | undefined = boardId === undefined ? undefined : (isNaN(Number(boardId)) ? boardId : Number(boardId));
 
@@ -21,13 +25,12 @@ const View: React.FC = () => {
     useEffect(() => {
         let isMounted = true
         const fetchPost = async () => {
-            const data: Post | undefined = await boardDetail(params, setBtnLike);
+            const data: Post | undefined = await boardDetail(params, setBtnLike, myMemberId);
             if (data && isMounted) {
                 try {
                     const formattedPost: Post | undefined  = {
                         ...data,
                         regTime: format(new Date(data.regTime), "MM.dd"),
-
                     };
                     setPost(formattedPost);    
                 } catch (error) {
@@ -39,7 +42,7 @@ const View: React.FC = () => {
         return () => {
             isMounted = false
         }
-    }, []);
+    }, [myMemberId]);
     return (
         <>
             <div className="board_view boxStyle roundCorner shaDow">
@@ -48,14 +51,14 @@ const View: React.FC = () => {
                 </h4>
 
                 
-                {post && <PostData post={post} params={params} btnLike={btnLike} setBtnLike={setBtnLike} setPost={setPost}/>}
+                {post && <PostData post={post} params={params} btnLike={btnLike} setBtnLike={setBtnLike} setPost={setPost} myMemberId={myMemberId}/>}
 
                 <div className="comment_summary">
                     <div className="button_list">
                         <button className="delete">삭제하기</button>
                         <button className="modify">수정하기</button>
                         <button className="good"
-                        onClick={(e) => goodBtn(e, params, btnLike, setBtnLike, setPost)}
+                        onClick={(e) => goodBtn(e, params, btnLike, setBtnLike, setPost,myMemberId)}
                         >추천하기</button>
                     </div>
                 </div>

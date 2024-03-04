@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { userInterface } from "../../../interface/userInterface";
+import { userInterface } from "../../../interface/user/userInterface";
 
 export const handleInputChange = (e: ChangeEvent<HTMLInputElement>, setFormValues: (value: userInterface) => void, formValues: userInterface, setCheckPass: (value: boolean) => void) => {
     const { name, value} = e.target;

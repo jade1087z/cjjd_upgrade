@@ -1,13 +1,15 @@
 import axios from "axios";
 
-export const post = async (e: React.MouseEvent, category: string, title: string, contents: string, navigate: any) => {
+export const post = async (e: React.MouseEvent, category: string, title: string, contents: string, navigate: any, myMemberId, author) => {
     e.preventDefault();
     if (window.confirm("게시글을 업로드할까요?")) {
         console.log(category);
         const body = {
+            myMemberId: myMemberId,
             boardCategory: category,
             boardTitle: title,
             boardContents: contents,
+            boardAuthor: author
         };
         await axios
             .post("/api/post/write", body)

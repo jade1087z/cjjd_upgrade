@@ -5,8 +5,6 @@ const logger = require("../logger");
 const jwt = require("../jwt");
 import bcrypt from 'bcryptjs';
 
-import { error } from 'console';
-
 interface User {
     youId: string;
     youPass: string;
@@ -32,6 +30,7 @@ router.post('/register', async (req: Request, res: Response) => {
         let values = [youId, hashedPassword, youName, youNick, youEmail, youBirth, youAddress];
         con.query(sql, values)
         res.status(200).send()
+
     } catch (error) {
         res.status(500).send()
     }
@@ -43,11 +42,13 @@ router.post('/check', async (req: Request, res: Response) => {
         let sql = `SELECT * FROM drinkmember WHERE ${field} = ?`
         const [rows, fields] = await con.query(sql, [value])
         console.log(rows.length, 'result')
+
         if (rows.length > 0) {
             res.status(400).json({ success: false, message: 'cannot use' }) // 값이 있는 경우 
         } else {
             res.status(200).json({ success: true, message: 'can use' }) // 없는 경우 true 
         }
+
     } catch (error) {
         res.status(400).json({ success: false, message: 'cannot use' }) // 값이 있는 경우 
         logger.error(error);
@@ -67,7 +68,7 @@ router.post('/login', async (req: Request, res: Response) => {
             console.log(user.youPass)
             if (await bcrypt.compare(youPass, user.youPass)) {
                 const payload = {
-                    userId: user.youId,
+                    youId: user.youId,
                     exp: Math.floor(Date.now() / 1000)  + (600 * 60),
                 }
                 const accessToken = jwt.generateToken(payload)
@@ -89,12 +90,18 @@ router.post('/login', async (req: Request, res: Response) => {
 router.get('/info', async (req: Request, res: Response) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
+    
     if (token == null) {
         return res.sendStatus(401)
     }
     try {
-        const userInfo = jwt.verifyToken(token)
+        const value = await jwt.verifyToken(token)
+        let userSql = 'SELECT * FROM drinkmember WHERE youId = ?';
+        const [rows] = await con.query(userSql, value.youId )
+        const { myMemberId, youId, youName, youNick, youEmail, youBirth, youAddress, youImgFile } = rows[0]; // 필요한 필드만 선택
+        const userInfo ={myMemberId, youId, youName, youNick, youEmail, youBirth, youAddress, youImgFile }
         console.log(userInfo)
+
         res.status(200).json({success: true, userInfo: userInfo})
     } catch (error) {
         logger.error(error)

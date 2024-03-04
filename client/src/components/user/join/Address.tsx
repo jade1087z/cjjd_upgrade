@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from 'react'
-import { userInterface } from '../../../interface/userInterface'
+import { userInterface } from '../../../interface/user/userInterface'
 import handleInputChange from '../../../util/user/join/handleInput';
 import DaumPostcode from 'react-daum-postcode';
-import { AddressData } from '../../../interface/addressData';
+import { AddressData } from '../../../interface/user/addressData';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 

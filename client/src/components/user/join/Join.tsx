@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BtnWrap from "./BtnWrap";
-import { userInterface } from "../../../interface/userInterface";
+import { userInterface } from "../../../interface/user/userInterface";
 import checkFunction from "../../../axios/user/checkFunction";
 import Address from "./Address";
 import handleInputChange from "../../../util/user/join/handleInput";

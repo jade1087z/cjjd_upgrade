@@ -1,5 +1,5 @@
 import axios from "axios"
-import { userInterface } from "../../interface/userInterface"
+import { userInterface } from "../../interface/user/userInterface"
 
 export const register = async (props: userInterface, check: boolean) => {
     console.log(check)

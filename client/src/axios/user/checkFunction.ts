@@ -1,7 +1,7 @@
 import { error } from "console"
-import { userInterface } from "../../interface/userInterface"
+import { userInterface } from "../../interface/user/userInterface"
 import axios from "axios"
-import { checkInterface } from "../../interface/checkInterface"
+import { checkInterface } from "../../interface/user/checkInterface"
 
 export const checkId = async (e: React.MouseEvent, formValues: userInterface, setCheckId: React.Dispatch<React.SetStateAction<boolean | null>>) => {
     e.preventDefault()

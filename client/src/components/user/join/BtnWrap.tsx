@@ -1,6 +1,6 @@
 import React from 'react'
 import register from '../../../axios/user/register'
-import { userInterface } from '../../../interface/userInterface'
+import { userInterface } from '../../../interface/user/userInterface'
 interface BtnWrapProps  extends userInterface{
     check: boolean;
 }

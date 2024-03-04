@@ -1,4 +1,5 @@
 import axios from "axios";
+import { format } from "date-fns";
 
 
 interface PrevPost {
@@ -23,23 +24,25 @@ export const goodBtn = async (e: React.MouseEvent<SVGSVGElement> | React.MouseEv
     params: number | string | undefined,
     btnLike: boolean,
     setBtnLike: (liked: boolean) => void,
-    setPost: (post: PrevPost) => void
-)=> {
+    setPost: (post: PrevPost) => void,
+    myMemberId: number
+) => {
 
 
     e.preventDefault()
     let body = {
-        myMemberId: 1,
+        myMemberId: myMemberId,
         isLiked: btnLike
     }
-    console.log('clcik')
-    await axios.post<{success: boolean, post: PrevPost}>(`/api/post/boardLike/${params}`, body).then((res) => {
+    console.log(myMemberId, 'myMemberId')
+    await axios.post<{ success: boolean, post: PrevPost }>(`/api/post/boardLike/${params}`, body).then((res) => {
         if (res.data.success) {
             setBtnLike(!btnLike)
-            setPost({
+            const postData ={
                 ...res.data.post,
-                boardLike: btnLike ? res.data.post.boardLike - 1 : res.data.post.boardLike + 1
-            });
+                regTime: format(new Date(res.data.post.regTime), "MM.dd"),
+            }
+            setPost(postData);
 
         }
     }).catch((err) => {

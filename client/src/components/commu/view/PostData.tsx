@@ -11,9 +11,10 @@ interface PostDataProps {
     btnLike: boolean;
     setBtnLike: (liked: boolean) => void;
     setPost: (post: Post) => void;
+    myMemberId: number
 }
 
-const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPost}) => {
+const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPost, myMemberId}) => {
 
     return (
         <>
@@ -41,7 +42,7 @@ const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPo
                                         {post.regTime instanceof Date ? post.regTime.toISOString() : post.regTime}
                                     </div>
                                     <FontAwesomeIcon icon={faHeart} className={btnLike ? 'like' : ''} 
-                                    onClick={(e:React.MouseEvent<SVGSVGElement>) => goodBtn(e, params, btnLike, setBtnLike, setPost)} />
+                                    onClick={(e:React.MouseEvent<SVGSVGElement>) => goodBtn(e, params, btnLike, setBtnLike, setPost, myMemberId)} />
                                     <div className="view_num boardLike">
                                         추천수: <em>{post.boardLike}</em>
                                     </div>
