@@ -24,7 +24,7 @@ export const tryLogin = async (e: React.MouseEvent, youId: string, youPass: stri
     if (youId && youPass) {
         try {
             const result = await axios.post('/api/user/login', body);
-            if (result.data.success) {
+            if (result.status === 200) {
                 alert('로그인 완료')
                 localStorage.setItem('accessToken', result.data.accessToken);
                 const user: ResultData['user'] = {
@@ -36,12 +36,20 @@ export const tryLogin = async (e: React.MouseEvent, youId: string, youPass: stri
                     youBirth: result.data.user.youBirth,
                     youAddress: result.data.user.youAddress,
                 }
+                window.location.href= '/';
                 return user;
-            } else {
-                alert('로그인 실패')
             }
         } catch (error) {
-            console.log(error)
+            if (error.response && error.response.status) {
+                if (error.response.status === 403) {
+                    alert('비밀번호를 확인해주세요.')
+                } else if (error.response.status === 404) {
+                    alert('해당 유저 정보를 찾을 수 없습니다.')
+                } else if(error.response.status === 500){
+                    alert('해당 유저 정보를 찾을 수 없습니다.')
+                    console.log(error);
+                }
+            } 
         }
 
     }

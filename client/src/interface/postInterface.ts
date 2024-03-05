@@ -13,3 +13,6 @@ export interface Post {
     boardDelete: number;
     regTime:  Date | string ;
 }
+export interface RouteParams {
+    [key: string]: string | undefined;
+}

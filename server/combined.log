@@ -65,3 +65,49 @@
 {"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
 {"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
 {"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"level":"error","message":"jwt expired"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error"}
+{"level":"error","message":"jwt expired"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '2'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '2'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '2'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '2'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '1'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}
+{"code":"ER_BAD_FIELD_ERROR","errno":1054,"level":"error","message":"Unknown column 'NaN' in 'where clause'","sql":"SELECT * FROM drinklikes WHERE myMemberId = NaN AND boardId = '2'","sqlMessage":"Unknown column 'NaN' in 'where clause'","sqlState":"42S22"}

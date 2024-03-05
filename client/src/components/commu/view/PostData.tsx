@@ -29,10 +29,7 @@ const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPo
                             <div className="user_info not_user">
                                 <div className="user_info_box">
                                     <Link to="board_member_info.php?boardId=<?= $boardId ?>">
-                                        <p>
-                                            <em>{post.boardAuthor}</em>님의
-                                            게시글 더보기
-                                        </p>
+                                            <p>{post.boardAuthor}님의 게시글 더보기</p>
                                     </Link>
                                 </div>
                             </div>
@@ -57,12 +54,9 @@ const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPo
                     <div className="board_desc">
                         <div className="board_detail">
                             <div className="board_desc_img">
-                                <img
-                                    src="../assets/DBIMG/<?= $boardInfo['boardImgFile'] ?>"
-                                    alt="<?= $boardInfo['boaldTitle'] ?>"
-                                />
+                                <img src="/" alt="image"/>
                             </div>
-                            <em className="scrollStyle"></em>
+                           <em className="scrollStyle"> {post.boardContents}</em>
                         </div>
                     </div>
                 </>

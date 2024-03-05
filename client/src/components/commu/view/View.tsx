@@ -5,13 +5,11 @@ import { format } from "date-fns";
 import CommentArea from "./CommentArea";
 import PostData from "./PostData";
 import goodBtn from "../../../axios/post/view/gootBtn";
-import { Post } from "../../../interface/postInterface";
+import { Post, RouteParams } from "../../../interface/postInterface";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducer/store";
-
-interface RouteParams {
-    [key: string]: string | undefined;
-}
+import updateCheck from "../../../axios/post/update/updateCheck";
+import deletePost from "../../../axios/post/deletPost";
 
 const View: React.FC = () => {
     const user = useSelector((state:RootState) => state.user)
@@ -43,20 +41,21 @@ const View: React.FC = () => {
             isMounted = false
         }
     }, [myMemberId]);
+
+
     return (
         <>
             <div className="board_view boxStyle roundCorner shaDow">
                 <h4>
                     <Link to="board.php">자유게시판</Link>
                 </h4>
-
                 
                 {post && <PostData post={post} params={params} btnLike={btnLike} setBtnLike={setBtnLike} setPost={setPost} myMemberId={myMemberId}/>}
 
                 <div className="comment_summary">
                     <div className="button_list">
-                        <button className="delete">삭제하기</button>
-                        <button className="modify">수정하기</button>
+                        <button className="delete" onClick={(e) => deletePost(e, params,myMemberId)}>삭제하기</button>
+                        <button className="modify" onClick={(e) => updateCheck(e, params,myMemberId)}>수정하기</button>
                         <button className="good"
                         onClick={(e) => goodBtn(e, params, btnLike, setBtnLike, setPost,myMemberId)}
                         >추천하기</button>

@@ -13,6 +13,7 @@ import Community from "./components/commu/Community";
 import { RootState } from './reducer/store';
 import { useSelector } from 'react-redux';
 import AsideNot from './components/layout/AsideNot';
+import PostUpdate from './components/commu/update/PostUpdate';
 
 const MainLayout:React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
@@ -32,6 +33,7 @@ const MainLayout:React.FC = () => {
                         <Route path="/" element={<Main />} />
                         <Route path="/community" element={<Community />} />
                         <Route path="/view/:boardId" element={<View />} />
+                        <Route path="/update/:boardId" element={<PostUpdate />} />
                         <Route path="/write" element={<Write />} />
                         <Route path="/aclist" element={<AcList />} />
                         <Route path="/acview" element={<AcVIiew />} />

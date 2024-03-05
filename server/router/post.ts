@@ -70,15 +70,15 @@ router.get("/list", async (req: Request, res: Response) => {
 
 
 router.get(`/view/:boardId`, async (req: Request, res: Response) => {
-    const params = req.params.boardId;
+    const boardId = req.params.boardId;
     const myMemberId = Number(req.query.myMemberId);
     console.log(myMemberId, 'myMemberId1')
 
     let checkSql = "SELECT * FROM drinklikes WHERE myMemberId = ? AND boardId = ?";
+    let valueForCheckSql = [myMemberId, boardId]
     let updateSql = `UPDATE drinkBoard SET boardView = boardView + 1 WHERE boardId = ? AND boardDelete = 0`;
     let sql = `SELECT * FROM drinkBoard WHERE boardId = ? AND boardDelete = 0 AND boardCategory = '자유게시판'`;
-    let valueForCheckSql = [myMemberId, params]
-    let value = params;
+    let value = boardId;
 
     try {
         const [checkResults]: [checkResults[]] = await con.query(checkSql, valueForCheckSql);
@@ -128,9 +128,77 @@ router.post(`/boardLike/:boardId`, async (req: Request, res: Response) => {
     }
 
 })
+
+// 게시글 수정 파트
+router.get('/check/:boardId', async (req: Request, res: Response) => {
+    const boardId = Number(req.params.boardId);
+    const paramsMember = Number(req.query.myMemberId);
+    try {
+        const [rows] = await con.query('SELECT * FROM drinkboard WHERE boardId = ?', [boardId]);
+        const {myMemberId} = rows[0]
+        if (rows.length === 0) {
+            res.status(404).json({success: false, message: "해당 게시글이 존재하지 않습니다."});
+            return;
+        }
+        if(paramsMember === myMemberId) {
+            res.status(200).json({success: true, message: "게시글 수정이 가능합니다."})
+        } else if(paramsMember !== myMemberId) {
+            res.status(403).json({success: false, message: "게시글 수정 권한이 없습니다."});
+            return;
+        }
+        
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({success: false, message: "서버 오류가 발생했습니다."});
+    }
+})
+
+router.patch('/update/:boardId', async(req: Request, res:Response) => {
+    const boardId = req.params.boardId;
+    console.log(boardId)
+    const title = req.body.boardTitle;
+    const contents = req.body.boardContents;
+    
+    try {
+        const sql = 'UPDATE drinkboard SET boardTitle = ?, boardContents = ? WHERE boardId = ?';
+        const values = [title, contents, boardId]
+        const [result, fields] = await con.query(sql, values)
+        
+        res.status(200).json({success: true});
+    } catch (error) {
+        logger.error(error)
+        res.status(500).json({success: false, message: "서버 오류가 발생했습니다."});
+    }
+
+})
+
+// 게시글 삭제 부분 
+router.delete('/delete/:boardId', async (req: Request, res: Response) => {
+    const boardId = req.params.boardId;
+    const paramsMember = Number(req.query.myMemberId);
+    console.log(boardId)
+    console.log(paramsMember)
+
+    try {
+        const [rows] = await con.query('SELECT * FROM drinkboard WHERE boardId = ?', [boardId]);
+        const {myMemberId} = rows[0]
+        if (rows.length === 0) {
+            res.status(404).json({success: false, message: "해당 게시글이 존재하지 않습니다."});
+            return;
+        }
+
+        if(paramsMember === myMemberId) {
+            const result = await con.query('DELETE FROM drinkboard WHERE boardId = ?', [boardId])
+            res.status(200).json({success: true, message: "게시글 수정이 가능합니다."})
+        } else if(paramsMember !== myMemberId) {
+            res.status(403).json({success: false, message: "게시글 삭제 권한이 없습니다."});
+            return;
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({success: false, message: "서버 오류가 발생했습니다."});
+    }
+
+})
+
 export default router;
-
-// 문제
-// 추천을 누르고 리랜더링시 반영되지 않음 -> setBtnLike의 상태가
-
-// 다른 멤버아이디로 접근시 -> setBtnLike의 상태가 달라야함

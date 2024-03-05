@@ -20,7 +20,6 @@ const Login:React.FC = () => {
         // 로그인 로직...
         const user = await tryLogin(e, youId, youPass);
         dispatch(setUser(user));
-        navigate('/');
     }
     
     return (

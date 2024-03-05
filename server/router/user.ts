@@ -62,7 +62,6 @@ router.post('/login', async (req: Request, res: Response) => {
         let value = [youId]
         const result = await con.query(sql, value);
         console.log(result[0][0],'resu')
-
         if (result.length > 0) {
             const user = result[0][0];
             console.log(user.youPass)
