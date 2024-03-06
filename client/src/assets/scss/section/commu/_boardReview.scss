@@ -37,8 +37,15 @@
                 padding: 0 1rem;
                 color: var(--black100);
             }
+            .renderingText {
+                text-align: left;
+                width: 75%;
+                line-height: 1.5;
+                padding: 0 1rem;
+                border: 1px solid var(--black300);
+            }
 
-            a {
+            button {
                 color: var(--black300);
                 text-wrap: nowrap;
                 font-size: 0.8rem;

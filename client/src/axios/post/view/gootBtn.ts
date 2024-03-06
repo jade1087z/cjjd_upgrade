@@ -28,7 +28,6 @@ export const goodBtn = async (e: React.MouseEvent<SVGSVGElement> | React.MouseEv
     myMemberId: number
 ) => {
 
-
     e.preventDefault()
     let body = {
         myMemberId: myMemberId,

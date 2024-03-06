@@ -12,7 +12,7 @@ interface checkResults {
     likeDelete: number
 }
 
-interface QueryResult {
+interface BoardResult {
     boardId: number;
     myMemberId: number;
     boardCategory: string;
@@ -59,7 +59,7 @@ router.get("/list", async (req: Request, res: Response) => {
 
     try {
         console.log("queryok")
-        const [results]: [QueryResult[]] = await con.query(sql);
+        const [results]: [BoardResult[]] = await con.query(sql);
         res.status(200).json({ success: true, postList: results });
     } catch (err) {
         console.log(err);
@@ -87,7 +87,7 @@ router.get(`/view/:boardId`, async (req: Request, res: Response) => {
 
         await con.query(updateSql, value)
 
-        const [[results]]: QueryResult[][] = await con.query(sql, value);
+        const [[results]]: BoardResult[][] = await con.query(sql, value);
 
         res.status(200).json({ success: true, post: results, isLiked: isLiked });
 
