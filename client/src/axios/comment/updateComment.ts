@@ -1,5 +1,4 @@
 import axios from "axios";
-import { comment } from "../../interface/commentInterface";
 
 interface updateCommentProps {
     e: React.MouseEvent;

@@ -1,6 +1,5 @@
 import axios from "axios";
-import { Post } from "../../interface/postInterface";
-
+import { Post } from "../../../interface/postInterface";
 interface PostResponse {
     postList: Post[];
 }
@@ -22,6 +21,8 @@ export const postAll = async (): Promise<Post[]> => {
 };
 
 export default postAll;
+
+
 
 // export const postAll = async () => {
 //     try {

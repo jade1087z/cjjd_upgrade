@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducer/store";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import {clearUser} from '../../reducer/user'
+import AsideSearch from "./AsideSearch";
+
 const Aside: React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
     const dispatch = useDispatch<ThunkDispatch<any, any, AnyAction>>();    
@@ -21,12 +21,7 @@ const Aside: React.FC = () => {
    
     return (
         <aside id="side_wrap">
-            <div className="search_box side_box roundCorner shaDow">
-                <input type="text" placeholder="취중진담 통합 검색" id="search" />
-                <button type="submit" id="searchBtn">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
-            </div>
+            <AsideSearch />
             <div className="info_box side_box roundCorner shaDow">
                 <div className="login_info">
                     <img src="../assets/profile/<?= $memberInfo['youImgFile'] ?>" />

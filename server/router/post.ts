@@ -54,9 +54,63 @@ router.post("/write", async (req: Request, res: Response) => {
     }
 });
 
+
+// boardId 값에 따른 특정 유저 게시글 페이지 라우터 하나 -> 무한 스크롤 
+router.get("/authpagelist/:boardAuthor", async (req: Request, res: Response) => {
+    const boardAuthor = req.params.boardAuthor
+    console.log(boardAuthor, 'boardAU')
+    const page = parseInt(req.query.page as string) || 1;
+    const pageSize = 18; // 한 페이지에 표시할 게시물 수
+    const offset = (page - 1) * pageSize;
+    
+    let sql = `SELECT * FROM drinkBoard WHERE boardDelete = 0 AND boardCategory = '자유게시판' AND boardAuthor = ? LIMIT ${offset}, ${pageSize}`;
+
+    try {
+        console.log("queryok", page)
+        const [results]: [BoardResult[]] = await con.query(sql, boardAuthor);
+        res.status(200).json({ success: true, postList: results });
+    } catch (err) {
+        res.status(400).json({ success: false, message: "serverERR" });
+        logger.error(err);
+    }
+});
+// 전체 리스트 가져오기 하나 -> 무한 스크롤 
+router.get("/pagelist", async (req: Request, res: Response) => {
+    const page = parseInt(req.query.page as string) || 1;
+    const pageSize = 18; // 한 페이지에 표시할 게시물 수
+    const offset = (page - 1) * pageSize;
+    
+    let sql = `SELECT * FROM drinkBoard WHERE boardDelete = 0 AND boardCategory = '자유게시판' LIMIT ${offset}, ${pageSize}`;
+
+    try {
+        console.log("queryok", page)
+        const [results]: [BoardResult[]] = await con.query(sql);
+        res.status(200).json({ success: true, postList: results });
+    } catch (err) {
+        res.status(400).json({ success: false, message: "serverERR" });
+        logger.error(err);
+    }
+});
+
+
+
+
+// 전체 리스트 가져오기 하나.
 router.get("/list", async (req: Request, res: Response) => {
     let sql = `SELECT * FROM drinkBoard WHERE boardDelete = 0 AND boardCategory = '자유게시판'`;
 
+    try { 
+        console.log("queryok")
+        const [results]: [BoardResult[]] = await con.query(sql);
+        res.status(200).json({ success: true, postList: results });
+    } catch (err) {
+        res.status(400).json({ success: false, message: "serverERR" });
+        logger.error(err);
+    }
+});
+// best 게시글 리스트 하나 //
+router.get("/bestpost", async (req: Request, res: Response) => {
+    let sql = `SELECT * FROM drinkBoard WHERE boardDelete = 0 AND boardCategory = '자유게시판' ORDER BY boardView DESC, boardLike DESC`;
     try {
         console.log("queryok")
         const [results]: [BoardResult[]] = await con.query(sql);
@@ -68,10 +122,10 @@ router.get("/list", async (req: Request, res: Response) => {
     }
 });
 
-
+// view page
 router.get(`/view/:boardId`, async (req: Request, res: Response) => {
     const boardId = req.params.boardId;
-    const myMemberId = Number(req.query.myMemberId);
+    const myMemberId = req.query.myMemberId;
     console.log(myMemberId, 'myMemberId1')
 
     let checkSql = "SELECT * FROM drinklikes WHERE myMemberId = ? AND boardId = ?";

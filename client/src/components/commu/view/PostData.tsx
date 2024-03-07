@@ -28,7 +28,7 @@ const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPo
                         <div className="view_box">
                             <div className="user_info not_user">
                                 <div className="user_info_box">
-                                    <Link to="board_member_info.php?boardId=<?= $boardId ?>">
+                                    <Link to={`/Authors/${post.boardAuthor}`}>
                                             <p>{post.boardAuthor}님의 게시글 더보기</p>
                                     </Link>
                                 </div>
@@ -39,7 +39,7 @@ const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPo
                                         {post.regTime instanceof Date ? post.regTime.toISOString() : post.regTime}
                                     </div>
                                     <FontAwesomeIcon icon={faHeart} className={btnLike ? 'like' : ''} 
-                                    onClick={(e:React.MouseEvent<SVGSVGElement>) => goodBtn(e, params, btnLike, setBtnLike, setPost, myMemberId)} />
+                                    onClick={(e:React.MouseEvent<SVGSVGElement>) => goodBtn({e, params, btnLike, setBtnLike, setPost, myMemberId})} />
                                     <div className="view_num boardLike">
                                         추천수: <em>{post.boardLike}</em>
                                     </div>

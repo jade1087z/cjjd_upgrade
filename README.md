@@ -1,3 +1,15 @@
+\*\* 03.07
+- 현재까지 완성한 부분
+-> 유저 기능 완성,
+-> 댓글
+-> 게시글 완성
+
+추가 개선 사항,,, 무한스크롤 구현, 스크롤 스무스 구현, 
+
+해결해야할 일,
+ 마이페이지 완성시키기, 술 리뷰 페이지 완성시키기. 
+
+
 \*\* 02.21
 -   view 페이지 다듬고 댓글 기능 -> 좋아요, 조회수 기능 해결하기
 
@@ -38,7 +50,8 @@ npm i http-proxy-middleware
 npm i react-router-dom
 npm i react-redux
 npm i @reduxjs/toolkit
-npm install react-places-autocomplete
+npm i react-places-autocomplete
+npm i locomotive-scroll,
 
 서버단 라이브러리 설치
 npm i nodemon

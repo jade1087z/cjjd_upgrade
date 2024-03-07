@@ -55,7 +55,7 @@
         }
 
         .board_title {
-            width: 70%;
+            width: 60%;
             text-align: left;
             font-size: 1rem;
             color: var(--black);
@@ -63,15 +63,31 @@
 
         .board_author,
         .board_date,
-        .board_view {
+        .board_view,
+        .board_comment {
             width: 10%;
-            span {
-                color: var(--black200);
+            color: var(--black200);
+        }
+    }
+}
+.toTheTop {
+    margin-top: 100px;
+    div {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fefefe;
+            transition: all 0.2s;
+            &:hover {
+                background-color: #e0e0e0;
             }
         }
     }
 }
-
 /* ________________________________1650________________________________ */
 @media (max-width: 1650px) {
     #contents_area {
@@ -144,5 +160,13 @@
     }
     .board_w100 li .board_view {
         width: 10%;
+    }
+    .toTheTop {
+        div {
+            button {
+                width: 30px;
+                height: 30px;
+            }
+        }
     }
 }

@@ -2,9 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faIcons } from "@fortawesome/free-solid-svg-icons";
+import AsideSearch from "./AsideSearch";
 const AsideNot:React.FC = () => {
     return (
         <aside id="side_wrap">
+            <AsideSearch />
+
             <div className="info_box side_box roundCorner shaDow">
                 <div className="login_info not_login">
                     <p>

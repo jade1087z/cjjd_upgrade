@@ -9,11 +9,12 @@ import Write from "./components/commu/write/Write";
 import AcList from "./components/acpage/list/AcList";
 import AcVIiew from "./components/acpage/view/AcVIiew";
 import Mypage from "./components/user/mypage/Mypage";
-import Community from "./components/commu/Community";
+import Community from "./components/commu/list/Community";
 import { RootState } from './reducer/store';
 import { useSelector } from 'react-redux';
 import AsideNot from './components/layout/AsideNot';
 import PostUpdate from './components/commu/update/PostUpdate';
+import Authors from './components/commu/list/Authors';
 
 const MainLayout:React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
@@ -32,6 +33,7 @@ const MainLayout:React.FC = () => {
                     <Routes>
                         <Route path="/" element={<Main />} />
                         <Route path="/community" element={<Community />} />
+                        <Route path="/Authors/:boardAuthor" element={<Authors />} />
                         <Route path="/view/:boardId" element={<View />} />
                         <Route path="/update/:boardId" element={<PostUpdate />} />
                         <Route path="/write" element={<Write />} />

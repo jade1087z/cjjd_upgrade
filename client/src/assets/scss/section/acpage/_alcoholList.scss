@@ -17,11 +17,12 @@
     width: 100%;
     margin-bottom: 1rem;
     margin-top: 3rem;
-    ul {
+    
+    .btnWrap {
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
-        li {
+        button {
             background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -36,11 +37,7 @@
             }
             &.active {
                 background-color: var(--mcolor);
-                color: var(--white);
-            }
-            a {
-                display: block;
-                cursor: pointer;
+                color: white;
             }
         }
     }

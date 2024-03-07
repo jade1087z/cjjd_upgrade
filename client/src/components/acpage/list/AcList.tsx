@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AcRank from "../rank/AcRank";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,66 +7,70 @@ import {
     faComment,
     faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
+import { DrinkList } from "../../../interface/acList.interface";
+import { dinkListAll } from "../../../axios/acList/list/listAll";
 const card1 = require("../../../assets/img/card (1).gif")
-const AcList = () => {
+
+
+const AcList: React.FC = () => {
+
+    const [drinkList, setDrinkList] = useState<DrinkList[]>([])
+    const [category, setCategory] = useState<string>('전체');
+    const btnList = ['전체', '소주', '맥주', '와인', '위스키', '막걸리'];
+
+    const fetchList = async (category: string) => {
+        const result: DrinkList[] = await dinkListAll({ category })
+        setDrinkList(result)
+    }
+    useEffect(() => {
+        fetchList(category);
+    }, [category])
+
+    console.log(drinkList)
     return (
         <>
             <AcRank />
-
             <div className="alcohol_select">
-                <ul>
-                    <li className="active">
-                        <Link to="alcohol_list.html">전체</Link>
-                    </li>
-                    <li>
-                        <Link to="alcohol_list.html">소주</Link>
-                    </li>
-                    <li>
-                        <Link to="alcohol_list.html">맥주</Link>
-                    </li>
-                    <li>
-                        <Link to="alcohol_list.html">와인</Link>
-                    </li>
-                    <li>
-                        <Link to="alcohol_list.html">위스키</Link>
-                    </li>
-                    <li>
-                        <Link to="alcohol_list.html">막걸리</Link>
-                    </li>
-                </ul>
+                <div className="btnWrap">
+                    {btnList.map((li, key) => (
+                        <button className={li === category ? 'active' : ''} key={key}
+                            onClick={() => setCategory(li)}>{li}</button>
+                    ))}
+                </div>
             </div>
 
             <div className="alcohol_item">
                 <ul>
-                    <li className="boxStyle roundCorner shaDow">
-                        <Link to="/acview">
+                    {drinkList && drinkList.map((li, key) => (
+                        <li className="boxStyle roundCorner shaDow" key={key}>
+                        <Link to={`/acview/${key}`}>
                             <div className="item_img">
                                 <img src={card1} alt="alcohol" />
                             </div>
                             <div className="item_info">
-                                <h4>진로 이즈백</h4>
-                                <p>하이트</p>
+                                <h4>{li.acName}</h4>
+                                <p>{li.acCompany}</p>
                             </div>
                             <div className="item_summary">
                                 <ul>
                                     <li className="summary_good">
                                         <FontAwesomeIcon icon={faThumbsUp} />
-                                        <span>15</span>
+                                        <span>{li.acLike}</span>
                                     </li>
                                     <li className="summary_comment">
                                         <FontAwesomeIcon icon={faComment} />
-                                        <span>24</span>
+                                        <span>{li.acComment}</span>
                                     </li>
                                     <li className="summary_abv">
-                                        <FontAwesomeIcon
-                                            icon={faWineGlassEmpty}
-                                        />
-                                        <span>14</span>
+                                        <FontAwesomeIcon icon={faWineGlassEmpty}/>
+                                        <span>{li.acAbv}</span>
                                     </li>
                                 </ul>
                             </div>
                         </Link>
                     </li>
+                    ))}
+                    
                 </ul>
             </div>
         </>

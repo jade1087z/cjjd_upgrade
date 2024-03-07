@@ -4,6 +4,7 @@ import { comment } from "../../../../interface/commentInterface";
 import updateComment from "../../../../axios/comment/updateComment";
 import deleteComment from "../../../../axios/comment/deleteComment";
 import checkUpdateComment from "../../../../axios/comment/checkUpdateComment";
+import cancleComment from "../../../../axios/comment/cancleComment";
 
 interface areaInterface {
     params: number | string | undefined,
@@ -28,9 +29,7 @@ const CommentArea: React.FC<areaInterface> = ({ params, commentUpdate, myMemberI
         }
     }, [params, commentUpdate])
 
-    const cancle = (e) => {
-
-    }
+    
     return (
         <>
             {comment ? (
@@ -62,7 +61,7 @@ const CommentArea: React.FC<areaInterface> = ({ params, commentUpdate, myMemberI
                                             <button className="modify" 
                                             onClick={(e: React.MouseEvent) => updateComment({ e, commentId: li.commentId, msg: msg[key] || '', msgUpdate, setMsgUpdate, key })}>등록</button>
                                             <button className="delete" 
-                                            onClick={(e: React.MouseEvent) => cancle({ e })}>취소</button></>
+                                            onClick={(e: React.MouseEvent) => cancleComment({e, msgUpdate, setMsgUpdate, key})}>취소</button></>
                                     )}
                                 </div>
                             </li>

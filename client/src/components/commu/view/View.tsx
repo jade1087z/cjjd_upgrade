@@ -48,7 +48,7 @@ const View: React.FC = () => {
     return (
         <>
             <div className="board_view boxStyle roundCorner shaDow">
-                <h4><Link to="/commu">자유게시판</Link></h4>
+                <h4><Link to="/community">자유게시판</Link></h4>
                 
                 {post && <PostData post={post} params={params} btnLike={btnLike} setBtnLike={setBtnLike} setPost={setPost} myMemberId={myMemberId}/>}
 
@@ -56,7 +56,7 @@ const View: React.FC = () => {
                     <div className="button_list">
                         <button className="delete" onClick={(e) => deletePost(e, params,myMemberId)}>삭제하기</button>
                         <button className="modify" onClick={(e) => updateCheck(e, params,myMemberId)}>수정하기</button>
-                        <button className="good" onClick={(e) => goodBtn(e, params, btnLike, setBtnLike, setPost,myMemberId)}>추천하기</button>
+                        <button className="good" onClick={(e) => goodBtn({e, params, btnLike, setBtnLike, setPost, myMemberId})}>추천하기</button>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@ const View: React.FC = () => {
                 <CmmentWrite myMemberId={myMemberId} params={params} setCommentUpdate={setCommentUpdate}/>
             
 
-            <div className="boxStyle roundCorner shaDow">
+            {/* <div className="boxStyle roundCorner shaDow">
                 <ul className="board_w100">
                     <li className="<?= $thisId ?>">
                         <Link to="/">
@@ -97,7 +97,7 @@ const View: React.FC = () => {
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };

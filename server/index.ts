@@ -6,7 +6,9 @@ import path from "path";
 import postRouter from "./router/post";
 import userRouter from "./router/user";
 import commentRouter from "./router/comment";
+import acListRouter from "./router/acList";
 
+import con from "./db";
 const app = express();
 const port = 5050;
 
@@ -16,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/post", postRouter);
 app.use("/api/user", userRouter);
 app.use("/api/comment", commentRouter);
+app.use("/api/acList", acListRouter);
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

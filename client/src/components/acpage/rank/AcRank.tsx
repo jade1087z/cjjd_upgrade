@@ -20,6 +20,10 @@ const AcRank = () => {
                     }}
                     modules={[Autoplay]}
                     breakpoints={{
+                        500: {
+                            slidesPerView: 2,
+                            spaceBetween: 10,
+                        },
                         600: {
                             slidesPerView: 3,
                             spaceBetween: 10,
