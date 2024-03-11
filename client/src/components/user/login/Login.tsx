@@ -14,10 +14,8 @@ const Login:React.FC = () => {
     const [youId, setYouId] = useState<string>('');
     const [youPass, setYouPass] = useState<string>('');
     const dispatch = useDispatch<ThunkDispatch<any, any, AnyAction>>();
-    const navigate = useNavigate();
     
-    const tryLoginLogic = async (e: React.MouseEvent, youId: string, youPass: string) => {
-        // 로그인 로직...
+    const tryLoginLogic = async (e: React.MouseEvent | React.KeyboardEvent, youId: string, youPass: string) => {
         const user = await tryLogin(e, youId, youPass);
         dispatch(setUser(user));
     }
@@ -33,8 +31,14 @@ const Login:React.FC = () => {
                     <div className="right">
                         <div className="logo"><a href="">취중진담</a></div>
                         <div className="login_box">
-                            <input type="text"  placeholder="아이디를 입력하세요." className="login_ID" onChange={(e) => setYouId(e.target.value)}/>
-                            <input type="password" placeholder="비밀번호를 입력하세요." className="login_Pass" onChange={(e) => setYouPass(e.target.value)}/>
+                            <input type="text"  placeholder="아이디를 입력하세요." className="login_ID" 
+                            onChange={(e) => setYouId(e.target.value)} 
+                            onKeyPress={(e) => {if(e.key === 'Enter') {tryLoginLogic(e, youId, youPass)}}}
+                            />
+                            <input type="password" placeholder="비밀번호를 입력하세요." className="login_Pass"
+                             onChange={(e) => setYouPass(e.target.value)}
+                             onKeyPress={(e) => {if(e.key === 'Enter') {tryLoginLogic(e, youId, youPass)}}}
+                             />
                             
                             <div className="check">
                                 <label htmlFor="agreeCheck1">

@@ -1,6 +1,14 @@
 import React from 'react'
+import QuillEditor from '../../../util/quill/QuillEditor'
+import "../../../assets/scss/setting/_quillSnow.scss";
 
-const ContentsWrap = ({ title, contents, setTitle, setContents }) => {
+interface ContentsWrapProps {
+    title: string;
+  contents: string;
+  setTitle: (value: string) => void;
+  setContents: (value: string) => void;
+}
+const ContentsWrap: React.FC<ContentsWrapProps> = ({ title, contents, setTitle, setContents }) => {
     
     return (
         <div>
@@ -20,11 +28,11 @@ const ContentsWrap = ({ title, contents, setTitle, setContents }) => {
             <div className="contents_wrap">
                 <div className="board_contents">
                     <label htmlFor="boardContents"></label>
-                    <textarea cols={50} rows={1} className="board_input_contents inputStyle placeholder" value={contents}
+                    {/* <textarea cols={50} rows={1} className="board_input_contents inputStyle placeholder" value={contents}
                         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setContents(e.currentTarget.value)}
                         placeholder="내용을 입력하세요"
-                    ></textarea>
-                   
+                    ></textarea> */}
+                   <QuillEditor value={contents} onChange={setContents} placeholder={'내용을 입력하세요'} />
                 </div>
             </div>
         </div>

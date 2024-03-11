@@ -56,7 +56,7 @@ const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPo
                             <div className="board_desc_img">
                                 <img src="/" alt="image"/>
                             </div>
-                           <em className="scrollStyle"> {post.boardContents}</em>
+                           <em className="scrollStyle" > {post.boardContents}</em>
                         </div>
                     </div>
                 </>

@@ -21,6 +21,13 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
-, "webpack.config.js"  ],
+    "src",
+    "webpack.config.js"
+  ],
+  "baseUrl": ".",
+  "paths": {
+    "@common/*": [
+      "src/common/*"
+    ] // 예시 경로, 실제 경로에 맞게 조정 필요
+  }
 }

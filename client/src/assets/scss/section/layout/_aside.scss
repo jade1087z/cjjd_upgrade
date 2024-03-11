@@ -111,9 +111,11 @@
             margin-bottom: 20px;
             color: var(--black);
 
-            font-size: 1.8rem;
-            color: var(--mcolor);
-            margin: 10px;
+            svg {
+                font-size: 1.8rem;
+                color: var(--mcolor);
+                margin: 10px;
+            }
         }
     }
 

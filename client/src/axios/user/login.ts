@@ -15,7 +15,7 @@ interface ResultData {
     }
 }
 
-export const tryLogin = async (e: React.MouseEvent, youId: string, youPass: string) => {
+export const tryLogin = async (e: React.MouseEvent | React.KeyboardEvent, youId: string, youPass: string) => {
     e.preventDefault();
     let body = {
         youId: youId,
