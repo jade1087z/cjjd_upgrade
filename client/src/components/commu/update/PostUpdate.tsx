@@ -8,7 +8,7 @@ import boardDetail from '../../../axios/post/view/boardDetail';
 import { Post, RouteParams } from '../../../interface/postInterface';
 import { format } from "date-fns";
 import update from '../../../axios/post/update/update';
-import { cancle } from '../../../axios/post/postCancle';
+import { cancle } from '../../../axios/post/create/postCancle';
 
 
 const PostUpdate: React.FC = () => {
@@ -22,6 +22,7 @@ const PostUpdate: React.FC = () => {
     const [category, setCategory] = useState<string>("자유게시판");
     const [title, setTitle] = useState<string>("");
     const [contents, setContents] = useState<string>("");
+    const [imgFile, setImgFile] = useState<string>("");
 
     useEffect(() => {
         let isMounted = true
@@ -51,16 +52,8 @@ const PostUpdate: React.FC = () => {
                                     <h2>자유게시판</h2>
                                 </div>
                                 <div className="board_text">
-                                    <div className="post">
-                                        <SelectOption3
-                                            category={category}
-                                            setCategory={setCategory}
-                                        />
-                                        <label htmlFor="boardFile" className="link">이미지를 업로드 해주세요.!!
-                                        </label>
-                                        <input type="file" accept=".jpg, .jpeg, .png, .gif, .webp" className="link none" />
-                                    </div>
-                                    <ContentsWrap title={title} contents={contents} setTitle={setTitle} setContents={setContents} />
+                                    
+                                    <ContentsWrap title={title} contents={contents} setTitle={setTitle} setContents={setContents} setImgFile={setImgFile} />
 
                                     <div className="create">
                                         <button className="sideBtn mt50 mr20" onClick={(e) => cancle(e)}>

@@ -201,3 +201,30 @@
 {"code":"ER_PARSE_ERROR","errno":1064,"level":"error","message":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '? LIMIT 0, 18' at line 1","sql":"SELECT * FROM drinkBoard WHERE boardDelete = 0 AND boardCategory = '자유게시판' AND boardAuthor = ? LIMIT 0, 18","sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '? LIMIT 0, 18' at line 1","sqlState":"42000"}
 {"code":"ER_PARSE_ERROR","errno":1064,"level":"error","message":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '? LIMIT 18, 18' at line 1","sql":"SELECT * FROM drinkBoard WHERE boardDelete = 0 AND boardCategory = '자유게시판' AND boardAuthor = ? LIMIT 18, 18","sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '? LIMIT 18, 18' at line 1","sqlState":"42000"}
 {"code":"ER_PARSE_ERROR","errno":1064,"level":"error","message":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '? LIMIT 0, 18' at line 1","sql":"SELECT * FROM drinkBoard WHERE boardDelete = 0 AND boardCategory = '자유게시판' AND boardAuthor = ? LIMIT 0, 18","sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '? LIMIT 0, 18' at line 1","sqlState":"42000"}
+{"level":"error"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"code":"ER_PARSE_ERROR","errno":1064,"level":"error","message":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OREDER BY regTime DESC' at line 1","sql":"SELECT * FROM drinkBoard WHERE boardDelete = 0 AND boardCategory = '자유게시판' OREDER BY regTime DESC","sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OREDER BY regTime DESC' at line 1","sqlState":"42000"}
+{"code":"ER_PARSE_ERROR","errno":1064,"level":"error","message":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OREDER BY regTime DESC LIMIT 0, 18' at line 1","sql":"SELECT * FROM drinkBoard WHERE boardDelete = 0 AND boardCategory = '자유게시판' OREDER BY regTime DESC LIMIT 0, 18","sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OREDER BY regTime DESC LIMIT 0, 18' at line 1","sqlState":"42000"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"code":"ER_PARSE_ERROR","errno":1064,"level":"error","message":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DAY OREDER BY boardView DESC, boardLike DESC' at line 1","sql":"SELECT * FROM drinkboard WHERE boardDelete = 0 AND regTime < NOW() - INTERVAL 1 DAY AND regTime >= 2 DAY OREDER BY boardView DESC, boardLike DESC","sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DAY OREDER BY boardView DESC, boardLike DESC' at line 1","sqlState":"42000"}
+{"code":"ER_PARSE_ERROR","errno":1064,"level":"error","message":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OREDER BY boardView DESC, boardLike DESC' at line 1","sql":"SELECT * FROM drinkboard WHERE boardDelete = 0 AND regTime < NOW() - INTERVAL 1 DAY AND regTime >= NOW() - INTERVAL 2 DAY OREDER BY boardView DESC, boardLike DESC","sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OREDER BY boardView DESC, boardLike DESC' at line 1","sqlState":"42000"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}

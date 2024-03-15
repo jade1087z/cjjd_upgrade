@@ -4,7 +4,7 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import goodBtn from "../../../axios/post/view/gootBtn";
 import { Post } from "../../../interface/postInterface";
-
+import DOMPurify from 'dompurify'
 interface PostDataProps {
     post: Post | null;
     params: number | string | undefined
@@ -15,7 +15,7 @@ interface PostDataProps {
 }
 
 const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPost, myMemberId}) => {
-
+    const cleanHTML = DOMPurify.sanitize(post.boardContents);
     return (
         <>
             {post ? (
@@ -56,7 +56,8 @@ const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPo
                             <div className="board_desc_img">
                                 <img src="/" alt="image"/>
                             </div>
-                           <em className="scrollStyle" > {post.boardContents}</em>
+                           <div dangerouslySetInnerHTML={{ __html: cleanHTML}} />
+
                         </div>
                     </div>
                 </>

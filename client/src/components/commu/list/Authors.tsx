@@ -28,7 +28,7 @@ const Authors: React.FC = () => {
         const formattedPostList = newPostList.map((post) => ({
             ...post,
             regTime: format(new Date(post.regTime), "MM.dd"),
-        })).sort((a, b) => Date.parse(b.regTime) - Date.parse(a.regTime));
+        }))
         setPostList(prevPosts => [...prevPosts, ...formattedPostList]);
         setFetching(false)
     };

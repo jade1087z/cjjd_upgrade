@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
-import con from '../db';
+import con from '../util/db';
 const router = express.Router();
-const logger = require("../logger");
-const jwt = require("../jwt");
+const logger = require("../util/logger");
+const jwt = require("../util/jwt");
 import bcrypt from 'bcryptjs';
 
 interface User {

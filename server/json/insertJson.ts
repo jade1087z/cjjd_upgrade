@@ -1,4 +1,4 @@
-import con from '../db';
+import con from '../util/db';
 import fs from 'fs';
 
 interface Drink {

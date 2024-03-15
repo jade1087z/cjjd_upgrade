@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
-import con from '../db';
+import con from '../util/db';
 const router = express.Router();
-const logger = require("../logger");
+const logger = require("../util/logger");
 
 interface commentResult {
     commentId: number;

@@ -15,7 +15,6 @@ const RecentList: React.FC = () => {
                     ...post,
                     regTime: format(new Date(post.regTime), "MM.dd"),
                 }))
-                .sort((a,b) => Date.parse(b.regTime) - Date.parse(a.regTime))
                 .slice(0,15);
                 if (JSON.stringify(postList) !== JSON.stringify(formattedPostList)) setPostList(formattedPostList);
             }

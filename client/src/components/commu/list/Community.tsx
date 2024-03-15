@@ -24,11 +24,11 @@ const Community: React.FC = () => {
         const formattedPostList = newPostList.map((post) => ({
             ...post,
             regTime: format(new Date(post.regTime), "MM.dd"),
-        })).sort((a, b) => Date.parse(b.regTime) - Date.parse(a.regTime));
+        }))
         setPostList(prevPosts => [...prevPosts, ...formattedPostList]);
         setFetching(false)
     };
-
+// 가장 최신 글이 위로 오게끔 정렬하기 
     useEffect(() => {
         observer = new IntersectionObserver((entries) => {
             if (fetching || !hasMore) return;

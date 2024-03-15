@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import QuillEditor from '../../../util/quill/QuillEditor'
-import "../../../assets/scss/setting/_quillSnow.scss";
-
+import ReactQuill, { Quill } from 'react-quill';
+const QuillEditorLazy = React.lazy(() => import('../../../util/quill/QuillEditor'));
 interface ContentsWrapProps {
     title: string;
-  contents: string;
-  setTitle: (value: string) => void;
-  setContents: (value: string) => void;
+    contents: string;
+    setTitle: (value: string) => void;
+    setContents: (value: string) => void;
+    setImgFile: (value: string) => void;
 }
-const ContentsWrap: React.FC<ContentsWrapProps> = ({ title, contents, setTitle, setContents }) => {
+const ContentsWrap: React.FC<ContentsWrapProps> = ({ title, contents, setTitle, setContents, setImgFile }) => {
+    const quillRef = useRef<any>(null);
+    const [isEditorReady, setEditorReady] = useState(false);
+    
+    useEffect(() => {
+        setEditorReady(true);
+        
+    }, [quillRef]);
     
     return (
         <div>
@@ -28,15 +36,16 @@ const ContentsWrap: React.FC<ContentsWrapProps> = ({ title, contents, setTitle, 
             <div className="contents_wrap">
                 <div className="board_contents">
                     <label htmlFor="boardContents"></label>
-                    {/* <textarea cols={50} rows={1} className="board_input_contents inputStyle placeholder" value={contents}
-                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setContents(e.currentTarget.value)}
-                        placeholder="내용을 입력하세요"
-                    ></textarea> */}
-                   <QuillEditor value={contents} onChange={setContents} placeholder={'내용을 입력하세요'} />
+                    {/* <QuillEditor quillRef={quillRef} onChange={setContents} placeholder={'내용을 입력하세요'} contents={contents} setImgFile={setImgFile} /> */}
+                    {isEditorReady && (
+                        <React.Suspense fallback={<div>Loading...</div>}>
+                            <QuillEditorLazy quillRef={quillRef} onChange={setContents} placeholder={'내용을 입력하세요'} contents={contents} setImgFile={setImgFile} />
+                        </React.Suspense>
+                    )}
                 </div>
             </div>
         </div>
     )
 }
-
+// react.lazy + suspense 를 통해 동적 importing
 export default ContentsWrap
