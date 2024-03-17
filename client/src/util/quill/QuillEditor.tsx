@@ -25,18 +25,42 @@ Quill.register('modules/ImageResize', ImageResize);
 
 
 const QuillEditor = ({ quillRef, onChange, placeholder, contents, setImgFile }) => {
-  const handleImageUpload = async (url) => {
+
+  // const handleImageUpload = async (result) => {
+  //   const editor = quillRef.current?.getEditor();
+  //   const range = editor?.getSelection() ?? false;
+  //   const { content, mimetype } = result;
+  //   const filename = `data:${mimetype};base64,${content}`
+
+
+  //   if (!range) return;
+  //   editor?.setSelection({
+  //     index: range.index + 1,
+  //     length: range.length + 1,
+  //   });
+
+  //   const boardImgFile = editor?.insertEmbed(range.index, 'image', filename);
+
+  // }
+
+  const reader = (file) => {
     const editor = quillRef.current?.getEditor();
-    const range = editor?.getSelection() ?? false;
 
-    if (!range) return;
-    editor?.setSelection({
-      index: range.index + 1,
-      length: range.length + 1,
-    });
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const base64Image = e.target.result;
+      const range = editor?.getSelection() ?? false;
 
-    const boardImgFile = editor?.insertEmbed(range.index, 'image', url);
-    return boardImgFile
+      if (!range) return;
+
+      editor?.setSelection({
+        index: range.index + 1,
+        length: range.length + 1,
+      })
+      editor.insertEmbed(range.index, 'image', base64Image);
+    }
+
+    const fileResult = reader.readAsDataURL(file)
   }
 
   const imageHandler = () => {
@@ -44,31 +68,27 @@ const QuillEditor = ({ quillRef, onChange, placeholder, contents, setImgFile }) 
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
     input.click();
+
+    // const formData = new FormData();
+    // formData.append('file', file);
+    // const result = await uploadFile({ formData });
+    // if (!result) {
+    //   console.error('file path is undefind', result)
+    //   return
+    // }
+    
     input.onchange = async () => {
       const file: File | null = input.files ? input.files[0] : null;
       if (!file) return;
-      const { name } = file;
-      // image 업로드 로직
-      const formData = new FormData();
-      formData.append('file', file);
-
       try {
-        const url = await uploadFile({ formData });
-        if (!url) {
-          console.error('file path is undefind', url)
-          return
-        }
-        const imagePath = URL.createObjectURL(file);
-        console.log(imagePath)
-        setImgFile(handleImageUpload(file))
-
+        reader(file)
+        setImgFile(file)
       } catch (error) {
         console.error('Error uploading file:', error);
       }
 
     };
   };
-  const formats = ['align', 'float', 'width', 'heigh'];
 
   const modules = useMemo(() => {
     return {
@@ -94,7 +114,7 @@ const QuillEditor = ({ quillRef, onChange, placeholder, contents, setImgFile }) 
       },
     }
   }, [])
-  
+
   return (
     <ReactQuill ref={quillRef} modules={modules} value={contents} onChange={onChange} placeholder={placeholder} />
   )

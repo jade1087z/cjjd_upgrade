@@ -1,5 +1,5 @@
 import axios from "axios"
-import { DrinkList } from "../../../interface/acList.interface";
+import { DrinkList } from "../../../interface/post/acList.interface";
 
 interface drinkResponse {
     drinkList: DrinkList[] 

@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import CommentArea from "./comment/CommentArea";
 import PostData from "./PostData";
 import goodBtn from "../../../axios/post/view/gootBtn";
-import { Post, RouteParams } from "../../../interface/postInterface";
+import { Post, RouteParams } from "../../../interface/post/postInterface";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducer/store";
 import updateCheck from "../../../axios/post/update/updateCheck";

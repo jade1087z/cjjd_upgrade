@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Post } from "../../../interface/postInterface";
+import { Post } from "../../../interface/post/postInterface";
 import postAll from "../../../axios/post/list/listAll";
 import { format } from "date-fns";
 

@@ -5,10 +5,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../reducer/store';
 import boardDetail from '../../../axios/post/view/boardDetail';
-import { Post, RouteParams } from '../../../interface/postInterface';
+import { Post, RouteParams } from '../../../interface/post/postInterface';
 import { format } from "date-fns";
 import update from '../../../axios/post/update/update';
 import { cancle } from '../../../axios/post/create/postCancle';
+import { ImageFile } from '../../../interface/post/ImageFile.interface';
 
 
 const PostUpdate: React.FC = () => {
@@ -19,10 +20,9 @@ const PostUpdate: React.FC = () => {
 
     const [btnLike, setBtnLike] = useState<boolean>(false)
 
-    const [category, setCategory] = useState<string>("자유게시판");
     const [title, setTitle] = useState<string>("");
     const [contents, setContents] = useState<string>("");
-    const [imgFile, setImgFile] = useState<string>("");
+    const [imgFile, setImgFile] = useState<ImageFile | null>();
 
     useEffect(() => {
         let isMounted = true

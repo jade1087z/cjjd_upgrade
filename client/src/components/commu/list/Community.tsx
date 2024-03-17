@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { Post } from '../../../interface/postInterface';
+import { Post } from '../../../interface/post/postInterface';
 import { format } from 'date-fns';
 import postAllpage from '../../../axios/post/list/pageList';
 import TopBtn from './TopBtn';

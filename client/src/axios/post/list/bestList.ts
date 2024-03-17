@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Post } from "../../../interface/postInterface";
+import { Post } from "../../../interface/post/postInterface";
 
 interface PostResponse {
     postList: Post[];

@@ -7,7 +7,7 @@ import {
     faComment,
     faThumbsUp,
 } from "@fortawesome/free-solid-svg-icons";
-import { DrinkList } from "../../../interface/acList.interface";
+import { DrinkList } from "../../../interface/post/acList.interface";
 import { dinkListAll } from "../../../axios/acList/list/listAll";
 const card1 = require("../../../assets/img/card (1).gif")
 

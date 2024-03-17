@@ -9,10 +9,7 @@ export const uploadFile = async ({formData}) => {
         console.log(result)
         if(result.data && result.data.url){
             console.log(result.data.url)
-            const {content, mimetype} = result.data.url;
-            const url = `data:${mimetype};base64,${content}`
-            console.log(url)
-            return url
+            return result.data.url
         } 
     } catch (error) {
         console.log(error)

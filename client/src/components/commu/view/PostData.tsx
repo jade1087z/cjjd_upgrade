@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import goodBtn from "../../../axios/post/view/gootBtn";
-import { Post } from "../../../interface/postInterface";
+import { Post } from "../../../interface/post/postInterface";
 import DOMPurify from 'dompurify'
 interface PostDataProps {
     post: Post | null;
@@ -16,6 +16,8 @@ interface PostDataProps {
 
 const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPost, myMemberId}) => {
     const cleanHTML = DOMPurify.sanitize(post.boardContents);
+    console.log(post.boardImgFile)
+
     return (
         <>
             {post ? (
@@ -54,7 +56,7 @@ const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPo
                     <div className="board_desc">
                         <div className="board_detail">
                             <div className="board_desc_img">
-                                <img src="/" alt="image"/>
+                                {post.boardImgFile ? <img src={`${post.boardImgFile}`} alt=""/> : ''}
                             </div>
                            <div dangerouslySetInnerHTML={{ __html: cleanHTML}} />
 

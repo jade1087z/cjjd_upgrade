@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import commentList from "../../../../axios/comment/list";
-import { comment } from "../../../../interface/commentInterface";
+import { comment } from "../../../../interface/post/commentInterface";
 import updateComment from "../../../../axios/comment/updateComment";
 import deleteComment from "../../../../axios/comment/deleteComment";
 import checkUpdateComment from "../../../../axios/comment/checkUpdateComment";

@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import QuillEditor from '../../../util/quill/QuillEditor'
-import ReactQuill, { Quill } from 'react-quill';
+import { ImageFile } from '../../../interface/post/ImageFile.interface';
 const QuillEditorLazy = React.lazy(() => import('../../../util/quill/QuillEditor'));
+
 interface ContentsWrapProps {
     title: string;
     contents: string;
     setTitle: (value: string) => void;
     setContents: (value: string) => void;
-    setImgFile: (value: string) => void;
+    setImgFile: (imageFile: ImageFile) => void;
 }
 const ContentsWrap: React.FC<ContentsWrapProps> = ({ title, contents, setTitle, setContents, setImgFile }) => {
     const quillRef = useRef<any>(null);
