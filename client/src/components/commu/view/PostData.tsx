@@ -56,7 +56,7 @@ const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPo
                     <div className="board_desc">
                         <div className="board_detail">
                             <div className="board_desc_img">
-                                {post.boardImgFile ? <img src={`${post.boardImgFile}`} alt=""/> : ''}
+                                {/* {post.boardImgFile ? <img src={`${post.boardImgFile}`} alt=""/> : ''} */}
                             </div>
                            <div dangerouslySetInnerHTML={{ __html: cleanHTML}} />
 

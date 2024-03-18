@@ -1,81 +1,46 @@
 import { ImageFile } from './../../client/src/interface/post/ImageFile.interface';
 import express, { Request, Response } from 'express';
 import con from '../util/db';
+import { CustomFile } from '../interface/postInterface/file.interface';
+import { BoardResult } from '../interface/postInterface/board.interface';
+import { checkResults } from '../interface/postInterface/check.interface';
 const setUpload = require('../util/multerS3')
 const logger = require("../util/logger");
 const router = express.Router();
 
-interface checkResults {
-    likeId: number;
-    myMemberId: number;
-    boardId: number;
-    acId: number;
-    likeCategory: string;
-    likeDelete: number
-}
 
-interface BoardResult {
-    boardId: number;
-    myMemberId: number;
-    boardTitle: string;
-    boardContents: string;
-    boardAuthor: string;
-    boardView: number;
-    boardLike: number;
-    boardComment: number;
-    boardImgFile: string | null;
-    boardImgSize: string | null;
-    boardDelete: number;
-    regTime: Date | string;
-}
-interface CustomFile {
-    fieldname: string;
-    originalname: string;
-    encoding: string;
-    mimetype: string;
-    size: number;
-    bucket: string;
-    key: string;
-    acl: string;
-    contentType: string;
-    contentDisposition: null | string;
-    contentEncoding: null | string;
-    storageClass: string;
-    serverSideEncryption: null | string;
-    metadata: null | any;
-    location: string;
-    etag: string;
-    versionId: undefined | string;
-}
+
 
 router.post('/write/:mymemberId', (req, res, next) => setUpload('cjjdup/post')(req, res, next), async (req: Request, res: Response) => {
-    
+
     const myMemberId = req.params.mymemberId;
-    const { boardTitle, boardContents, boardAuthor } = req.body
-    console.log(req.file, 'reqfile')
-    
+    const { boardTitle, boardContents, boardAuthor, imgRange } = req.body
+
     function isCustomFile(file: any): file is CustomFile {
         return file && typeof file === 'object' && 'location' in file;
     }
+    
+    let location: string[] = [];
+    let size: number[] = [];
 
-    let location: string | undefined = undefined;
-    let size: number | undefined = undefined;
-
-    if (isCustomFile(req.file)) {
-        // if문 안에서 선언된 변수에 값 할당
-        location = req.file.location;
-        size = req.file.size;
+    if (req.files && Array.isArray(req.files)) {
+        req.files.forEach(file => {
+            if (isCustomFile(file)) {
+                // if문 안에서 선언된 변수에 값 할당
+                location?.push(file.location)
+                size?.push(file.size)
+            }
+        })
     }
-    console.log(location, 'loca')
-    console.log(size, 'siz')
-
-    const sql = `INSERT INTO drinkBoard(myMemberId, boardTitle, boardContents, boardAuthor, boardImgFile, boardImgSize ) VALUES (?, ?, ?, ?, ?,?)`;
-    let values = [myMemberId, boardTitle, boardContents, boardAuthor, location, size];
+    const locationJson = JSON.stringify(location)
+    const siezJson = JSON.stringify(size)
+    const RangeJson = JSON.stringify(imgRange)
+    const sql = `INSERT INTO drinkBoard(myMemberId, boardTitle, boardContents, boardAuthor, boardImgFile, boardImgSize, boardImgRange) VALUES (?, ?, ?, ?, ?,?, ?)`;
+    let values = [myMemberId, boardTitle, boardContents, boardAuthor, locationJson, siezJson, RangeJson];
 
     try {
-        const [results, fields] = await con.query(sql, values);
+        await con.query(sql, values);
         res.status(200).json({ success: true });
-
     } catch (error) {
         console.log(error);
         logger.error(error); //에러 로깅
@@ -331,16 +296,33 @@ router.get('/check/:boardId', async (req: Request, res: Response) => {
     }
 })
 
-router.patch('/update/:boardId', async (req: Request, res: Response) => {
+router.patch('/update/:boardId', (req, res, next) => setUpload('cjjdup/post')(req, res, next), async (req: Request, res: Response) => {
     const boardId = req.params.boardId;
-    console.log(boardId)
-    const title = req.body.boardTitle;
-    const contents = req.body.boardContents;
+    const { boardTitle, boardContents, newRange } = req.body
+    console.log(newRange)
+
+    function isCustomFile(file: any): file is CustomFile {
+        return file && typeof file === 'object' && 'location' in file;
+    }
+
+    let location: string | undefined = undefined;
+    let size: number | undefined = undefined;
+
+    if (isCustomFile(req.file)) {
+        // if문 안에서 선언된 변수에 값 할당
+        location = req.file.location;
+        size = req.file.size;
+    }
+
+    console.log(req.file, 'reqfile')
+    console.log(location, 'location update')
+    console.log(size, 'siz')
+
 
     try {
-        const sql = 'UPDATE drinkboard SET boardTitle = ?, boardContents = ? WHERE boardId = ?';
-        const values = [title, contents, boardId]
-        const [result, fields] = await con.query(sql, values)
+        const sql = 'UPDATE drinkboard SET boardTitle = ?, boardContents = ?, boardImgFile = ?, boardImgSize = ?, boardImgRange = ? WHERE boardId = ?';
+        const values = [boardTitle, boardContents, location, size, newRange, boardId]
+        await con.query(sql, values)
 
         res.status(200).json({ success: true });
     } catch (error) {

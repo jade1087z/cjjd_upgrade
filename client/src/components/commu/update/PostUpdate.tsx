@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import SelectOption3 from '../write/SelectOption3';
 import ContentsWrap from '../write/ContentsWrap';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../reducer/store';
 import boardDetail from '../../../axios/post/view/boardDetail';
 import { Post, RouteParams } from '../../../interface/post/postInterface';
-import { format } from "date-fns";
 import update from '../../../axios/post/update/update';
 import { cancle } from '../../../axios/post/create/postCancle';
 import { ImageFile } from '../../../interface/post/ImageFile.interface';
+import { onlyText, prepareContentForServer } from '../../../axios/post/prepareContentForServer';
 
 
 const PostUpdate: React.FC = () => {
@@ -19,18 +18,25 @@ const PostUpdate: React.FC = () => {
     const params: number | string | undefined = boardId === undefined ? undefined : (isNaN(Number(boardId)) ? boardId : Number(boardId));
 
     const [btnLike, setBtnLike] = useState<boolean>(false)
-
     const [title, setTitle] = useState<string>("");
     const [contents, setContents] = useState<string>("");
-    const [imgFile, setImgFile] = useState<ImageFile | null>();
+    
+    const [updateImgFile, setUpdateImgFile] = useState<ImageFile [] | string | null>();
+    const [newUpdateImgFile, setNewUpdateImgFile] = useState<ImageFile [] | string | null>();
+    
+    const [updateRange, setUpdateRange] = useState<number[] | number | null>(); // -> 기존 range 값
+    const [newRange, setNewRange] = useState<number[] | number | null >(); // -> 새로 받을 range 값 
 
     useEffect(() => {
         let isMounted = true
         const fetchPost = async () => {
-            const data: Post | undefined = await boardDetail(params, setBtnLike, myMemberId);
+            const data: Post | undefined = await boardDetail({params, setBtnLike, myMemberId});
             if (data && isMounted) {
                 setTitle(data.boardTitle);
-                setContents(data.boardContents);
+                const textContents = await prepareContentForServer(data.boardContents)
+                setContents(textContents);
+                setUpdateImgFile(data.boardImgFile);
+                setUpdateRange(data.boardImgRange)
             }
         };
         fetchPost();
@@ -38,8 +44,7 @@ const PostUpdate: React.FC = () => {
             isMounted = false
         }
     }, [myMemberId]);
-
-
+    
     return (
         <>
             <div className="best_list boxStyle roundCorner shaDow ">
@@ -53,13 +58,13 @@ const PostUpdate: React.FC = () => {
                                 </div>
                                 <div className="board_text">
                                     
-                                    <ContentsWrap title={title} contents={contents} setTitle={setTitle} setContents={setContents} setImgFile={setImgFile} />
+                                    <ContentsWrap title={title} contents={contents} setTitle={setTitle} setContents={setContents} updateImgFile={updateImgFile} setNewUpdateImgFile={setNewUpdateImgFile} updateRange={updateRange} setNewRange={setNewRange} />
 
                                     <div className="create">
                                         <button className="sideBtn mt50 mr20" onClick={(e) => cancle(e)}>
                                             취소
                                         </button>
-                                        <button className="sideBtn mt50 submit" onClick={(e) => update(e, title, contents, params)}>
+                                        <button className="sideBtn mt50 submit" onClick={(e) => update({e, title, contents, newUpdateImgFile, newRange, params})}>
                                             수정 완료
                                         </button>
                                     </div>

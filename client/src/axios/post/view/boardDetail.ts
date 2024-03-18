@@ -1,7 +1,13 @@
-import axios, { AxiosResponse }  from "axios";
+import axios from "axios";
 import { Post } from "../../../interface/post/postInterface";
 
-export const boardDetail = async(params: number | string | undefined, setBtnLike: (liked: boolean) => void, myMemberId: number | null) => {
+interface boardDetailProps {
+    params: number | string | undefined,
+    setBtnLike: (liked: boolean) => void,
+    myMemberId: number | null
+}
+
+export const boardDetail = async ({params, setBtnLike, myMemberId}: boardDetailProps) => {
     return await axios
         .get<{success: boolean; isLiked: boolean; post: Post;}>(`/api/post/view/${params}`, {params: {myMemberId}})
         .then((res) => {

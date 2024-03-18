@@ -25,7 +25,7 @@ const View: React.FC = () => {
     useEffect(() => {
         let isMounted = true
         const fetchPost = async () => {
-            const data: Post | undefined = await boardDetail(params, setBtnLike, myMemberId);
+            const data: Post | undefined = await boardDetail({params, setBtnLike, myMemberId});
             if (data && isMounted) {
                 try {
                     const formattedPost: Post | undefined  = {

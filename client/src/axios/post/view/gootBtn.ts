@@ -1,29 +1,13 @@
 import axios from "axios";
 import { format } from "date-fns";
-
-
-interface PrevPost {
-    boardId: number;
-    myMemberId: number;
-    boardCategory: string;
-    boardTitle: string;
-    boardContents: string;
-    boardAuthor: string;
-    boardView: number;
-    boardLike: number;
-    boardComment: number;
-    boardImgFile: string | null;
-    boardImgSize: string | null;
-    boardDelete: number;
-    regTime: Date | string;
-}
+import { Post } from "../../../interface/post/postInterface";
 
 interface btnProps {
     e: React.MouseEvent<SVGSVGElement> | React.MouseEvent<HTMLButtonElement>,
     params: number | string | undefined,
     btnLike: boolean,
     setBtnLike: (liked: boolean) => void,
-    setPost: (post: PrevPost) => void,
+    setPost: (post: Post) => void,
     myMemberId: number
 }
 
@@ -37,7 +21,7 @@ export const goodBtn = async ({ e, params, btnLike, setBtnLike, setPost, myMembe
     }
     console.log(myMemberId, 'myMemberId')
     if (myMemberId) {
-        await axios.post<{ success: boolean, post: PrevPost }>(`/api/post/boardLike/${params}`, body).then((res) => {
+        await axios.post<{ success: boolean, post: Post }>(`/api/post/boardLike/${params}`, body).then((res) => {
             if (res.data.success) {
                 setBtnLike(!btnLike)
                 const postData = {

@@ -34,7 +34,10 @@ function setUpload(bucket) {
                 cb(null, file.mimetype)
             }
         }),
-    }).single("imgFile");
+        limits: {
+            fileSize: 10 * 1024 * 1024, // 파일 크기 제한을 10MB로 설정
+          },
+    }).array("imgFile", 10);
     return upload;
 }
 
