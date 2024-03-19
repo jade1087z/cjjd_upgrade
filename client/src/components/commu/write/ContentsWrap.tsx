@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { ImageFile } from '../../../interface/post/ImageFile.interface';
 import "../../../assets/scss/setting/_quillSnow.scss";
 const QuillEditorLazy = React.lazy(() => import('../../../util/quill/QuillEditor'));
@@ -25,7 +25,7 @@ const ContentsWrap: React.FC<ContentsWrapProps> = ({ title, contents, setTitle, 
     useEffect(() => {
         setEditorReady(true);
     }, [quillRef]);
-
+    
     return (
         <div>
             <div className="post_title">

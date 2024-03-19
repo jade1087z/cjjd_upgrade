@@ -22,7 +22,7 @@ router.post('/write/:mymemberId', (req, res, next) => setUpload('cjjdup/post')(r
     
     let location: string[] = [];
     let size: number[] = [];
-
+    console.log(req.file, ' req file ')
     if (req.files && Array.isArray(req.files)) {
         req.files.forEach(file => {
             if (isCustomFile(file)) {

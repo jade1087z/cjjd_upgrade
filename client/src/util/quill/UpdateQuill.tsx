@@ -1,6 +1,8 @@
 import ReactQuill, { Quill } from 'react-quill';
 import { useEffect, useMemo } from 'react';
 import ImageResize from '@looop/quill-image-resize-module-react';
+import { handleImageUpload } from './handleImageUpload';
+import uploadFile from '../../axios/post/create/uploadPost';
 
 const Font = Quill.import('formats/font');
 Font.whitelist = [
@@ -34,7 +36,6 @@ const UpdateQuillEditor = ({ quillRef, onChange, placeholder, contents, updateIm
             setNewRange(prevIndices => [...prevIndices, range.index])
             editor.insertEmbed(range.index, 'image', base64Image);
         }
-        const fileResult = reader.readAsDataURL(file)
     }
 
     useEffect(() => {
@@ -62,16 +63,26 @@ const UpdateQuillEditor = ({ quillRef, onChange, placeholder, contents, updateIm
         input.onchange = async () => {
             const file: File | null = input.files ? input.files[0] : null;
             if (!file) return;
+            const formData = new FormData();
+            formData.append('file', file);
 
             try {
-                reader(file)
+                const result = await uploadFile({ formData });
+                if (!result) {
+                    console.error('file path is undefind', result)
+                    return
+                }
+
+                handleImageUpload(quillRef, result, setNewRange) // -> url을 setContents에 순차적으로 저장시키기 위한 방법
                 setNewUpdateImgFile((currentFiles) => {
-                    if (Array.isArray(currentFiles)) {
-                        return [...currentFiles, file];
-                    } else {
-                        return [file]
-                    }
-                })
+                    const newFile = {
+                        ...file,
+                        id: `${file.name}-${file.size}-${file.lastModified}`
+                    };
+                    return Array.isArray(currentFiles) ? [...currentFiles, newFile] : [newFile];
+
+                });// ==> 배열 펼침으로 기존의 값을 유지하며 순차적으로 file 객체 저장 
+
             } catch (error) {
                 console.error('Error uploading file:', error);
             }

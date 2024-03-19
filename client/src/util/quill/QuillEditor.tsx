@@ -2,6 +2,7 @@ import ReactQuill, { Quill } from 'react-quill';
 import { useMemo } from 'react';
 import ImageResize from '@looop/quill-image-resize-module-react';
 import uploadFile from '../../axios/post/create/uploadPost';
+import { handleImageUpload } from './handleImageUpload';
 
 const Font = Quill.import('formats/font');
 Font.whitelist = [
@@ -66,28 +67,6 @@ const QuillEditor = ({ quillRef, onChange, placeholder, setImgFile, setImgRange 
     observer.disconnect()
   }
 
-  const handleImageUpload = async (result) => {
-    const editor = quillRef.current?.getEditor();
-    const range = editor?.getSelection() ?? false;
-    const { content, mimetype } = result;
-    const filename = `data:${mimetype};base64,${content}`
-    if (!range) return;
-    editor?.setSelection({
-      index: range.index + 1,
-      length: range.length + 1,
-    });
-
-    let handleRange = range.index;
-    setImgRange((currentHandleRange) => {
-      if (Array.isArray(currentHandleRange)) {
-        return [...currentHandleRange, handleRange];
-      } else {
-        return [handleRange]
-      }
-    })
-    editor?.insertEmbed(handleRange, 'image', filename);
-  }
-
   const imageHandler = () => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
@@ -107,17 +86,19 @@ const QuillEditor = ({ quillRef, onChange, placeholder, setImgFile, setImgRange 
           return
         }
         // reader(file)
+        console.log(result)
         console.log(file)
-        handleImageUpload(result) // -> url을 setContents에 순차적으로 저장시키기 위한 방법
+        handleImageUpload(quillRef, result, setImgRange) // -> url을 setContents에 순차적으로 저장시키기 위한 방법
         setImgFile((currentFiles) => {
           const newFile = {
             ...file,
-            id: `${file.name}-${file.size}-${file.lastModified}`
+            id: `${file.name}-${file.size}-${file.lastModified}`,
+            file: file,
           };
-
+          
           return Array.isArray(currentFiles) ? [...currentFiles, newFile] : [newFile];
         });// ==> 배열 펼침으로 기존의 값을 유지하며 순차적으로 file 객체 저장 
-
+        initMutationObserver()
       } catch (error) {
         console.error('Error uploading file:', error);
       }
