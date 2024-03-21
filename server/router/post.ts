@@ -8,37 +8,12 @@ const setUpload = require('../util/multerS3')
 const logger = require("../util/logger");
 const router = express.Router();
 
-
-
-
-router.post('/write/:mymemberId', (req, res, next) => setUpload('cjjdup/post')(req, res, next), async (req: Request, res: Response) => {
-
+router.post('/write/:mymemberId', async (req: Request, res: Response) => {
     const myMemberId = req.params.mymemberId;
-    const { boardTitle, boardContents, boardAuthor, imgRange } = req.body
-
-    function isCustomFile(file: any): file is CustomFile {
-        return file && typeof file === 'object' && 'location' in file;
-    }
-    
-    let location: string[] = [];
-    let size: number[] = [];
-    console.log(req.file, ' req file ')
-    if (req.files && Array.isArray(req.files)) {
-        req.files.forEach(file => {
-            if (isCustomFile(file)) {
-                // if문 안에서 선언된 변수에 값 할당
-                location?.push(file.location)
-                size?.push(file.size)
-            }
-        })
-    }
-    const locationJson = JSON.stringify(location)
-    const siezJson = JSON.stringify(size)
-    const RangeJson = JSON.stringify(imgRange)
-    const sql = `INSERT INTO drinkBoard(myMemberId, boardTitle, boardContents, boardAuthor, boardImgFile, boardImgSize, boardImgRange) VALUES (?, ?, ?, ?, ?,?, ?)`;
-    let values = [myMemberId, boardTitle, boardContents, boardAuthor, locationJson, siezJson, RangeJson];
-
+    const { boardTitle, boardContents, boardAuthor } = req.body
     try {
+        const sql = `INSERT INTO drinkBoard(myMemberId, boardTitle, boardContents, boardAuthor) VALUES (?, ?, ?, ?)`;
+    let values = [myMemberId, boardTitle, boardContents, boardAuthor];
         await con.query(sql, values);
         res.status(200).json({ success: true });
     } catch (error) {
@@ -46,90 +21,59 @@ router.post('/write/:mymemberId', (req, res, next) => setUpload('cjjdup/post')(r
         logger.error(error); //에러 로깅
         res.status(500).send("serverError");
     }
-
 })
 
+router.patch('/update/:boardId', async (req: Request, res: Response) => {
+    const boardId = req.params.boardId;
+    const { boardTitle, boardContents } = req.body
 
+    try {
+        const sql = 'UPDATE drinkboard SET boardTitle = ?, boardContents = ? WHERE boardId = ?';
+        const values = [boardTitle, boardContents, boardId]
+        await con.query(sql, values)
+        res.status(200).json({ success: true });
+    } catch (error) {
+        logger.error(error)
+        res.status(500).json({ success: false, message: "서버 오류가 발생했습니다." });
+    }
+})
 // router.post('/write/:mymemberId', (req, res, next) => setUpload('cjjdup/post')(req, res, next), async (req: Request, res: Response) => {
 
-//     const myMemberId = req.params.myMemberId;
+//     const myMemberId = req.params.mymemberId;
+//     const { boardTitle, boardContents, boardAuthor, imgRange } = req.body
 
-//     const boardCategory = '자유게시판';
-
-//     const boardTitle = req.body.boardTitle;
-//     const boardContents = req.body.boardContents;
-//     const boardAuthor = req.body.boardAuthor; // member 정보에서 닉네임 가져오기
-//     const boardImgFile = req.body.imgFile
-
-//     console.log(boardContents)
-//     console.log(boardImgFile)
-
-
-//     if (req.file) {
-//         const file: any = req.file;
-//         const boardImgFile = file.loaction
-//         let imgSql = `INSERT INTO drinkBoard(myMemberId, boardCategory, boardTitle, boardContents, boardAuthor, boardImgFile) VALUES (?, ?, ?, ?, ?,?)`;
-//         let values = [
-//             myMemberId,
-//             boardCategory,
-//             boardTitle,
-//             boardContents,
-//             boardAuthor,
-//             boardImgFile
-//         ];
-//         try {
-//             await con.query(imgSql, values);
-//             res.status(200).json({ success: true })
-//         } catch (error) {
-//             console.error('파일 업로드 x')
-//             res.status(400).json({ success: false })
-//         }
-//     } else {
-//         let sql = `INSERT INTO drinkBoard(myMemberId, boardCategory, boardTitle, boardContents, boardAuthor) VALUES (?, ?, ?, ?, ?)`;
-//         let values = [
-//             myMemberId,
-//             boardCategory,
-//             boardTitle,
-//             boardContents,
-//             boardAuthor,
-//         ];
-//         try {
-//             await con.query(sql, values);
-//             res.status(200).json({ success: true });
-//         } catch (error) {
-//             console.log(error);
-//             res.status(500).send("serverError");
-//             logger.error(error); //에러 로깅
-//         }
+//     function isCustomFile(file: any): file is CustomFile {
+//         return file && typeof file === 'object' && 'location' in file;
 //     }
-// })
 
-// router.post("/write", async (req: Request, res: Response) => {
-//     let myMemberId = req.body.myMemberId;
-//     let boardCategory = '자유게시판';
-//     let boardTitle = req.body.boardTitle;
-//     let boardContents = req.body.boardContents;
-//     let boardAuthor = req.body.boardAuthor; // member 정보에서 닉네임 가져오기
-//     console.log(boardContents)
-//     let sql = `INSERT INTO drinkBoard(myMemberId, boardCategory, boardTitle, boardContents, boardAuthor) VALUES (?, ?, ?, ?, ?)`;
-//     let values = [
-//         myMemberId,
-//         boardCategory,
-//         boardTitle,
-//         boardContents,
-//         boardAuthor,
-//     ];
+//     let location: string[] = [];
+//     let size: number[] = [];
+//     console.log(req.file, ' req file ')
+//     if (req.files && Array.isArray(req.files)) {
+//         req.files.forEach(file => {
+//             if (isCustomFile(file)) {
+//                 // if문 안에서 선언된 변수에 값 할당
+//                 location?.push(file.location)
+//                 size?.push(file.size)
+//             }
+//         })
+//     }
+//     const locationJson = JSON.stringify(location)
+//     const siezJson = JSON.stringify(size)
+//     const RangeJson = JSON.stringify(imgRange)
+//     const sql = `INSERT INTO drinkBoard(myMemberId, boardTitle, boardContents, boardAuthor, boardImgFile, boardImgSize, boardImgRange) VALUES (?, ?, ?, ?, ?,?, ?)`;
+//     let values = [myMemberId, boardTitle, boardContents, boardAuthor, locationJson, siezJson, RangeJson];
 
 //     try {
-//         const [results, fields] = await con.query(sql, values);
-//         console.log(boardContents, ' contents')
+//         await con.query(sql, values);
 //         res.status(200).json({ success: true });
 //     } catch (error) {
 //         console.log(error);
-//         res.status(500).send("serverError");
 //         logger.error(error); //에러 로깅
+//         res.status(500).send("serverError");
 //     }
-// });
+
+// })
 
 // boardId 값에 따른 특정 유저 게시글 페이지 라우터 하나 -> 무한 스크롤 
 
@@ -296,41 +240,41 @@ router.get('/check/:boardId', async (req: Request, res: Response) => {
     }
 })
 
-router.patch('/update/:boardId', (req, res, next) => setUpload('cjjdup/post')(req, res, next), async (req: Request, res: Response) => {
-    const boardId = req.params.boardId;
-    const { boardTitle, boardContents, newRange } = req.body
-    console.log(newRange)
+// router.patch('/update/:boardId', (req, res, next) => setUpload('cjjdup/post')(req, res, next), async (req: Request, res: Response) => {
+//     const boardId = req.params.boardId;
+//     const { boardTitle, boardContents, newRange } = req.body
+//     console.log(newRange)
 
-    function isCustomFile(file: any): file is CustomFile {
-        return file && typeof file === 'object' && 'location' in file;
-    }
+//     function isCustomFile(file: any): file is CustomFile {
+//         return file && typeof file === 'object' && 'location' in file;
+//     }
 
-    let location: string | undefined = undefined;
-    let size: number | undefined = undefined;
+//     let location: string | undefined = undefined;
+//     let size: number | undefined = undefined;
 
-    if (isCustomFile(req.file)) {
-        // if문 안에서 선언된 변수에 값 할당
-        location = req.file.location;
-        size = req.file.size;
-    }
+//     if (isCustomFile(req.file)) {
+//         // if문 안에서 선언된 변수에 값 할당
+//         location = req.file.location;
+//         size = req.file.size;
+//     }
 
-    console.log(req.file, 'reqfile')
-    console.log(location, 'location update')
-    console.log(size, 'siz')
+//     console.log(req.file, 'reqfile')
+//     console.log(location, 'location update')
+//     console.log(size, 'siz')
 
 
-    try {
-        const sql = 'UPDATE drinkboard SET boardTitle = ?, boardContents = ?, boardImgFile = ?, boardImgSize = ?, boardImgRange = ? WHERE boardId = ?';
-        const values = [boardTitle, boardContents, location, size, newRange, boardId]
-        await con.query(sql, values)
+//     try {
+//         const sql = 'UPDATE drinkboard SET boardTitle = ?, boardContents = ?, boardImgFile = ?, boardImgSize = ?, boardImgRange = ? WHERE boardId = ?';
+//         const values = [boardTitle, boardContents, location, size, newRange, boardId]
+//         await con.query(sql, values)
 
-        res.status(200).json({ success: true });
-    } catch (error) {
-        logger.error(error)
-        res.status(500).json({ success: false, message: "서버 오류가 발생했습니다." });
-    }
+//         res.status(200).json({ success: true });
+//     } catch (error) {
+//         logger.error(error)
+//         res.status(500).json({ success: false, message: "서버 오류가 발생했습니다." });
+//     }
 
-})
+// })
 
 // 게시글 삭제 부분 
 router.delete('/delete/:boardId', async (req: Request, res: Response) => {

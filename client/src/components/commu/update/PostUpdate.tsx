@@ -21,22 +21,13 @@ const PostUpdate: React.FC = () => {
     const [title, setTitle] = useState<string>("");
     const [contents, setContents] = useState<string>("");
     
-    const [updateImgFile, setUpdateImgFile] = useState<ImageFile [] | string | null>();
-    const [newUpdateImgFile, setNewUpdateImgFile] = useState<ImageFile [] | string | null>();
-    
-    const [updateRange, setUpdateRange] = useState<number[] | number | null>(); // -> 기존 range 값
-    const [newRange, setNewRange] = useState<number[] | number | null >(); // -> 새로 받을 range 값 
-
     useEffect(() => {
         let isMounted = true
         const fetchPost = async () => {
             const data: Post | undefined = await boardDetail({params, setBtnLike, myMemberId});
             if (data && isMounted) {
                 setTitle(data.boardTitle);
-                const textContents = await prepareContentForServer(data.boardContents)
-                setContents(textContents);
-                setUpdateImgFile(data.boardImgFile);
-                setUpdateRange(data.boardImgRange)
+                setContents(data.boardContents);
             }
         };
         fetchPost();
@@ -58,13 +49,13 @@ const PostUpdate: React.FC = () => {
                                 </div>
                                 <div className="board_text">
                                     
-                                    <ContentsWrap title={title} contents={contents} setTitle={setTitle} setContents={setContents} updateImgFile={updateImgFile} setNewUpdateImgFile={setNewUpdateImgFile} updateRange={updateRange} setNewRange={setNewRange} />
+                                    <ContentsWrap title={title} contents={contents} setTitle={setTitle} setContents={setContents} />
 
                                     <div className="create">
                                         <button className="sideBtn mt50 mr20" onClick={(e) => cancle(e)}>
                                             취소
                                         </button>
-                                        <button className="sideBtn mt50 submit" onClick={(e) => update({e, title, contents, newUpdateImgFile, newRange, params})}>
+                                        <button className="sideBtn mt50 submit" onClick={(e) => update({e, title, contents, params})}>
                                             수정 완료
                                         </button>
                                     </div>

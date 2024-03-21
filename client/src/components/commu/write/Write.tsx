@@ -4,18 +4,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../reducer/store";
 import ContentsWrap from "./ContentsWrap";
 import { cancle } from "../../../axios/post/create/postCancle";
-import { ImageFile } from "../../../interface/post/ImageFile.interface";
 
 const Write: React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
     const myMemberId = user?.myMemberId;
     const author = user?.youNick;
-
-    // const [category, setCategory] = useState<string>("자유게시판");
     const [title, setTitle] = useState<string>("");
     const [contents, setContents] = useState<string>("");
-    const [imgFile, setImgFile] = useState<ImageFile [] | string| null>();
-    const [imgRange, setImgRange] = useState<number[] | number | null>();
 
     return (
         <>
@@ -29,12 +24,12 @@ const Write: React.FC = () => {
                                     <h2>자유게시판</h2>
                                 </div>
                                 <div className="board_text">
-                                    <ContentsWrap setTitle={setTitle} setContents={setContents} setImgFile={setImgFile} setImgRange={setImgRange}  />
+                                    <ContentsWrap setTitle={setTitle} setContents={setContents} />
                                     <div className="create">
                                         <button className="sideBtn mt50 mr20" onClick={(e) => cancle(e)}>
                                             취소
                                         </button>
-                                        <button className="sideBtn mt50 submit" onClick={(e) => post({e, title, contents, myMemberId, author, imgFile, imgRange})}>
+                                        <button className="sideBtn mt50 submit" onClick={(e) => post({e, title, contents, myMemberId, author})}>
                                             작성 완료
                                         </button>
                                     </div>

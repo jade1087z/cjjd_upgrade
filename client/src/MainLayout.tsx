@@ -6,6 +6,7 @@ import Main from "./components/contents/Main";
 import Aside from "./components/layout/Aside";
 import View from "./components/commu/view/View";
 import Write from "./components/commu/write/Write";
+import PostUpdate from './components/commu/update/PostUpdate';
 import AcList from "./components/acpage/list/AcList";
 import AcVIiew from "./components/acpage/view/AcVIiew";
 import Mypage from "./components/user/mypage/Mypage";
@@ -13,7 +14,6 @@ import Community from "./components/commu/list/Community";
 import { RootState } from './reducer/store';
 import { useSelector } from 'react-redux';
 import AsideNot from './components/layout/AsideNot';
-import PostUpdate from './components/commu/update/PostUpdate';
 import Authors from './components/commu/list/Authors';
 
 const MainLayout:React.FC = () => {
