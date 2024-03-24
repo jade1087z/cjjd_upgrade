@@ -20,7 +20,9 @@
     text-align: center;
     align-items: center;
 }
+
 @mixin CHBTN {
+    font-family: "Roboto";
     border: 0;
     border-radius: 5px;
     color: #fff;

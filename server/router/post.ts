@@ -102,7 +102,7 @@ router.get("/pagelist", async (req: Request, res: Response) => {
     const pageSize = 18; // 한 페이지에 표시할 게시물 수
     const offset = (page - 1) * pageSize;
 
-    let sql = `SELECT * FROM drinkBoard WHERE boardDelete = 0  ORDER BY regTime DESC LIMIT ${offset}, ${pageSize}`;
+    let sql = `SELECT * FROM drinkBoard WHERE boardDelete = 0 ORDER BY regTime DESC LIMIT ${offset}, ${pageSize}`;
 
     try {
         console.log("queryok", page)

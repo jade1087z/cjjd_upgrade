@@ -71,11 +71,18 @@ router.post('/write/:boardId', async (req: Request, res: Response) => {
 router.get('/list/:boardId', async (req: Request, res: Response) => {
 
     const boardId = req.params.boardId;
+    const page = parseInt(req.query.page as string);
+    const offset = (page+1) * 10;
+
+    console.log(page, 'page')
+    console.log(offset,' offset')
+    const countSql = 'SELECT COUNT(*) AS total FROM drinkcomment WHERE boardId = ?';
+    const [[{ total }]]: [[{ total: number }]] = await con.query(countSql, [boardId]);
 
     try {
-        const commentSql = 'SELECT * FROM drinkcomment WHERE boardId = ?'
-        const [result]: [commentResult[]] = await con.query(commentSql, boardId);
-        res.status(200).json({ success: true, result: result })
+        const commentSql = 'SELECT * FROM drinkcomment WHERE boardId = ? LIMIT ?, ?';
+        const [result]: [commentResult[]] = await con.query(commentSql, [boardId, 0, offset]);
+        res.status(200).json({ success: true, result: result, total: total })
     } catch (error) {
         res.status(500).json({ success: false })
     }

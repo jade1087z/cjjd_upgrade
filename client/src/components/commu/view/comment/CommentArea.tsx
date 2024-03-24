@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import commentList from "../../../../axios/comment/list";
-import { comment } from "../../../../interface/post/commentInterface";
+import { comment, commentResponse } from "../../../../interface/post/commentInterface";
 import updateComment from "../../../../axios/comment/updateComment";
 import deleteComment from "../../../../axios/comment/deleteComment";
 import checkUpdateComment from "../../../../axios/comment/checkUpdateComment";
@@ -14,28 +14,46 @@ interface areaInterface {
 }
 
 const CommentArea: React.FC<areaInterface> = ({ params, commentUpdate, myMemberId, setCommentUpdate }) => {
+
     const [comment, setComment] = useState<comment[]>([]);
+    const [total, setTotal] = useState<number>();
+    const [page, setPage] = useState<number>(0);
+    const [noMore, setNomore] = useState<boolean>(false);
     const [msgUpdate, setMsgUpdate] = useState<boolean[]>(new Array(comment.length).fill(false));
     const [msg, setMsg] = useState<string[]>(new Array(comment.length).fill(''));
 
+    const fetchComment = async () => {
+        const newPage = page + 1;
+        const result: boolean = await commentList({ params, page, setComment, setTotal })
+        if (result) {
+            setPage(newPage)
+        }
+        console.log(page)
+    }
+
+    const prevPageRef = useRef<number | undefined>();
+
+
     useEffect(() => {
-        const fetchComment = async () => {
-            const result: comment[] = await commentList(params)
-            if (result) setComment(result)
-        }
+        if (comment.length === total) setNomore(true)
+    }, [comment.length, total])
+    console.log(noMore)
+
+    useEffect(() => {
         fetchComment();
-        return () => {
-            setCommentUpdate(false)
-        }
+        return () => { setCommentUpdate(false) }
     }, [params, commentUpdate])
 
-    
+    const resetComment = () => {
+        setPage(0)
+        setNomore(false);
+    }
     return (
         <>
             {comment ? (
                 <div className="boxStyle roundCorner shaDow">
                     <h4>
-                        후기 <span id="commentCount">{comment.length}</span>
+                        댓글 <span id="commentCount">{total}</span>
                     </h4>
                     <ul className="review_wrap">
                         {comment.map((li, key) => (
@@ -45,28 +63,36 @@ const CommentArea: React.FC<areaInterface> = ({ params, commentUpdate, myMemberI
                                         <>
                                             <strong className="textCut">{li.commentName}</strong>
                                             <p>{li.commentMsg}</p>
-                                            <button className="modify" 
-                                            onClick={(e: React.MouseEvent) => checkUpdateComment({ e, params, myMemberId, commentId: li.commentId, msgUpdate, setMsgUpdate, key})}>수정</button>
+                                            <button className="modify"
+                                                onClick={(e: React.MouseEvent) => checkUpdateComment({ e, params, myMemberId, commentId: li.commentId, msgUpdate, setMsgUpdate, key })}>수정</button>
                                             <button className="delete"
-                                             onClick={(e: React.MouseEvent) => deleteComment({ e, params, myMemberId, commentId: li.commentId, commentUpdate, setCommentUpdate })}>삭제</button>
+                                                onClick={(e: React.MouseEvent) => deleteComment({ e, params, myMemberId, commentId: li.commentId, commentUpdate, setCommentUpdate })}>삭제</button>
                                         </>
                                     ) : (
                                         <><strong className="textCut">{li.commentName}</strong>
                                             <textarea className="renderingText" cols={20} rows={1} value={msg[key] || li.commentMsg}
-                                             onChange={(e:React.ChangeEvent<HTMLTextAreaElement>) => {
-                                                const newSetMsg = [...msg];
-                                                newSetMsg[key] = e.currentTarget.value;
-                                                setMsg(newSetMsg)
-                                             }}></textarea>
-                                            <button className="modify" 
-                                            onClick={(e: React.MouseEvent) => updateComment({ e, commentId: li.commentId, msg: msg[key] || '', msgUpdate, setMsgUpdate, key })}>등록</button>
-                                            <button className="delete" 
-                                            onClick={(e: React.MouseEvent) => cancleComment({e, msgUpdate, setMsgUpdate, key})}>취소</button></>
+                                                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                                                    const newSetMsg = [...msg];
+                                                    newSetMsg[key] = e.currentTarget.value;
+                                                    setMsg(newSetMsg)
+                                                }}></textarea>
+                                            <button className="modify"
+                                                onClick={(e: React.MouseEvent) => updateComment({ e, commentId: li.commentId, msg: msg[key] || '', msgUpdate, setMsgUpdate, key })}>등록</button>
+                                            <button className="delete"
+                                                onClick={(e: React.MouseEvent) => cancleComment({ e, msgUpdate, setMsgUpdate, key })}>취소</button></>
                                     )}
                                 </div>
                             </li>
                         ))}
                     </ul>
+                    <div className="moreWrap">
+                        {noMore ?
+                            (<button className="commentMore" onClick={resetComment}>간략히 보기</button>)
+                            :
+                            (<button className="commentMore" onClick={() => fetchComment()}>댓글 더보기</button>)
+                        }
+
+                    </div>
                 </div>
             ) : (
                 <div className="boxStyle roundCorner shaDow">
