@@ -9,9 +9,11 @@ const card5 = require("../../../assets/img/card (5).gif")
 const AcRank = () => {
     return (
         <div className="ranking_list boxStyle roundCorner shaDow">
-            <h4>
-                이번주 인기 주류 <span>TOP10</span>
-            </h4>
+            <Link to={'/aclist'}>
+                <h4>
+                    이번주 인기 주류 <span>TOP10</span>
+                </h4>
+            </Link>
             <div className="alcohol_list">
                 <Swiper
                     autoplay={{

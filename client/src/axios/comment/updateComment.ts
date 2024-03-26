@@ -7,11 +7,12 @@ interface updateCommentProps {
     msgUpdate: boolean[];
     setMsgUpdate: (arg: boolean[]) => void;
     key: number;
+    type: string;
 }
 
-export const updateComment = async ({ e, commentId, msg, msgUpdate, setMsgUpdate, key }: updateCommentProps) => {
+export const updateComment = async ({ e, commentId, msg, msgUpdate, setMsgUpdate, key, type }: updateCommentProps) => {
     e.preventDefault()
-    let body = { msg: msg }
+    let body = { msg: msg, type: type}
     if (window.confirm('댓글을 수정하시겠습니까?')) {
         if (msg) {
             try {

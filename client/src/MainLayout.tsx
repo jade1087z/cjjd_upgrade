@@ -15,14 +15,11 @@ import { RootState } from './reducer/store';
 import { useSelector } from 'react-redux';
 import AsideNot from './components/layout/AsideNot';
 import Authors from './components/commu/list/Authors';
+import TopBtn from './components/commu/list/TopBtn';
 
 const MainLayout:React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
     const youId = user?.youId;
-    if (user) {
-        console.log(user, 'redux user');
-      }
-    // user 값이 있을때만 
     
     return (
         <div id="wrapper">
@@ -38,7 +35,7 @@ const MainLayout:React.FC = () => {
                         <Route path="/update/:boardId" element={<PostUpdate />} />
                         <Route path="/write" element={<Write />} />
                         <Route path="/aclist" element={<AcList />} />
-                        <Route path="/acview" element={<AcVIiew />} />
+                        <Route path="/acview/:acId" element={<AcVIiew />} />
                         <Route path="/mypage" element={<Mypage />} />
                     </Routes>
                 </section>

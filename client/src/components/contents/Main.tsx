@@ -1,11 +1,8 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
 import AcRank from "../acpage/rank/AcRank";
+import TopBtn from "../commu/list/TopBtn";
 import HotList from "./page/HotList";
 import RecentList from "./page/RecentList";
-import BestList from "./page/BestList";
-import BtnWrap from "../user/join/BtnWrap";
-import TopBtn from "../commu/list/TopBtn";
+
 
 const Main = () => {
 
@@ -14,8 +11,7 @@ const Main = () => {
             <AcRank />
             <HotList />
             <RecentList />
-            <TopBtn  />
-            {/* <BestList /> */}
+            <TopBtn />
         </>
     );
 };

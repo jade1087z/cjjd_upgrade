@@ -16,7 +16,6 @@ interface PostDataProps {
 
 const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPost, myMemberId}) => {
     const cleanHTML = DOMPurify.sanitize(post.boardContents);
-    console.log(post.boardImgFile)
 
     return (
         <>

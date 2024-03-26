@@ -1,18 +1,9 @@
 import express, { Request, Response } from 'express';
 import con from '../util/db';
+import { commentResult } from '../interface/commentInterface/commentResult';
+import { User } from '../interface/userInterface/user.interface';
 const router = express.Router();
 const logger = require("../util/logger");
-
-interface commentResult {
-    commentId: number;
-    myMemberId: number;
-    boardId: number;
-    acId: number;
-    commentName: string;
-    commentMsg: number;
-    commentDelete: number;
-    regTime: Date | string;
-}
 
 interface BoardResult {
     boardId: number;
@@ -30,94 +21,106 @@ interface BoardResult {
     regTime: Date | string;
 }
 
-interface User {
-    youId: string;
-    youPass: string;
-    youName: string;
-    youNick: string;
-    youEmail: string;
-    youBirth: string;
-    youAddress: string | null;
-    youImgFile: string | null;
-    youImgSize: string | null;
-    memberDelete: number;
-    regTime: string | Date;
-}
-
 router.post('/write/:boardId', async (req: Request, res: Response) => {
-    const boardId = req.params.boardId;
+    const id = req.params.boardId; // boardId 또는 acId
     const myMemberId = req.body.myMemberId;
     const contents = req.body.contents;
+    const type = req.body.type; // 'board' 또는 'ac'
 
+    console.log(type)
     try {
         const memberSql = 'SELECT * FROM drinkmember WHERE myMemberId = ?';
-        const [rows] = await con.query(memberSql, myMemberId) as [User[]]
-        const { youNick } = rows[0]
+        const [rows] = await con.query(memberSql, myMemberId) as [User[]];
+        const { youNick } = rows[0];
 
-        const postSql = 'INSERT INTO drinkcomment(myMemberId, boardId, commentName, commentMsg) VALUES (?,?,?,?)';
-        const commentUpdate = 'UPDATE drinkboard SET boardComment =+ 1 WHERE boardId = ?'
-        const values = [myMemberId, boardId, youNick, contents]
+        let postSql, commentUpdate;
+        if (type === 'board') {
+            postSql = 'INSERT INTO drinkcomment(myMemberId, boardId, commentName, commentMsg) VALUES (?,?,?,?)';
+            commentUpdate = 'UPDATE drinkboard SET boardComment = boardComment + 1 WHERE boardId = ?';
+        } else if (type === 'ac') {
+            postSql = 'INSERT INTO drinkcomment(myMemberId, acId, commentName, commentMsg) VALUES (?,?,?,?)';
+            commentUpdate = 'UPDATE drinklist SET acComment = acComment + 1 WHERE acId = ?';
+        } else {
+            return res.status(400).json({ success: false, message: 'Invalid type' });
+        }
 
-        await con.query(postSql, values)
-        await con.query(commentUpdate, boardId)
+        const values = [myMemberId, id, youNick, contents];
+
+        await con.query(postSql, values);
+        await con.query(commentUpdate, id);
 
         res.status(200).json({ success: true, message: 'Comment posted successfully' });
-
     } catch (error) {
         res.status(500).json({ success: false, message: 'Error occurred while posting comment', error });
     }
-})
+});
 
 router.get('/list/:boardId', async (req: Request, res: Response) => {
-
-    const boardId = req.params.boardId;
+    const id = req.params.boardId; // boardId 또는 acId
     const page = parseInt(req.query.page as string);
-    const offset = (page+1) * 10;
-
-    console.log(page, 'page')
-    console.log(offset,' offset')
-    const countSql = 'SELECT COUNT(*) AS total FROM drinkcomment WHERE boardId = ?';
-    const [[{ total }]]: [[{ total: number }]] = await con.query(countSql, [boardId]);
-
+    const type = req.query.type; // 'board' 또는 'ac'
+    const offset = (page + 1) * 10;
+    let more: boolean = false;
+    console.log(type)
     try {
-        const commentSql = 'SELECT * FROM drinkcomment WHERE boardId = ? LIMIT ?, ?';
-        const [result]: [commentResult[]] = await con.query(commentSql, [boardId, 0, offset]);
-        res.status(200).json({ success: true, result: result, total: total })
+        let countSql, commentSql;
+        if (type === 'board') {
+            countSql = 'SELECT COUNT(*) AS total FROM drinkcomment WHERE boardId = ?';
+            commentSql = 'SELECT * FROM drinkcomment WHERE boardId = ? ORDER BY regTime DESC LIMIT ?, ?';
+        } else if (type === 'ac') {
+            countSql = 'SELECT COUNT(*) AS total FROM drinkcomment WHERE acId = ?';
+            commentSql = 'SELECT * FROM drinkcomment WHERE acId = ? ORDER BY regTime DESC LIMIT ?, ?';
+        } else {
+            return res.status(400).json({ success: false, message: 'Invalid type' });
+        }
+
+        const [[{ total }]]: [[{ total: number }]] = await con.query(countSql, [id]);
+        const [result]: [commentResult[]] = await con.query(commentSql, [id, 0, offset]);
+        if (result.length === total) more = true;
+
+        res.status(200).json({ success: true, result: result, total: total, more: more });
     } catch (error) {
-        res.status(500).json({ success: false })
+        res.status(500).json({ success: false });
     }
-})
-
-// update 
-router.get('/check/:boardId', async (req: Request, res: Response) => {
-    const commentId = Number(req.query.commentId);;
-    const boardId = Number(req.params.boardId);
+});
+router.get('/check/:id', async (req: Request, res: Response) => {
+    const id = Number(req.params.id);
+    const commentId = Number(req.query.commentId);
     const paramsMember = Number(req.query.myMemberId);
-
+    const type = req.query.type; // 'board' 또는 'ac'
+    console.log(type)
     try {
-        const checkSql = 'SELECT * FROM drinkcomment WHERE commentId = ? AND boardId = ?'
-        const [[queryResult]]: [[commentResult]] = await con.query(checkSql, [commentId, boardId]);
-        const { myMemberId } = queryResult
+        let checkSql;
+        if (type === 'board') {
+            checkSql = 'SELECT * FROM drinkcomment WHERE commentId = ? AND boardId = ?';
+        } else if (type === 'ac') {
+            checkSql = 'SELECT * FROM drinkcomment WHERE commentId = ? AND acId = ?';
+        } else {
+            return res.status(400).json({ success: false, message: 'Invalid type' });
+        }
+
+        const [[queryResult]] = await con.query(checkSql, [commentId, id]);
+        const { myMemberId } = queryResult;
 
         if (myMemberId === paramsMember) {
-            res.status(200).json({ success: true })
+            res.status(200).json({ success: true });
         } else {
-            res.status(403).json({ success: false })
+            res.status(403).json({ success: false });
         }
     } catch (error) {
-        res.status(500).json({ success: false })
+        res.status(500).json({ success: false });
     }
-})
+});
 
-router.patch('/update/:commentId', async (req: Request, res: Response) => {
-    const commentId = req.params.commentId;
+router.patch('/update/:id', async (req: Request, res: Response) => {
+    const id = req.params.id;
     const commentMsg = req.body.msg;
-    console.log(commentId)
+    console.log(id)
     console.log(commentMsg)
 
     try {
         const sql = 'UPDATE drinkcomment SET commentMsg = ? WHERE commentId = ?';
-        const values = [commentMsg, commentId]
+        const values = [commentMsg, id]
         await con.query(sql, values)
         res.status(200).json({ success: true });
     } catch (error) {
@@ -126,7 +129,6 @@ router.patch('/update/:commentId', async (req: Request, res: Response) => {
     }
 
 })
-
 // delete 
 router.delete('/delete/:commentId', async (req: Request, res: Response) => {
     const commentId = Number(req.params.commentId);

@@ -8,16 +8,17 @@ interface updateUpdateCommentProps {
     msgUpdate: boolean[];
     setMsgUpdate: (arg: boolean[]) => void;
     key: number;
+    type?: string;
 }
 
-export const checkUpdateComment = async ({ e, params, myMemberId, commentId, msgUpdate, setMsgUpdate, key }: updateUpdateCommentProps) => {
+export const checkUpdateComment = async ({ e, params, myMemberId, commentId, msgUpdate, setMsgUpdate, key, type}: updateUpdateCommentProps) => {
     e.preventDefault()
-
+    console.log(type)
     if (window.confirm('댓글을 수정하시겠습니까?')) {
         if (myMemberId) {
 
             try {
-                const result = await axios.get(`/api/comment/check/${params}`, { params: { myMemberId, commentId } })
+                const result = await axios.get(`/api/comment/check/${params}`, { params: { myMemberId, commentId, type } })
                 if (result.status === 200) {
                     const newMsgUpdate = [...msgUpdate];
                     newMsgUpdate[key] = true;

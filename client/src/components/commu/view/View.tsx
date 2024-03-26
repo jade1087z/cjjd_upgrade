@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import boardDetail from "../../../axios/post/view/boardDetail";
 import { format } from "date-fns";
-import CommentArea from "./comment/CommentArea";
+import CommentArea from "../../comment/CommentArea";
 import PostData from "./PostData";
 import goodBtn from "../../../axios/post/view/gootBtn";
 import { Post, RouteParams } from "../../../interface/post/postInterface";
@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../reducer/store";
 import updateCheck from "../../../axios/post/update/updateCheck";
 import deletePost from "../../../axios/post/deletPost";
-import CmmentWrite from "./comment/CmmentWrite";
+import CmmentWrite from "../../comment/CmmentWrite";
 
 const View: React.FC = () => {
     const user = useSelector((state:RootState) => state.user)
@@ -21,6 +21,7 @@ const View: React.FC = () => {
     const [post, setPost] = useState<Post | null>(null);
     const [btnLike, setBtnLike] = useState<boolean>(false)
     const [commentUpdate, setCommentUpdate] = useState<boolean>(false)
+    const [type, setType] = useState<string>('board')
    
     useEffect(() => {
         let isMounted = true
@@ -61,8 +62,8 @@ const View: React.FC = () => {
                 </div>
             </div>
                 
-                {post && <CommentArea params={params}  commentUpdate={commentUpdate} myMemberId={myMemberId} setCommentUpdate={setCommentUpdate} />}
-                <CmmentWrite myMemberId={myMemberId} params={params} setCommentUpdate={setCommentUpdate}/>
+                {post && <CommentArea params={params}  commentUpdate={commentUpdate} myMemberId={myMemberId} setCommentUpdate={setCommentUpdate} type={type}/>}
+                <CmmentWrite myMemberId={myMemberId} params={params} setCommentUpdate={setCommentUpdate} type={type}/>
             
 
             {/* <div className="boxStyle roundCorner shaDow">

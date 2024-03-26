@@ -3,31 +3,27 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    border: 1px solid var(--gray);
-}
+    border: 2px solid var(--gray);
 
-.tab-button {
-    background-color: var(--white);
-    flex: 1;
-    max-width: 25%;
-    padding: 10px 20px;
-    cursor: pointer;
-    box-sizing: border-box;
-    border: 0;
-    border-right: 1px solid var(--gray);
-}
+    .tab-button {
+        flex: 1;
+        max-width: 25%;
+        padding: 10px 20px;
+        cursor: pointer;
+        box-sizing: border-box;
+        border-right: 1px solid var(--gray);
 
-.right {
-    border-right: 0;
-}
-
-.tab-button:hover {
-    background-color: #e6e6e6;
-}
-
-.tab-button.activity {
-    flex: 2;
-    max-width: 40%;
+        &:hover {
+            background-color: #e6e6e6;
+        }
+    }
+    .activity {
+        flex: 2;
+        max-width: 40%;
+    }
+    .right {
+        border-right: none;
+    }
 }
 
 /* mypage_main */
@@ -36,84 +32,63 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-}
+    .header_img {
+        border: 2px solid var(--gray);
+    }
+    .profile_img {
+        border: 2px solid var(--gray);
+        margin: 30px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        overflow: hidden;
+        img {
+            width: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
+    }
 
-.profile_img {
-    margin: 30px;
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    overflow: hidden;
-}
+    .profile_text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: left;
 
-.profile_img img {
-    width: 100%;
-    object-fit: cover;
-    object-position: center center;
-}
+        .youNick h2 {
+            font-size: 1.1rem;
+        }
+        .youID,
+        .youemail {
+            text-align: left;
+        }
+        > div {
+            margin-bottom: 3px;
+        }
+    }
 
-.profile_text {
-    display: block;
-}
+    .profile_modify {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        ul {
+            transition: all 0.3s;
+            display: flex;
+            li {
+                @include FCCC;
+                flex-direction: column;
+                border: 1px solid var(--black100);
+                border-radius: 10px;
+                margin-right: 0.4rem;
+                width: 10rem;
+                height: 3rem;
 
-.profile_text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: left;
-}
-
-.youID,
-.youemail {
-    text-align: left;
-}
-
-.profile_text div {
-    margin-bottom: 3px;
-}
-
-.profile_text h2 {
-    font-size: 20px;
-}
-
-/* profile_modify */
-
-.profile_modify {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-}
-
-.profile_modify ul {
-    padding: 0;
-    margin: 0;
-    margin-right: 10px;
-    transition: all 0.3s;
-    border: 1px solid var(--black100);
-    border-radius: 10px;
-}
-
-.profile_modify ul:hover {
-    background-color: var(--bgcolor);
-}
-
-.profile_modify ul li {
-    border-radius: 30px;
-    text-align: center;
-    width: 10rem;
-    height: 3rem;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: left;
-}
-
-.profile_modify ul li img {
-    padding-top: 2px;
-    margin-right: 5px;
-    width: 20px;
+                &:hover {
+                    background-color: var(--bgcolor);
+                }
+            }
+        }
+    }
 }
 
 .input_newnick {
@@ -352,93 +327,87 @@
 
 /* mypage_activity */
 
-.mypage_activity > div {
+.mypage_activity .flexWrap {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-}
+    .my_board {
+        width: 50%;
+        border-right: 1px solid var(--gray);
+        margin-top: 5px;
+        padding: 5px;
+        h2 {
+            font-size: 1.2rem;
+            margin: 10px;
+            padding: 10px;
+            background: var(--bgcolor);
+            border-radius: 10px;
+        }
 
-.my_board {
-    width: 50%;
-    border-right: 1px solid var(--gray);
-    margin-top: 5px;
-    padding: 5px;
-}
+        .my_board_table {
+            height: 50vh;
+            padding: 10px;
+            overflow: hidden;
+            table {
+                width: 100%;
+                tr {
+                    cursor: pointer;
+                    th {
+                        padding: 10px;
+                        border-bottom: 1px solid #000;
+                        text-align: center;
+                        background-color: var(--bgcolor);
+                        td {
+                            text-align: left;
+                            padding: 10px 15px;
+                            border-bottom: 1px solid var(--black300);
+                        }
+                    }
+                    &:hover {
+                        background-color: var(--bgcolor);
+                    }
+                }
+            }
+        }
+    }
+    .my_comment {
+        margin-top: 5px;
+        width: 50%;
+        padding: 5px;
+        h2 {
+            font-size: 20px;
+            margin: 10px;
+            background: var(--bgcolor);
+            border-radius: 10px;
+            padding: 10px;
+        }
 
-.my_board h2 {
-    font-size: 20px;
-    margin: 10px;
-    padding: 10px;
-    background: var(--bgcolor);
-    border-radius: 10px;
-}
-
-.my_board_table {
-    height: 50vh;
-    padding: 10px;
-    overflow: hidden;
-}
-
-.my_board_table table {
-    width: 100%;
-}
-
-.my_board_table table tr th {
-    padding: 10px;
-    border-bottom: 1px solid #000;
-    text-align: center;
-    background-color: var(--bgcolor);
-}
-
-.my_board_table table tr td {
-    text-align: left;
-    padding: 10px 15px;
-    border-bottom: 1px solid var(--black300);
-}
-
-.my_board_table table tr:hover {
-    background-color: var(--bgcolor);
-}
-
-.my_comment {
-    margin-top: 5px;
-    width: 50%;
-    padding: 5px;
-}
-
-.my_comment h2 {
-    font-size: 20px;
-    margin: 10px;
-    background: var(--bgcolor);
-    border-radius: 10px;
-    padding: 10px;
-}
-
-.my_comment_table {
-    text-align: left;
-    height: 50vh;
-    padding: 10px;
-}
-
-.my_comment_table table {
-    width: 100%;
-}
-
-.my_comment_table table tr th {
-    padding: 10px;
-    border-bottom: 1px solid #000;
-    text-align: center;
-    background-color: var(--bgcolor);
-}
-
-.my_comment_table table tr td {
-    text-align: left;
-    padding: 10px 15px;
-    border-bottom: 1px solid var(--black300);
-}
-
-.my_comment_table table tr:hover {
-    background-color: var(--bgcolor);
+        .my_comment_table {
+            text-align: left;
+            height: 50vh;
+            padding: 10px;
+            table {
+                width: 100%;
+                tr {
+                    cursor: pointer;
+                    th {
+                        padding: 10px;
+                        border-bottom: 1px solid #000;
+                        text-align: center;
+                        background-color: var(--bgcolor);
+                        td {
+                            text-align: left;
+                            padding: 10px 15px;
+                            border-bottom: 1px solid var(--black300);
+                        }
+                    }
+                    &:hover {
+                        background-color: var(--bgcolor);
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media (max-width: 1200px) {
@@ -485,19 +454,20 @@
 /* mypage_review */
 .my_review {
     padding: 10px;
+
+    tr {
+        td {
+            border-bottom: 1px solid var(--gray);
+        }
+        th {
+            padding: 10px 10px 20px 10px;
+            border-bottom: 1px solid #000;
+            text-align: center;
+        }
+    }
 }
 
-.my_review_table td {
-    border-bottom: 1px solid var(--gray);
-}
-
-.my_review_table table tr th {
-    padding: 10px 10px 20px 10px;
-    border-bottom: 1px solid #000;
-    text-align: center;
-}
-
-.my_review_table table tr td img {
+.my_review_table table .my_review_table table tr td img {
     width: 100%;
     display: block;
     margin: 0 auto;

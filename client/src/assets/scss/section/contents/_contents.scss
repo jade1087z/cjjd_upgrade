@@ -13,6 +13,24 @@
         width: 100%;
         padding: 0 25px;
     }
+    .toTheTop {
+        margin-top: 100px;
+        div {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            button {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: #fefefe;
+                transition: all 0.2s;
+                &:hover {
+                    background-color: #e0e0e0;
+                }
+            }
+        }
+    }
 }
 
 .board_w100 {
@@ -70,24 +88,8 @@
         }
     }
 }
-.toTheTop {
-    margin-top: 100px;
-    div {
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        button {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #fefefe;
-            transition: all 0.2s;
-            &:hover {
-                background-color: #e0e0e0;
-            }
-        }
-    }
-}
+
+
 /* ________________________________1650________________________________ */
 @media (max-width: 1650px) {
     #contents_area {

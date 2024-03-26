@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { DrinkList } from "../../../interface/post/acList.interface";
 import { dinkListAll } from "../../../axios/acList/list/listAll";
+import TopBtn from "../../commu/list/TopBtn";
 const card1 = require("../../../assets/img/card (1).gif")
 
 
@@ -16,7 +17,7 @@ const AcList: React.FC = () => {
 
     const [drinkList, setDrinkList] = useState<DrinkList[]>([])
     const [category, setCategory] = useState<string>('전체');
-    const btnList = ['전체', '소주', '맥주', '와인', '위스키', '막걸리'];
+    const btnList = ['전체', '소주', '맥주', '위스키', '막걸리'];
 
     const fetchList = async (category: string) => {
         const result: DrinkList[] = await dinkListAll({ category })
@@ -38,14 +39,13 @@ const AcList: React.FC = () => {
                     ))}
                 </div>
             </div>
-
             <div className="alcohol_item">
                 <ul>
                     {drinkList && drinkList.map((li, key) => (
                         <li className="boxStyle roundCorner shaDow" key={key}>
-                        <Link to={`/acview/${key}`}>
+                        <Link to={`/acview/${li.acId}`}>
                             <div className="item_img">
-                                <img src={card1} alt="alcohol" />
+                                <img src={li.acImgPath} alt="alcohol" />
                             </div>
                             <div className="item_info">
                                 <h4>{li.acName}</h4>
@@ -70,9 +70,9 @@ const AcList: React.FC = () => {
                         </Link>
                     </li>
                     ))}
-                    
                 </ul>
             </div>
+            <TopBtn />
         </>
     );
 };

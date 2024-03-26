@@ -1,53 +1,43 @@
 import React, { useEffect, useRef, useState } from "react";
-import commentList from "../../../../axios/comment/list";
-import { comment, commentResponse } from "../../../../interface/post/commentInterface";
-import updateComment from "../../../../axios/comment/updateComment";
-import deleteComment from "../../../../axios/comment/deleteComment";
-import checkUpdateComment from "../../../../axios/comment/checkUpdateComment";
-import cancleComment from "../../../../axios/comment/cancleComment";
+import commentList from "../../axios/comment/list";
+import { comment, commentResponse } from "../../interface/post/commentInterface";
+import updateComment from "../../axios/comment/updateComment";
+import deleteComment from "../../axios/comment/deleteComment";
+import checkUpdateComment from "../../axios/comment/checkUpdateComment";
+import cancleComment from "../../axios/comment/cancleComment";
+import MoreComment from "./MoreComment";
 
 interface areaInterface {
     params: number | string | undefined,
     myMemberId: number,
     commentUpdate: boolean,
-    setCommentUpdate: (arg: boolean) => void
+    setCommentUpdate: (arg: boolean) => void,
+    type: string;
 }
 
-const CommentArea: React.FC<areaInterface> = ({ params, commentUpdate, myMemberId, setCommentUpdate }) => {
+const CommentArea: React.FC<areaInterface> = ({ params, commentUpdate, myMemberId, setCommentUpdate, type }) => {
 
     const [comment, setComment] = useState<comment[]>([]);
-    const [total, setTotal] = useState<number>();
+    const [total, setTotal] = useState<number>(0);
     const [page, setPage] = useState<number>(0);
     const [noMore, setNomore] = useState<boolean>(false);
     const [msgUpdate, setMsgUpdate] = useState<boolean[]>(new Array(comment.length).fill(false));
     const [msg, setMsg] = useState<string[]>(new Array(comment.length).fill(''));
 
     const fetchComment = async () => {
-        const newPage = page + 1;
-        const result: boolean = await commentList({ params, page, setComment, setTotal })
+        const result: commentResponse = await commentList({ params, page, type })
         if (result) {
-            setPage(newPage)
+            setComment(result.result)
+            setTotal(result.total)
+            setNomore(result.more)
         }
-        console.log(page)
     }
-
-    const prevPageRef = useRef<number | undefined>();
-
-
-    useEffect(() => {
-        if (comment.length === total) setNomore(true)
-    }, [comment.length, total])
-    console.log(noMore)
 
     useEffect(() => {
         fetchComment();
         return () => { setCommentUpdate(false) }
-    }, [params, commentUpdate])
+    }, [params, msgUpdate, commentUpdate, noMore, page])
 
-    const resetComment = () => {
-        setPage(0)
-        setNomore(false);
-    }
     return (
         <>
             {comment ? (
@@ -64,7 +54,7 @@ const CommentArea: React.FC<areaInterface> = ({ params, commentUpdate, myMemberI
                                             <strong className="textCut">{li.commentName}</strong>
                                             <p>{li.commentMsg}</p>
                                             <button className="modify"
-                                                onClick={(e: React.MouseEvent) => checkUpdateComment({ e, params, myMemberId, commentId: li.commentId, msgUpdate, setMsgUpdate, key })}>수정</button>
+                                                onClick={(e: React.MouseEvent) => checkUpdateComment({ e, params, myMemberId, commentId: li.commentId, msgUpdate, setMsgUpdate, key, type })}>수정</button>
                                             <button className="delete"
                                                 onClick={(e: React.MouseEvent) => deleteComment({ e, params, myMemberId, commentId: li.commentId, commentUpdate, setCommentUpdate })}>삭제</button>
                                         </>
@@ -77,22 +67,15 @@ const CommentArea: React.FC<areaInterface> = ({ params, commentUpdate, myMemberI
                                                     setMsg(newSetMsg)
                                                 }}></textarea>
                                             <button className="modify"
-                                                onClick={(e: React.MouseEvent) => updateComment({ e, commentId: li.commentId, msg: msg[key] || '', msgUpdate, setMsgUpdate, key })}>등록</button>
+                                                onClick={(e: React.MouseEvent) => updateComment({ e, commentId: li.commentId, msg: msg[key] || '', msgUpdate, setMsgUpdate, key, type })}>등록</button>
                                             <button className="delete"
                                                 onClick={(e: React.MouseEvent) => cancleComment({ e, msgUpdate, setMsgUpdate, key })}>취소</button></>
                                     )}
                                 </div>
                             </li>
                         ))}
+                    <MoreComment noMore={noMore} setNomore={setNomore} page={page} setPage={setPage} />
                     </ul>
-                    <div className="moreWrap">
-                        {noMore ?
-                            (<button className="commentMore" onClick={resetComment}>간략히 보기</button>)
-                            :
-                            (<button className="commentMore" onClick={() => fetchComment()}>댓글 더보기</button>)
-                        }
-
-                    </div>
                 </div>
             ) : (
                 <div className="boxStyle roundCorner shaDow">

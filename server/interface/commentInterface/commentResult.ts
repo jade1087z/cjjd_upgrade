@@ -1,11 +1,4 @@
-export interface commentResponse {
-    success: boolean;
-    result: comment [];
-    total: number;
-    more: boolean;
-}
-
-export interface comment {
+export interface commentResult {
     commentId: number;
     myMemberId: number;
     boardId: number;
