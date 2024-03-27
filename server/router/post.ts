@@ -37,58 +37,22 @@ router.patch('/update/:boardId', async (req: Request, res: Response) => {
         res.status(500).json({ success: false, message: "서버 오류가 발생했습니다." });
     }
 })
-// router.post('/write/:mymemberId', (req, res, next) => setUpload('cjjdup/post')(req, res, next), async (req: Request, res: Response) => {
 
-//     const myMemberId = req.params.mymemberId;
-//     const { boardTitle, boardContents, boardAuthor, imgRange } = req.body
 
-//     function isCustomFile(file: any): file is CustomFile {
-//         return file && typeof file === 'object' && 'location' in file;
-//     }
-
-//     let location: string[] = [];
-//     let size: number[] = [];
-//     console.log(req.file, ' req file ')
-//     if (req.files && Array.isArray(req.files)) {
-//         req.files.forEach(file => {
-//             if (isCustomFile(file)) {
-//                 // if문 안에서 선언된 변수에 값 할당
-//                 location?.push(file.location)
-//                 size?.push(file.size)
-//             }
-//         })
-//     }
-//     const locationJson = JSON.stringify(location)
-//     const siezJson = JSON.stringify(size)
-//     const RangeJson = JSON.stringify(imgRange)
-//     const sql = `INSERT INTO drinkBoard(myMemberId, boardTitle, boardContents, boardAuthor, boardImgFile, boardImgSize, boardImgRange) VALUES (?, ?, ?, ?, ?,?, ?)`;
-//     let values = [myMemberId, boardTitle, boardContents, boardAuthor, locationJson, siezJson, RangeJson];
-
-//     try {
-//         await con.query(sql, values);
-//         res.status(200).json({ success: true });
-//     } catch (error) {
-//         console.log(error);
-//         logger.error(error); //에러 로깅
-//         res.status(500).send("serverError");
-//     }
-
-// })
 
 // boardId 값에 따른 특정 유저 게시글 페이지 라우터 하나 -> 무한 스크롤 
-
-router.get("/authpagelist/:boardAuthor", async (req: Request, res: Response) => {
-    const boardAuthor = req.params.boardAuthor
-    console.log(boardAuthor, 'boardAU')
+router.get("/authpagelist/:id", async (req: Request, res: Response) => {
+    const id = req.params.id
+    console.log(id, 'boardAU')
     const page = parseInt(req.query.page as string) || 1;
     const pageSize = 18; // 한 페이지에 표시할 게시물 수
     const offset = (page - 1) * pageSize;
 
-    let sql = `SELECT * FROM drinkBoard WHERE boardDelete = 0 AND boardAuthor = ? ORDER BY regTime DESC LIMIT ${offset}, ${pageSize}`;
+    let sql = `SELECT * FROM drinkBoard WHERE boardDelete = 0 AND myMemberId = ? ORDER BY regTime DESC LIMIT ${offset}, ${pageSize}`;
 
     try {
         console.log("queryok", page)
-        const [results]: [BoardResult[]] = await con.query(sql, boardAuthor);
+        const [results]: [BoardResult[]] = await con.query(sql, id);
         res.status(200).json({ success: true, postList: results });
     } catch (err) {
         res.status(400).json({ success: false, message: "serverERR" });

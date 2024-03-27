@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import commentWrite from '../../axios/comment/commentWrite';
+import commentWrite from '../../axios/comment/post/commentWrite';
 
 interface commentWriteProps {
     myMemberId: Number,

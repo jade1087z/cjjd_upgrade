@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import commentList from "../../axios/comment/list";
+import commentList from "../../axios/comment/LIST/list";
 import { comment, commentResponse } from "../../interface/post/commentInterface";
-import updateComment from "../../axios/comment/updateComment";
-import deleteComment from "../../axios/comment/deleteComment";
-import checkUpdateComment from "../../axios/comment/checkUpdateComment";
-import cancleComment from "../../axios/comment/cancleComment";
+import updateComment from "../../axios/comment/update/updateComment";
+import deleteComment from "../../axios/comment/update/deleteComment";
+import checkUpdateComment from "../../axios/comment/update/checkUpdateComment";
+import cancleComment from "../../axios/comment/update/cancleComment";
 import MoreComment from "./MoreComment";
 
 interface areaInterface {

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { setUser } from "../../../reducer/user";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const cocktail = require('../../../assets/img/cocktail.png')
 const coconut = require('../../../assets/img/coconut.png')
 
@@ -29,7 +29,7 @@ const Login:React.FC = () => {
                         <img className="coconut" src={coconut} alt="coconut" aria-hidden="true" />
                     </div>
                     <div className="right">
-                        <div className="logo"><a href="">취중진담</a></div>
+                        <div className="logo"><Link to={"/"}>취중진담 홈</Link></div>
                         <div className="login_box">
                             <input type="text"  placeholder="아이디를 입력하세요." className="login_ID" 
                             onChange={(e) => setYouId(e.target.value)} 
@@ -50,8 +50,8 @@ const Login:React.FC = () => {
 
                             <button className="button__style" onClick={(e) => tryLoginLogic(e, youId, youPass )}>로그인</button>
                             <ul className="login_go">
-                                <li><a href="/">비밀번호 찾기</a></li>
-                                <li><a href="/join">회원가입</a></li>
+                                <li><Link to={"/"}>비밀번호 찾기</Link></li>
+                                <li><Link to={"/join"}>회원가입</Link></li>
                             </ul>
                         </div>
                     </div>

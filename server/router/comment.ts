@@ -83,6 +83,36 @@ router.get('/list/:boardId', async (req: Request, res: Response) => {
         res.status(500).json({ success: false });
     }
 });
+
+router.get('/myList/:id', async (req: Request, res: Response) => {
+    const id = req.params.id; // boardId 또는 acId
+    const page = parseInt(req.query.page as string);
+    const type = req.query.type; // 'board' 또는 'ac'
+    const offset = (page + 1) * 10;
+    let more: boolean = false;
+    console.log(type)
+    try {
+        let countSql, commentSql;
+        if (type === 'board') {
+            countSql = 'SELECT COUNT(*) AS total FROM drinkcomment WHERE boardId = ?';
+            commentSql = 'SELECT * FROM drinkcomment WHERE boardId = ? ORDER BY regTime DESC LIMIT ?, ?';
+        } else if (type === 'ac') {
+            countSql = 'SELECT COUNT(*) AS total FROM drinkcomment WHERE acId = ?';
+            commentSql = 'SELECT * FROM drinkcomment WHERE acId = ? ORDER BY regTime DESC LIMIT ?, ?';
+        } else {
+            return res.status(400).json({ success: false, message: 'Invalid type' });
+        }
+
+        const [[{ total }]]: [[{ total: number }]] = await con.query(countSql, [id]);
+        const [result]: [commentResult[]] = await con.query(commentSql, [id, 0, offset]);
+        if (result.length === total) more = true;
+
+        res.status(200).json({ success: true, result: result, total: total, more: more });
+    } catch (error) {
+        res.status(500).json({ success: false });
+    }
+});
+
 router.get('/check/:id', async (req: Request, res: Response) => {
     const id = Number(req.params.id);
     const commentId = Number(req.query.commentId);

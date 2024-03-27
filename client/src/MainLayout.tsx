@@ -16,6 +16,8 @@ import { useSelector } from 'react-redux';
 import AsideNot from './components/layout/AsideNot';
 import Authors from './components/commu/list/Authors';
 import TopBtn from './components/commu/list/TopBtn';
+import MyList from './components/commu/list/MyList';
+import MyComment from './components/comment/MyComment';
 
 const MainLayout:React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
@@ -31,6 +33,8 @@ const MainLayout:React.FC = () => {
                         <Route path="/" element={<Main />} />
                         <Route path="/community" element={<Community />} />
                         <Route path="/Authors/:boardAuthor" element={<Authors />} />
+                        <Route path="/myList/:youId" element={<MyList />} />
+                        <Route path="/myComment/:youId" element={<MyComment />} />
                         <Route path="/view/:boardId" element={<View />} />
                         <Route path="/update/:boardId" element={<PostUpdate />} />
                         <Route path="/write" element={<Write />} />

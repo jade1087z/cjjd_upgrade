@@ -29,7 +29,7 @@ const PostData: React.FC<PostDataProps> = ({post,params,btnLike,setBtnLike,setPo
                         <div className="view_box">
                             <div className="user_info not_user">
                                 <div className="user_info_box">
-                                    <Link to={`/Authors/${post.boardAuthor}`}>
+                                    <Link to={`/Authors/${post.myMemberId}`}>
                                             <p>{post.boardAuthor}님의 게시글 더보기</p>
                                     </Link>
                                 </div>

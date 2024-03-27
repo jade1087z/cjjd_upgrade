@@ -1,13 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Post, RouteParams } from '../../../interface/post/postInterface';
 import { format } from 'date-fns';
-import authpagelist from '../../../axios/post/list/authpagelist';
 import TopBtn from './TopBtn';
+import authpagelist from '../../../axios/post/list/authpagelist';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../reducer/store';
 
-const Authors: React.FC = () => {
-    const { boardAuthor } = useParams<RouteParams>();
-    const params: string | undefined = boardAuthor;
+const MyList:React.FC = () => {
+    const user = useSelector((state: RootState) => state.user)
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!user) {
+            alert('로그아웃 되었습니다.')
+            navigate('/')
+        }
+    }, [user])
+    const { youId } = useParams<RouteParams>();
+    
+    const params: string | undefined = youId;
 
     const [postList, setPostList] = useState<Post[]>([]);
     const [page, setPage] = useState<number>(1);
@@ -50,10 +61,9 @@ const Authors: React.FC = () => {
         if (hasMore) fetchPostList(page)
     }, [page, hasMore]);
 
-    // ref 도달해서 멈춰있을 때도 계속 서버로의 요청이 일어난다. 이러한 부분을 막아야함 
-    return (
-        <div className="best_list boxStyle roundCorner shaDow">
-            <h4>{postList[0]?.boardAuthor} 님의 게시글</h4>
+  return (
+    <div className="best_list boxStyle roundCorner shaDow">
+            <h4>내가 쓴 게시글</h4>
             <ul className="board_w100">
                 {postList &&
                     postList.map((post, key) => (
@@ -79,7 +89,7 @@ const Authors: React.FC = () => {
                 <TopBtn pageEnd={pageEnd} />
             </ul>
         </div>
-    );
+  )
 }
 
-export default Authors
+export default MyList
