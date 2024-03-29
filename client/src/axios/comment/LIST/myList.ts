@@ -1,4 +1,5 @@
 import axios from "axios"
+import { commentResponse } from "../../../interface/post/commentInterface";
 
 interface commentListparmas {
     params: number | string | undefined,
@@ -6,13 +7,20 @@ interface commentListparmas {
     type?: string
 } 
 export const myCommentList = async ({params, page, type}:commentListparmas) => {
-    try {
-        const result = await axios.get(`/api/comment/myList/${params}`)
-        if(result.status === 200) return result.data
-    } catch (err) {
-        console.log(err)
-        return null;
-    }
+    return await axios
+    .get<commentResponse>(`/api/comment/myComment/${params}?page=${page}`)
+    .then((res) => {
+        if (res.status === 200) {
+            return res.data;
+        } else {
+            console.log("else error", res);
+            return [];
+        }
+    })
+    .catch((err) => {
+        console.log("Axios error", err); // Axios 오류 출력
+        return [];
+    });
 }
 
 export default myCommentList

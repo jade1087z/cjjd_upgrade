@@ -18,6 +18,7 @@ import Authors from './components/commu/list/Authors';
 import TopBtn from './components/commu/list/TopBtn';
 import MyList from './components/commu/list/MyList';
 import MyComment from './components/comment/MyComment';
+import ModifyUser from './components/user/mypage/ModifyUser';
 
 const MainLayout:React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
@@ -41,6 +42,7 @@ const MainLayout:React.FC = () => {
                         <Route path="/aclist" element={<AcList />} />
                         <Route path="/acview/:acId" element={<AcVIiew />} />
                         <Route path="/mypage" element={<Mypage />} />
+                        <Route path="/profileModify" element={<ModifyUser />} />
                     </Routes>
                 </section>
             </main>

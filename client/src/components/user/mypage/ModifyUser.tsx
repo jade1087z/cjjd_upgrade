@@ -1,12 +1,11 @@
-import React, { useEffect, useMemo } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { RootState } from '../../../reducer/store';
+import { RootState } from '../../../reducer/store'
 const banner = require("../../../assets/img/mypage_header.jpg")
 const profileImg = require("../../../assets/img/profile.png")
 
-const Mypage: React.FC = () => {
-
+const ModifyUser: React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
     console.log(user)
     const navigate = useNavigate();
@@ -42,17 +41,12 @@ const Mypage: React.FC = () => {
                         </div>
                         <div className="profile_modify">
                             <ul>
-                                <li>
-                                    <Link to="/profileModify">
-                                        프로필 수정하기
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to={`/myList/${user?.myMemberId}`} >내가 쓴 게시글 보기</Link>
-                                </li>
-                                <li>
-                                    <Link to={`/myComment/${user?.myMemberId}`} >내가 쓴 댓글 보기</Link>
-                                </li>
+                                <li><button>
+                                    수정완료
+                                </button></li>
+                                <li><button>
+                                    수정취소
+                                </button></li>
                             </ul>
                         </div>
                     </div>
@@ -60,6 +54,6 @@ const Mypage: React.FC = () => {
             </div>
         </div>
     );
-};
+}
 
-export default Mypage;
+export default ModifyUser

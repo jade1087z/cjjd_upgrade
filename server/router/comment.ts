@@ -186,4 +186,28 @@ router.delete('/delete/:commentId', async (req: Request, res: Response) => {
     }
 })
 
+
+// boardId 값에 따른 특정 유저 게시글 페이지 라우터 하나 -> 무한 스크롤 
+router.get("/myComment/:id", async (req: Request, res: Response) => {
+    const id = req.params.id
+    console.log(id, 'commentId')
+    const page = parseInt(req.query.page as string) || 1;
+    const pageSize = 18; // 한 페이지에 표시할 게시물 수
+    const offset = (page - 1) * pageSize;
+
+    const countSql = 'SELECT COUNT(*) AS total FROM drinkcomment WHERE myMemberId = ?';
+    const sql = `SELECT * FROM drinkcomment WHERE myMemberId = ? ORDER BY regTime DESC LIMIT ${offset}, ${pageSize}`;
+
+    try {
+        console.log("queryok", page)
+
+        const [[{ total }]]: [[{ total: number }]] = await con.query(countSql, id);
+        const [results]: [BoardResult[]] = await con.query(sql, id);
+        res.status(200).json({ success: true, result: results, total: total });
+    } catch (err) {
+        res.status(400).json({ success: false, message: "serverERR" });
+        logger.error(err);
+    }
+});
+
 export default router;
