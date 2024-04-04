@@ -48,3 +48,9 @@
 {"level":"error","message":"jwt expired"}
 {"level":"error","message":"jwt expired"}
 {"code":"ER_TRUNCATED_WRONG_VALUE","errno":1292,"level":"error","message":"Truncated incorrect DOUBLE value: 'null'","sql":"UPDATE drinkBoard SET boardView = boardView + 1 WHERE boardId = 'null' AND boardDelete = 0","sqlMessage":"Truncated incorrect DOUBLE value: 'null'","sqlState":"22007"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}

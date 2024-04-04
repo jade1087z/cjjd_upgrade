@@ -6,6 +6,7 @@ export interface userInterface {
     youNick: string;
     youEmail: string;
     youBirth: string;
+    youImgFile?: string;
     youAddress1: string;
     youAddress2: string;
     youAddress3: string;
@@ -20,4 +21,5 @@ export interface reducerUser {
     youEmail: string;
     youBirth: string;
     youAddress: string;
+    youImgFile?: string;
 }

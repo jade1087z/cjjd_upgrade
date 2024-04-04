@@ -13,7 +13,6 @@
     display: flex;
     justify-content: space-between;
 }
-
 @mixin FCCC {
     display: flex;
     justify-content: center;
@@ -29,8 +28,18 @@
     font-size: 1rem;
     background-color: #03c75a;
     &:hover {
-        background-color: var(--mcolorUp); 
+        background-color: var(--mcolorUp);
     }
+}
+
+@mixin MyPageBtn {
+    border: 1px solid var(--black100);
+    border-radius: 10px;
+    margin-right: 0.8rem;
+    width: 7.3rem;
+    height: 2.5rem;
+    font-size: 0.8rem;
+    cursor: pointer;
 }
 
 @mixin selectBox3 {

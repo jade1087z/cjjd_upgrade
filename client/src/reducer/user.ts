@@ -10,6 +10,7 @@ const initialState: reducerUser = {
   youEmail: '',
   youBirth: '',
   youAddress: '',
+  youImgFile:'',
 };
 const userSlice = createSlice({
   name: 'user',
