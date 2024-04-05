@@ -57,6 +57,7 @@ const Mypage: React.FC = () => {
                                     <FontAwesomeIcon icon={faGear} />
                                 </div>
                                 <input type="file" name="profileImage" accept="image/*" onChange={handleImageChange} />
+                                {/* 사진만 변경 가능하게 하기  */}
                             </label>
                         </div>
                         <div className="right">
@@ -64,18 +65,18 @@ const Mypage: React.FC = () => {
                                 <li><em>닉네임 : </em>{user?.youNick ? `${user?.youNick}님` : ''}</li>
                                 <li><em>이름 : </em>{user?.youId}</li>
                                 <li><em>이메일 : </em>{user?.youEmail}</li>
+                                {/*  여기를 input으로 변경하기  */}
                             </ul>
                             <ul className='myData'>
-                                <li><Link to={`/myList/${user?.myMemberId}`} >내가 쓴 게시글 보기</Link></li>
-                                <li><Link to={`/myComment/${user?.myMemberId}`} >내가 쓴 댓글 보기</Link></li>
                             </ul>
                         </div>
                     </div>
                     <div className="profile_modify">
                         <ul>
-                            <li onClick={profileModify}>프로필 수정하기</li>
-                            <li onClick={profileModify}>변경사항 저장하기</li>
-
+                            <li><Link to={`/myList/${user?.myMemberId}`} >내가 쓴 게시글 보기</Link></li>
+                            <li><Link to={`/myComment/${user?.myMemberId}`} >내가 쓴 댓글 보기</Link></li>
+                            {/* <li onClick={profileModify}>수정하기</li> */}
+                            {/* <li onClick={profileModify}>적용하기</li> */}
                         </ul>
                     </div>
                 </div>
