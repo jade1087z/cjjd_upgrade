@@ -103,38 +103,38 @@ CREATE TABLE drinkLikes (<br />
 <br />
 ALTER TABLE drinkLikes ADD CONSTRAINT FK_myMemberId FOREIGN KEY (myMemberId) REFERENCES drinkMember(myMemberId) ON DELETE SET NULL, ADD CONSTRAINT FK_acId FOREIGN KEY (acId) REFERENCES drinkList(acId) ON DELETE SET NULL;
 <br />
-
-CREATE TABLE drinkComment (
-  commentId INT(10) UNSIGNED AUTO_INCREMENT,
-  myMemberId INT(10) UNSIGNED,
-  boardId INT(10) NOT NULL,
-  acId INT(10) UNSIGNED,
-  commentCategory VARCHAR(10) NOT NULL,
-  commentName VARCHAR(20) NOT NULL,
-  commentPass VARCHAR(20) NOT NULL,
-  commentMsg VARCHAR(225) NOT NULL,
-  commentDelete BOOLEAN DEFAULT 1,
-  regTime INT(20) NOT NULL,
-  PRIMARY KEY (commentId)
-) CHARSET=utf8;
-
+<br />
+CREATE TABLE drinkComment (<br />
+  commentId INT(10) UNSIGNED AUTO_INCREMENT,<br />
+  myMemberId INT(10) UNSIGNED,<br />
+  boardId INT(10) NOT NULL,<br />
+  acId INT(10) UNSIGNED,<br />
+  commentCategory VARCHAR(10) NOT NULL,<br />
+  commentName VARCHAR(20) NOT NULL,<br />
+  commentPass VARCHAR(20) NOT NULL,<br />
+  commentMsg VARCHAR(225) NOT NULL,<br />
+  commentDelete BOOLEAN DEFAULT 1,<br />
+  regTime INT(20) NOT NULL,<br />
+  PRIMARY KEY (commentId)<br />
+) CHARSET=utf8;<br />
+<br />
 ALTER TABLE drinkComment ADD CONSTRAINT FK_myMemberId FOREIGN KEY (myMemberId) REFERENCES drinkMember(myMemberId) ON DELETE SET NULL, ADD CONSTRAINT FK_acId FOREIGN KEY (acId) REFERENCES drinkList(acId) ON DELETE SET NULL;
-
-CREATE TABLE drinkList (
-  acId INT(10) UNSIGNED AUTO_INCREMENT,
-  acCategory VARCHAR(10) NOT NULL,
-  acImgPath VARCHAR(255) NOT NULL,
-  acName VARCHAR(40) NOT NULL,
-  acCompany VARCHAR(20) NOT NULL,
-  acDesc LONGTEXT NOT NULL,
-  acView INT(100) NOT NULL,
-  acLike INT(100) NOT NULL,
-  acComment INT(100) NOT NULL,
-  acAbv FLOAT NOT NULL,
-  acDelete BOOLEAN DEFAULT 1,
-  PRIMARY KEY (acId)
-) CHARSET=utf8;
-
+<br /><br />
+CREATE TABLE drinkList (<br />
+  acId INT(10) UNSIGNED AUTO_INCREMENT,<br />
+  acCategory VARCHAR(10) NOT NULL,<br />
+  acImgPath VARCHAR(255) NOT NULL,<br />
+  acName VARCHAR(40) NOT NULL,<br />
+  acCompany VARCHAR(20) NOT NULL,<br />
+  acDesc LONGTEXT NOT NULL,<br />
+  acView INT(100) NOT NULL,<br />
+  acLike INT(100) NOT NULL,<br />
+  acComment INT(100) NOT NULL,<br />
+  acAbv FLOAT NOT NULL,<br />
+  acDelete BOOLEAN DEFAULT 1,<br />
+  PRIMARY KEY (acId)<br />
+) CHARSET=utf8;<br />
+<br />
 ALTER TABLE drinkList ADD CONSTRAINT FK_myMemberId FOREIGN KEY (myMemberId) REFERENCES drinkMember(myMemberId) ON DELETE CASCADE;
-
+<br />
 ALTER TABLE drinkLikes ADD CONSTRAINT FK_myMemberId FOREIGN KEY (myMemberId) REFERENCES drinkMember(myMemberId) ON DELETE CASCADE, ADD CONSTRAINT FK_acId FOREIGN KEY (acId) REFERENCES drinkList(acId) ON DELETE CASCADE;
