@@ -20,8 +20,8 @@
 
 
 <h3>설치 라이브러리</h3>
-\*\* typescript   
-npm i -g typescript
+\*\* typescript       
+npm i -g typescript    
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 tsc --init
 server 
@@ -55,53 +55,54 @@ SET FOREIGN_KEY_CHECKS=1;
 
 
 <h3>\*\* TABLE </h3>
-CREATE TABLE drinkMember(
-  myMemberId INT(10) UNSIGNED AUTO_INCREMENT,
-  youId VARCHAR(20) NOT NULL,
-  youPass VARCHAR(20) NOT NULL,
-  youName VARCHAR(5) NOT NULL,
-  youNick VARCHAR(10) NOT NULL,
-  youEmail VARCHAR(40) NOT NULL,
-  youBirth INT(8) NOT NULL,
-  youAddress VARCHAR(80) NOT NULL,
-  youImgFile VARCHAR(100) DEFAULT NULL,
-  youImgSize VARCHAR(100) DEFAULT NULL,
-  memberDelete BOOLEAN DEFAULT 1,
-  regTime INT(20) NOT NULL,
-  PRIMARY KEY(myMemberID)
-) CHARSET=utf8;
-
-CREATE TABLE drinkBoard (
-  boardId INT(10) UNSIGNED AUTO_INCREMENT,
-  myMemberId INT(10) UNSIGNED NOT NULL,
-  boardCategory VARCHAR(10) NOT NULL,
-  boardTitle VARCHAR(255) NOT NULL,
-  boardContents LONGTEXT NOT NULL,
-  boardAuthor VARCHAR(10) NOT NULL,
-  boardView INT(100) NOT NULL,
-  boardLike INT(100) NOT NULL,
-  boardComment INT(100) NOT NULL,
-  boardImgFile VARCHAR(100) DEFAULT NULL,
-  boardImgSize VARCHAR(100) DEFAULT NULL,
-  boardDelete BOOLEAN DEFAULT 1,
-  regTime INT(40) NOT NULL,
-  PRIMARY KEY (boardId)
-) CHARSET=utf8;
-
+CREATE TABLE drinkMember(  <br />  
+  myMemberId INT(10) UNSIGNED AUTO_INCREMENT,  <br />
+  youId VARCHAR(20) NOT NULL,<br />
+  youPass VARCHAR(20) NOT NULL,<br />
+  youName VARCHAR(5) NOT NULL,<br />
+  youNick VARCHAR(10) NOT NULL,<br />
+  youEmail VARCHAR(40) NOT NULL,<br />
+  youBirth INT(8) NOT NULL,<br />
+  youAddress VARCHAR(80) NOT NULL,<br />
+  youImgFile VARCHAR(100) DEFAULT NULL,<br />
+  youImgSize VARCHAR(100) DEFAULT NULL,<br />
+  memberDelete BOOLEAN DEFAULT 1,<br />
+  regTime INT(20) NOT NULL,<br />
+  PRIMARY KEY(myMemberID)<br />
+) CHARSET=utf8;<br />
+<br /><br />
+CREATE TABLE drinkBoard (<br />
+  boardId INT(10) UNSIGNED AUTO_INCREMENT,<br />
+  myMemberId INT(10) UNSIGNED NOT NULL,<br />
+  boardCategory VARCHAR(10) NOT NULL,<br />
+  boardTitle VARCHAR(255) NOT NULL,<br />
+  boardContents LONGTEXT NOT NULL,<br />
+  boardAuthor VARCHAR(10) NOT NULL,<br />
+  boardView INT(100) NOT NULL,<br />
+  boardLike INT(100) NOT NULL,<br />
+  boardComment INT(100) NOT NULL,<br />
+  boardImgFile VARCHAR(100) DEFAULT NULL,<br />
+  boardImgSize VARCHAR(100) DEFAULT NULL,<br />
+  boardDelete BOOLEAN DEFAULT 1,<br />
+  regTime INT(40) NOT NULL,<br />
+  PRIMARY KEY (boardId)<br />
+) CHARSET=utf8;<br />
+<br />
 ALTER TABLE drinkBoard ADD CONSTRAINT FK_myMemberId FOREIGN KEY (myMemberId) REFERENCES drinkMember(myMemberId) ON DELETE CASCADE;
-
-CREATE TABLE drinkLikes (
-  likeId INT(10) UNSIGNED AUTO_INCREMENT,
-  myMemberId INT(10) UNSIGNED,
-  boardId INT(10) NOT NULL,
-  acId INT(10) UNSIGNED,
-  likeCategory VARCHAR(10) NOT NULL,
-  likeDelete BOOLEAN DEFAULT 1,
-  regTime INT(40) NOT NULL,
-  PRIMARY KEY (likeId)
-) CHARSET=utf8;
-
+<br />
+CREATE TABLE drinkLikes (<br />
+  likeId INT(10) UNSIGNED AUTO_INCREMENT,<br />
+  myMemberId INT(10) UNSIGNED,<br />
+  boardId INT(10) NOT NULL,<br />
+  acId INT(10) UNSIGNED,<br />
+  likeCategory VARCHAR(10) NOT NULL,<br />
+  likeDelete BOOLEAN DEFAULT 1,<br />
+  regTime INT(40) NOT NULL,<br />
+  PRIMARY KEY (likeId)<br />
+) CHARSET=utf8;<br />
+<br />
 ALTER TABLE drinkLikes ADD CONSTRAINT FK_myMemberId FOREIGN KEY (myMemberId) REFERENCES drinkMember(myMemberId) ON DELETE SET NULL, ADD CONSTRAINT FK_acId FOREIGN KEY (acId) REFERENCES drinkList(acId) ON DELETE SET NULL;
+<br />
 
 CREATE TABLE drinkComment (
   commentId INT(10) UNSIGNED AUTO_INCREMENT,
