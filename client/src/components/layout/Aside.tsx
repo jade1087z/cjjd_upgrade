@@ -11,7 +11,6 @@ const Aside: React.FC = () => {
     const dispatch = useDispatch<ThunkDispatch<any, any, AnyAction>>();    
 
     const logout = (e: React.MouseEvent) => {
-        
         e.preventDefault()
         if(window.confirm('로그아웃 하시겠습니까?')){
             localStorage.removeItem('accessToken');
@@ -24,7 +23,7 @@ const Aside: React.FC = () => {
             <AsideSearch />
             <div className="info_box side_box roundCorner shaDow">
                 <div className="login_info">
-                    <img src="../assets/profile/<?= $memberInfo['youImgFile'] ?>" />
+                    <img src={user.youImgFile} />
                     <p>{user.youNick}님 어서오세요.</p>
                     <ul>
                         <li>

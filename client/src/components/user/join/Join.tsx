@@ -17,6 +17,7 @@ const Join = () => {
         youAddress1: '',
         youAddress2: '',
         youAddress3: '',
+        // youImgFile: '',
     });
 
     const [check, setCheck] = useState<boolean>(false);
@@ -24,6 +25,7 @@ const Join = () => {
     const [nickCheck, setNickCheck] = useState<boolean | null >(null);
     const [emailCheck, setEmailCheck] = useState<boolean | null>(null);
     const [checkPass, setCheckPass] = useState<boolean | null>(null);
+    // const [imgPath, setImgPath] = useState<boolean | null>(null);
     
 
     useEffect(() => {

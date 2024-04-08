@@ -10,8 +10,6 @@ import {
 import { DrinkList } from "../../../interface/post/acList.interface";
 import { dinkListAll } from "../../../axios/acList/list/listAll";
 import TopBtn from "../../commu/list/TopBtn";
-const card1 = require("../../../assets/img/card (1).gif")
-
 
 const AcList: React.FC = () => {
 

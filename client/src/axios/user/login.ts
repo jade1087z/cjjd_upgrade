@@ -12,6 +12,7 @@ interface ResultData {
         youEmail: string;
         youBirth: string;
         youAddress: string;
+        youImgFile: string;
     }
 }
 
@@ -35,6 +36,7 @@ export const tryLogin = async (e: React.MouseEvent | React.KeyboardEvent, youId:
                     youEmail: result.data.user.youEmail,
                     youBirth: result.data.user.youBirth,
                     youAddress: result.data.user.youAddress,
+                    youImgFile: result.data.user.youImgFile
                 }
                 window.location.href= '/';
                 return user;

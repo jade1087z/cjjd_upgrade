@@ -4,9 +4,8 @@ import { DrinkList } from "../../../interface/post/acList.interface";
 interface drinkResponse {
     drinkList: DrinkList[] 
 }
-export const dinkListAll = async ({category}): Promise<DrinkList[]> => {
-    console.log(category)
-    return await axios.get<drinkResponse>(`/api/acList/list/${category}`)
+export const ranking = async (): Promise<DrinkList[]> => {
+    return await axios.get<drinkResponse>(`/api/acList/ranking`)
     .then((res) =>{
         if(res.status === 200) {
             return res.data.drinkList;
@@ -19,4 +18,4 @@ export const dinkListAll = async ({category}): Promise<DrinkList[]> => {
         return []
     })
 }
-export default dinkListAll
+export default ranking

@@ -29,6 +29,18 @@ router.get('/list/:category', async (req: Request, res: Response) => {
       logger.error(error)
    }
 })
+router.get('/ranking', async (req: Request, res: Response) => {
+   try {
+      let sql = 'SELECT * FROM drinklist ORDER BY acView DESC, acLike DESC LIMIT 10';
+      const [rows]: alcohol[] = await con.query(sql)
+      const result = rows
+      res.status(200).json({success: true, drinkList: result})
+   } catch (error) {
+      res.status(500).json({success: false})
+      logger.error(error)
+   } 
+
+})
 
 router.get('/view/:acId', async (req: Request, res: Response) => {
    const acId = req.params.acId;

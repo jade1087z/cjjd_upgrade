@@ -1,3 +1,6 @@
+<img src='./client/src/assets/img/main.PNG'>
+<img src='./client/src/assets/img/ac.PNG'>
+<img src='./client/src/assets/img/post.PNG'>
 \*\* 취중진담 프로젝트 
 - 기존에 php와 mySql, javascript를 활용해 팀프로젝트로 만들었던 웹사이트 취중진담을 혼자 리팩토링과 마이그레이션 하는 프로젝트를 혼자 진행중이다.
 - 클라이언트는 react.js를 활용하였고, 서버는 node.js를 이용하고 있으며 express를 활용해 연결하였다. 데이터베이스는 mysql을 사용하고 있다. 

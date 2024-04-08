@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css/bundle";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-const card5 = require("../../../assets/img/card (5).gif")
-const AcRank = () => {
+import { DrinkList } from "../../../interface/post/acList.interface";
+import ranking from "../../../axios/acList/list/rankingAc";
+
+const AcRank: React.FC = () => {
+
+    const [acRank, setAcRank] = useState<DrinkList[]>([]);
+
+    const fetchList = async () => {
+        const result: DrinkList[] = await ranking()
+        setAcRank(result)
+    }
+    useEffect(() => {
+        fetchList();
+    }, [])
+
+    console.log(acRank)
+
     return (
         <div className="ranking_list boxStyle roundCorner shaDow">
             <Link to={'/aclist'}>
@@ -40,106 +55,18 @@ const AcRank = () => {
                         },
                     }}
                 >
-                    <SwiperSlide>
-                        <span className="rankedIn">1 </span>
-                        <Link id="<?= $acTop10['acId'] ?>" to="/">
-                            <img src={card5} alt="<?= $acTop10['acName'] ?>" />
-                            <div className="title_hover">
-                                <p>['acName']</p>
-                                <span>acTop10['acCompany']</span>
-                            </div>
-                        </Link>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <span className="rankedIn">1 </span>
-                        <Link id="<?= $acTop10['acId'] ?>" to="/">
-                            <img src={card5} alt="<?= $acTop10['acName'] ?>" />
-                            <div className="title_hover">
-                                <p>['acName']</p>
-                                <span>acTop10['acCompany']</span>
-                            </div>
-                        </Link>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <span className="rankedIn">1 </span>
-                        <Link id="<?= $acTop10['acId'] ?>" to="/">
-                            <img src={card5} alt="<?= $acTop10['acName'] ?>" />
-                            <div className="title_hover">
-                                <p>['acName']</p>
-                                <span>acTop10['acCompany']</span>
-                            </div>
-                        </Link>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <span className="rankedIn">1 </span>
-                        <Link id="<?= $acTop10['acId'] ?>" to="/">
-                            <img src={card5} alt="<?= $acTop10['acName'] ?>" />
-                            <div className="title_hover">
-                                <p>['acName']</p>
-                                <span>acTop10['acCompany']</span>
-                            </div>
-                        </Link>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <span className="rankedIn">1 </span>
-                        <Link id="<?= $acTop10['acId'] ?>" to="/">
-                            <img src={card5} alt="<?= $acTop10['acName'] ?>" />
-                            <div className="title_hover">
-                                <p>['acName']</p>
-                                <span>acTop10['acCompany']</span>
-                            </div>
-                        </Link>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <span className="rankedIn">1 </span>
-                        <Link id="<?= $acTop10['acId'] ?>" to="/">
-                            <img src={card5} alt="<?= $acTop10['acName'] ?>" />
-                            <div className="title_hover">
-                                <p>['acName']</p>
-                                <span>acTop10['acCompany']</span>
-                            </div>
-                        </Link>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <span className="rankedIn">1 </span>
-                        <Link id="<?= $acTop10['acId'] ?>" to="/">
-                            <img src={card5} alt="<?= $acTop10['acName'] ?>" />
-                            <div className="title_hover">
-                                <p>['acName']</p>
-                                <span>acTop10['acCompany']</span>
-                            </div>
-                        </Link>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <span className="rankedIn">1 </span>
-                        <Link id="<?= $acTop10['acId'] ?>" to="/">
-                            <img src={card5} alt="<?= $acTop10['acName'] ?>" />
-                            <div className="title_hover">
-                                <p>['acName']</p>
-                                <span>acTop10['acCompany']</span>
-                            </div>
-                        </Link>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <span className="rankedIn">9 </span>
-                        <Link id="<?= $acTop10['acId'] ?>" to="/">
-                            <img src={card5} alt="<?= $acTop10['acName'] ?>" />
-                            <div className="title_hover">
-                                <p>['acName']</p>
-                                <span>acTop10['acCompany']</span>
-                            </div>
-                        </Link>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <span className="rankedIn">1 </span>
-                        <Link id="<?= $acTop10['acId'] ?>" to="/">
-                            <img src={card5} alt="<?= $acTop10['acName'] ?>" />
-                            <div className="title_hover">
-                                <p>['acName']</p>
-                                <span>acTop10['acCompany']</span>
-                            </div>
-                        </Link>
-                    </SwiperSlide>
+                    {acRank && acRank.map((swip, key) => (
+                        <SwiperSlide key={key}>
+                            <span className="rankedIn">{key+1}</span>
+                            <Link to={`/acview/${swip.acId}`}>
+                                <img src={swip.acImgPath} alt='' />
+                                <div className="title_hover">
+                                    <p>{swip.acName}</p>
+                                    <span>acTop10 {swip.acCompany}</span>
+                                </div>
+                            </Link>
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </div>
         </div>

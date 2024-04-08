@@ -4,6 +4,7 @@ const router = express.Router();
 const logger = require("../util/logger");
 const jwt = require("../util/jwt");
 import bcrypt from 'bcryptjs';
+const setUpload = require('../util/multerS3')
 
 interface User {
     youId: string;
@@ -61,14 +62,14 @@ router.post('/login', async (req: Request, res: Response) => {
         let sql = 'SELECT * FROM drinkmember WHERE youId = ?';
         let value = [youId]
         const result = await con.query(sql, value);
-        console.log(result[0][0],'resu')
+        console.log(result[0][0], 'resu')
         if (result.length > 0) {
             const user = result[0][0];
             console.log(user.youPass)
             if (await bcrypt.compare(youPass, user.youPass)) {
                 const payload = {
                     youId: user.youId,
-                    exp: Math.floor(Date.now() / 1000)  + (600 * 60),
+                    exp: Math.floor(Date.now() / 1000) + (600 * 60),
                 }
                 const accessToken = jwt.generateToken(payload)
                 res.status(200).json({ success: true, accessToken: accessToken, user: user })
@@ -89,24 +90,43 @@ router.post('/login', async (req: Request, res: Response) => {
 router.get('/info', async (req: Request, res: Response) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
-    
+
     if (token == null) {
         return res.sendStatus(401)
     }
     try {
         const value = await jwt.verifyToken(token)
         let userSql = 'SELECT * FROM drinkmember WHERE youId = ?';
-        const [rows] = await con.query(userSql, value.youId )
+        const [rows] = await con.query(userSql, value.youId)
         const { myMemberId, youId, youName, youNick, youEmail, youBirth, youAddress, youImgFile } = rows[0]; // 필요한 필드만 선택
-        const userInfo ={myMemberId, youId, youName, youNick, youEmail, youBirth, youAddress, youImgFile }
+        const userInfo = { myMemberId, youId, youName, youNick, youEmail, youBirth, youAddress, youImgFile }
         console.log(userInfo)
 
-        res.status(200).json({success: true, userInfo: userInfo})
+        res.status(200).json({ success: true, userInfo: userInfo })
     } catch (error) {
         logger.error(error)
     }
 })
 
+router.patch('/modify/:myMemberId', (req, res, next) => setUpload('cjjdup/post')(req, res, next), async (req: Request, res: Response)  => {
+    try {
+        const myMemberId = req.params.myMemberId;
+        const file: any = req.files;
+        const imgFile = file[0].location
+        console.log(file[0].location)
+
+        let sql = 'UPDATE drinkmember SET youImgFile= ? WHERE myMemberId = ?'
+        let value = [imgFile, myMemberId]
+
+        const result = await con.query(sql, value);
+        console.log(result)
+        res.status(200).json({success: true, imgFile:imgFile })
+        
+    } catch (error) {
+        logger.error(error)
+        res.status(500).send()
+    }
+})
 //  UnhandledPromiseRejection: This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). The promise rejected with 
 // the reason "jwt expired".
 // 다음 에러는 jwt 토큰 만료시 생김 리프레쉬 토큰을 만들던지 // 서버에서 에러 처리를 하던지 해결할 것

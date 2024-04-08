@@ -23,6 +23,7 @@ import ModifyUser from './components/user/mypage/ModifyUser';
 const MainLayout:React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
     const youId = user?.youId;
+    console.log(user)
     
     return (
         <div id="wrapper">

@@ -279,3 +279,11 @@
 {"level":"error","message":"jwt expired"}
 {"level":"error","message":"jwt expired"}
 {"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"level":"error","message":"jwt expired"}
+{"code":"ER_PARSE_ERROR","errno":1064,"level":"error","message":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 10' at line 1","sql":"SELECT * FROM drinklist ORDER BY acView DESC, acLike DESC LIMIT= 10","sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 10' at line 1","sqlState":"42000"}
+{"code":"ER_PARSE_ERROR","errno":1064,"level":"error","message":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 10' at line 1","sql":"SELECT * FROM drinklist ORDER BY acView DESC, acLike DESC LIMIT= 10","sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 10' at line 1","sqlState":"42000"}
+{"code":"ER_PARSE_ERROR","errno":1064,"level":"error","message":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 10' at line 1","sql":"SELECT * FROM drinklist ORDER BY acView DESC, acLike DESC LIMIT= 10","sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 10' at line 1","sqlState":"42000"}
+{"code":"ER_PARSE_ERROR","errno":1064,"level":"error","message":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 10' at line 1","sql":"SELECT * FROM drinklist ORDER BY acView DESC, acLike DESC LIMIT= 10","sqlMessage":"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 10' at line 1","sqlState":"42000"}

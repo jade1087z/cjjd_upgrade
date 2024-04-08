@@ -21,10 +21,13 @@ const userSlice = createSlice({
     },
     clearUser: (state, action: PayloadAction<null>) => {
       return initialState;
+    },
+    setUserImage: (state, action: PayloadAction<string>) => {
+      state.youImgFile = action.payload
     }
   }
 });
-const {setUser, clearUser} = userSlice.actions;
+const {setUser, clearUser, setUserImage} = userSlice.actions;
 
-export { setUser, clearUser};
+export { setUser, clearUser, setUserImage};
 export default userSlice.reducer;
