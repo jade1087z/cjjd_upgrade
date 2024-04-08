@@ -2,7 +2,7 @@
 <img src='./client/src/assets/img/ac.PNG'>
 <img src='./client/src/assets/img/post.PNG'>
 
-\*\* 취중진담 프로젝트 
+\*\* <h2> 취중진담 프로젝트 </h2>
 - 취중진담 프로젝트는 PHP, MySQL, JavaScript를 사용하여 팀 프로젝트로 개발되었던 웹사이트로, 현재는 React.js, Node.js, Express, MySQL을 사용하여 혼자서 리팩토링 및 마이그레이션을 진행 중입니다. 이 과정에서 TypeScript를 도입하여 정적 타입을 통한 개발 경험을 하고 있으며, 이미지 처리를 위해 multerS3와 Quill의 이미지 핸들러를 활용하고 있습니다. 또한, 사용자 인증 및 비밀번호 관리를 위해 JWT와 해시를 사용하고 있습니다.
 
  <h3>TypeScript 도입 경험</h3>
