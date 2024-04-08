@@ -2,8 +2,8 @@
 <img src='./client/src/assets/img/ac.PNG'>
 <img src='./client/src/assets/img/post.PNG'>
 
-\*\* <h2> 취중진담 프로젝트 </h2>
-- 취중진담 프로젝트는 PHP, MySQL, JavaScript를 사용하여 팀 프로젝트로 개발되었던 웹사이트로, 현재는 React.js, Node.js, Express, MySQL을 사용하여 혼자서 리팩토링 및 마이그레이션을 진행 중입니다. 이 과정에서 TypeScript를 도입하여 정적 타입을 통한 개발 경험을 하고 있으며, 이미지 처리를 위해 multerS3와 Quill의 이미지 핸들러를 활용하고 있습니다. 또한, 사용자 인증 및 비밀번호 관리를 위해 JWT와 해시를 사용하고 있습니다.
+ <h2>\*\* 취중진담 프로젝트 </h2>
+ 취중진담 프로젝트는 PHP, MySQL, JavaScript를 사용하여 팀 프로젝트로 개발되었던 웹사이트로, 현재는 React.js, Node.js, Express, MySQL을 사용하여 혼자서 리팩토링 및 마이그레이션을 진행 중입니다. 이 과정에서 TypeScript를 도입하여 정적 타입을 통한 개발 경험을 하고 있으며, 이미지 처리를 위해 multerS3와 Quill의 이미지 핸들러를 활용하고 있습니다. 또한, 사용자 인증 및 비밀번호 관리를 위해 JWT와 해시를 사용하고 있습니다.
 
  <h3>TypeScript 도입 경험</h3>
  정적 타입의 장점: TypeScript를 도입함으로써 코드의 안정성이 높아지고, 예상치 못한 런타임 에러를 줄일 수 있었습니다. 또한, 타입 에러를 통해 에러를 잡아주는 기능이 개발 속도 향상에 도움을 주었습니다.    
@@ -19,31 +19,32 @@
 이 프로젝트를 통해 TypeScript의 정적 타입을 통한 개발, 이미지 처리 기능의 개선, 사용자 인증 및 비밀번호 관리 등 다양한 기술을 경험하고 있습니다. 앞으로도 더 나은 웹 어플리케이션 개발을 위해 지속적으로 학습하고 개선해 나갈 예정입니다. 😊
 
 
-\*\* typescript
+<h3>설치 라이브러리</h3>
+\*\* typescript   
 npm i -g typescript
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 tsc --init
 server 
 npm install --save-dev typescript @types/node @types/express
 
-\*\* 클라이언트 라이브러리 설치
-npm i swiper
-npm i sass
-npm i axios
-npm i http-proxy-middleware
-npm i react-router-dom
-npm i react-redux
-npm i @reduxjs/toolkit
-npm i react-places-autocomplete
-npm i locomotive-scroll,
+\*\* 클라이언트 라이브러리 설치   
+npm i swiper   
+npm i sass   
+npm i axios   
+npm i http-proxy-middleware   
+npm i react-router-dom   
+npm i react-redux   
+npm i @reduxjs/toolkit   
+npm i react-places-autocomplete   
+npm i locomotive-scroll  
 
 \*\* 서버단 라이브러리 설치
-npm i nodemon
-npm i mysql
-npm i express
-npm install --save-dev ts-node-dev
-npm install jsonwebtoken bcryptjs
-npm install dotenv
+npm i nodemon   
+npm i mysql   
+npm i express   
+npm install --save-dev ts-node-dev   
+npm install jsonwebtoken bcryptjs   
+npm install dotenv   
 
 - 외래 키
 -- 외래 키 검사 해제
@@ -52,7 +53,8 @@ SET FOREIGN_KEY_CHECKS=0;
 -- 외래 키 검사 재활성화
 SET FOREIGN_KEY_CHECKS=1;
 
-\*\* TABLE 
+
+<h3>\*\* TABLE </h3>
 CREATE TABLE drinkMember(
   myMemberId INT(10) UNSIGNED AUTO_INCREMENT,
   youId VARCHAR(20) NOT NULL,
