@@ -1,6 +1,5 @@
 import ReactQuill, { Quill } from 'react-quill';
 import { useMemo } from 'react';
-import ImageResize from '@looop/quill-image-resize-module-react';
 import { imageHandler } from './imageHandle';
 
 const Font = Quill.import('formats/font');
@@ -14,7 +13,6 @@ Font.whitelist = [
     'lucida',
 ];
 Quill.register(Font, true);
-Quill.register('modules/ImageResize', ImageResize);
 
 const UpdateQuillEditor = ({ quillRef, onChange, placeholder, contents }) => {
 

@@ -62,15 +62,17 @@ router.get("/authpagelist/:id", async (req: Request, res: Response) => {
 
 // 전체 리스트 가져오기  -> 무한 스크롤 
 router.get("/pagelist", async (req: Request, res: Response) => {
-    const page = parseInt(req.query.page as string) || 1;
+    const page = parseInt(req.query.pageParam as string) || 1;
     const pageSize = 18; // 한 페이지에 표시할 게시물 수
     const offset = (page - 1) * pageSize;
-
+    console.log('query', page)
+    console.log('query')
     let sql = `SELECT * FROM drinkBoard WHERE boardDelete = 0 ORDER BY regTime DESC LIMIT ${offset}, ${pageSize}`;
 
     try {
         console.log("queryok", page)
         const [results]: [BoardResult[]] = await con.query(sql);
+        console.log(results)
         res.status(200).json({ success: true, postList: results });
     } catch (err) {
         res.status(400).json({ success: false, message: "serverERR" });

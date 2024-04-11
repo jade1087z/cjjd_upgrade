@@ -10,22 +10,27 @@ import {
 import { DrinkList } from "../../../interface/post/acList.interface";
 import { dinkListAll } from "../../../axios/acList/list/listAll";
 import TopBtn from "../../commu/list/TopBtn";
+import { useQuery } from "@tanstack/react-query";
 
 const AcList: React.FC = () => {
 
-    const [drinkList, setDrinkList] = useState<DrinkList[]>([])
+
+// const [drinkList, setDrinkList] = useState<DrinkList[]>([])
+    // const fetchList = async (category: string) => {
+    //     const result: DrinkList[] = await dinkListAll({ category })
+    //     setDrinkList(result)
+    // }
+    // useEffect(() => {
+    //     fetchList(category);
+    // }, [category])
+
     const [category, setCategory] = useState<string>('전체');
     const btnList = ['전체', '소주', '맥주', '위스키', '막걸리'];
+    const { data, error, isLoading } = useQuery<DrinkList[], Error>({
+     queryKey: ['drinkList', category],
+     queryFn: () => dinkListAll({category})
+    });
 
-    const fetchList = async (category: string) => {
-        const result: DrinkList[] = await dinkListAll({ category })
-        setDrinkList(result)
-    }
-    useEffect(() => {
-        fetchList(category);
-    }, [category])
-
-    console.log(drinkList)
     return (
         <>
             <AcRank />
@@ -39,7 +44,7 @@ const AcList: React.FC = () => {
             </div>
             <div className="alcohol_item">
                 <ul>
-                    {drinkList && drinkList.map((li, key) => (
+                    {data && data.map((li, key) => (
                         <li className="boxStyle roundCorner shaDow" key={key}>
                         <Link to={`/acview/${li.acId}`}>
                             <div className="item_img">

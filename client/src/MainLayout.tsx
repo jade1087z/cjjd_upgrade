@@ -15,10 +15,9 @@ import { RootState } from './reducer/store';
 import { useSelector } from 'react-redux';
 import AsideNot from './components/layout/AsideNot';
 import Authors from './components/commu/list/Authors';
-import TopBtn from './components/commu/list/TopBtn';
 import MyList from './components/commu/list/MyList';
 import MyComment from './components/comment/MyComment';
-import ModifyUser from './components/user/mypage/ModifyUser';
+import Query from './components/commu/list/Query';
 
 const MainLayout:React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
@@ -33,7 +32,7 @@ const MainLayout:React.FC = () => {
                 <section id="main_contents">
                     <Routes>
                         <Route path="/" element={<Main />} />
-                        <Route path="/community" element={<Community />} />
+                        <Route path="/community" element={<Query />} />
                         <Route path="/Authors/:boardAuthor" element={<Authors />} />
                         <Route path="/myList/:youId" element={<MyList />} />
                         <Route path="/myComment/:youId" element={<MyComment />} />
@@ -43,7 +42,6 @@ const MainLayout:React.FC = () => {
                         <Route path="/aclist" element={<AcList />} />
                         <Route path="/acview/:acId" element={<AcVIiew />} />
                         <Route path="/mypage" element={<Mypage />} />
-                        <Route path="/profileModify" element={<ModifyUser />} />
                     </Routes>
                 </section>
             </main>

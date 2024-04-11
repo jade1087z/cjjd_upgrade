@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Post } from "../../../interface/post/postInterface";
-
+import { format } from 'date-fns';
 interface PostResponse {
     postList: Post[];
 }
@@ -10,7 +10,10 @@ export const bestPost = async (): Promise<Post[]> => {
         .get<PostResponse>("/api/post/bestpost")
         .then((res) => {
             if (res.status === 200) {
-                return res.data.postList;
+                return res.data.postList.map(post => ({
+                    ...post, 
+                    regTime: format(new Date(post.regTime), 'MM,dd')
+                }));
             } else {
                 console.log("else error", res);
                 return [];
@@ -21,5 +24,4 @@ export const bestPost = async (): Promise<Post[]> => {
             return [];
         });
 };
-
 export default bestPost

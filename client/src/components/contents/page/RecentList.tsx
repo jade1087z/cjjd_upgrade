@@ -2,25 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Post } from "../../../interface/post/postInterface";
 import postAll from "../../../axios/post/list/listAll";
-import { format } from "date-fns";
+import { useQuery } from "@tanstack/react-query";
 
 const RecentList: React.FC = () => {
-    const [postList, setPostList] = useState<Post[]>([]);
-
-    useEffect(() => {
-        const fetchPostList = async () => {
-            const newPostList: Post[] = await postAll();
-            if (newPostList) {
-                const formattedPostList = newPostList.map((post) => ({
-                    ...post,
-                    regTime: format(new Date(post.regTime), "MM.dd"),
-                }))
-                .slice(0,15);
-                if (JSON.stringify(postList) !== JSON.stringify(formattedPostList)) setPostList(formattedPostList);
-            }
-        };
-        fetchPostList();
-    }, [postList]);
+    const { data, error, isLoading } = useQuery<Post[], Error>({queryKey: ['posts'], queryFn: postAll});
+    
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>An error occurred</div>;
 
     return (
         <div className="best_list boxStyle roundCorner shaDow">
@@ -28,7 +16,7 @@ const RecentList: React.FC = () => {
                 최신 게시글 <span>NEW</span>
             </h4>
             <ul className="board_w100">
-                {postList && postList.map((post, key) => (
+                {data && data.map((post, key) => (
                     <li key={key}>
                         <Link to={`/view/${post.boardId}`}>
                             <div className="board_info">

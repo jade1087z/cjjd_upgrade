@@ -4,53 +4,52 @@ import { Post } from '../../../interface/post/postInterface';
 import { format } from 'date-fns';
 import postAllpage from '../../../axios/post/list/pageList';
 import TopBtn from './TopBtn';
+import { useInfiniteQuery, useQuery, InfiniteData } from '@tanstack/react-query';
 
 const Community: React.FC = () => {
-    const [postList, setPostList] = useState<Post[]>([]);
-    const [page, setPage] = useState<number>(1);
-    const [fetching, setFetching] = useState<Boolean>(false);
-    const [hasMore, setHasMore] = useState<Boolean>(true);
+    // const [postList, setPostList] = useState<Post[]>([]);
+    // const [page, setPage] = useState<number>(1);
+    // const [fetching, setFetching] = useState<Boolean>(false);
+    // const [hasMore, setHasMore] = useState<Boolean>(true);
 
-    const pageEnd = useRef<HTMLDivElement>(null);
-    let observer: IntersectionObserver;
+    // const pageEnd = useRef<HTMLDivElement>(null);
+    // let observer: IntersectionObserver;
 
-    const fetchPostList = async (page: number) => {
-        setFetching(true)
-        const newPostList: Post[] = await postAllpage(page);
-        if (newPostList.length === 0) {  // 데이터를 더 이상 가져올 수 없을 때
-            if (observer) observer.disconnect();  // Observer를 중단합니다.
-            return;  // 함수를 종료합니다.
-        }
-        const formattedPostList = newPostList.map((post) => ({
-            ...post,
-            regTime: format(new Date(post.regTime), "MM.dd"),
-        }))
-        setPostList(prevPosts => [...prevPosts, ...formattedPostList]);
-        setFetching(false)
-    };
-// 가장 최신 글이 위로 오게끔 정렬하기 
-    useEffect(() => {
-        observer = new IntersectionObserver((entries) => {
-            if (fetching || !hasMore) return;
-            if (entries[0].intersectionRatio === 1) {
-                setPage(prevPage => prevPage + 1);
-            }
-        }, { threshold: 1 });
+    // const fetchPostList = async (page: number) => {
+    //     setFetching(true)
+    //     const newPostList: Post[] = await postAllpage(page);
+    //     if (newPostList.length === 0) {  // 데이터를 더 이상 가져올 수 없을 때
+    //         if (observer) observer.disconnect();  // Observer를 중단합니다.
+    //         return;  // 함수를 종료합니다.
+    //     }
+    //     const formattedPostList = newPostList.map((post) => ({
+    //         ...post,
+    //         regTime: format(new Date(post.regTime), "MM.dd"),
+    //     }))
+    //     setPostList(prevPosts => [...prevPosts, ...formattedPostList]);
+    //     setFetching(false)
+    // };
 
-        if (pageEnd.current) observer.observe(pageEnd.current)
+    // useEffect(() => {
+    //     observer = new IntersectionObserver((entries) => {
+    //         if (fetching || !hasMore) return;
+    //         if (entries[0].intersectionRatio === 1) {
+    //             setPage(prevPage => prevPage + 1);
+    //         }
+    //     }, { threshold: 1 });
 
-        return (() => { observer.disconnect() })
-    }, [fetching, hasMore])
+    //     if (pageEnd.current) observer.observe(pageEnd.current)
 
-    useEffect(() => {
-        if(hasMore) fetchPostList(page)
-    }, [page, hasMore]);
+    //     return (() => { observer.disconnect() })
+    // }, [fetching, hasMore])
 
-    // ref 도달해서 멈춰있을 때도 계속 서버로의 요청이 일어난다. 이러한 부분을 막아야함 
+    // useEffect(() => {
+    //     if(hasMore) fetchPostList(page)
+    // }, [page, hasMore]);
 
     return (
         <>
-            <div className="best_list boxStyle roundCorner shaDow">
+            {/* <div className="best_list boxStyle roundCorner shaDow">
                 <h4>자유 게시판</h4>
                 <ul className="board_w100">
                     {postList &&
@@ -76,7 +75,7 @@ const Community: React.FC = () => {
                         ))}
                 </ul>
             </div>
-            <TopBtn pageEnd={pageEnd}/>
+            <TopBtn pageEnd={pageEnd} /> */}
         </>
     );
 }

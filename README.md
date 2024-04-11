@@ -1,3 +1,9 @@
+\*\* 
+추가 개선 -> 캐싱, seo, 랜더링시 스켈레톤 ui
+캐싱: 리액트 쿼리
+seo: remix
+
+
 <img src='./client/src/assets/img/main.PNG'>
 <img src='./client/src/assets/img/ac.PNG'>
 <img src='./client/src/assets/img/post.PNG'>

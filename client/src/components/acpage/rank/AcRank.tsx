@@ -7,20 +7,23 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { DrinkList } from "../../../interface/post/acList.interface";
 import ranking from "../../../axios/acList/list/rankingAc";
+import { useQuery } from "@tanstack/react-query";
 
 const AcRank: React.FC = () => {
 
-    const [acRank, setAcRank] = useState<DrinkList[]>([]);
+    // const [acRank, setAcRank] = useState<DrinkList[]>([]);
 
-    const fetchList = async () => {
-        const result: DrinkList[] = await ranking()
-        setAcRank(result)
-    }
-    useEffect(() => {
-        fetchList();
-    }, [])
+    // const fetchList = async () => {
+    //     const result: DrinkList[] = await ranking()
+    //     setAcRank(result)
+    // }
+    // useEffect(() => {
+    //     fetchList();
+    // }, [])
 
-    console.log(acRank)
+    const { data, error, isLoading} = useQuery<DrinkList[], Error>({queryKey: ['aclist'], queryFn: ranking})
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>An error occurred</div>;
 
     return (
         <div className="ranking_list boxStyle roundCorner shaDow">
@@ -55,7 +58,7 @@ const AcRank: React.FC = () => {
                         },
                     }}
                 >
-                    {acRank && acRank.map((swip, key) => (
+                    {data && data.map((swip, key) => (
                         <SwiperSlide key={key}>
                             <span className="rankedIn">{key+1}</span>
                             <Link to={`/acview/${swip.acId}`}>
