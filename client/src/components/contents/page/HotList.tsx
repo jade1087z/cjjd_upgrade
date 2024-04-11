@@ -23,11 +23,12 @@ const HotList: React.FC = () => {
     //     fetchPostList();
     // }, [postList]);
 
-    const { data, error, isLoading } = useQuery<Post[], Error>({queryKey: ['posts'], queryFn: bestPost, });
+    const {data=[], error, isLoading } = useQuery<Post[], Error>({queryKey: ['posts'], queryFn: bestPost, placeholderData: []});
     console.log(data)
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>An error occurred</div>;
-
+    if (!Array.isArray(data)) return <div>Data is not an array</div>;
+    
     return (
         <div className="best_list boxStyle roundCorner shaDow">
             <h4>

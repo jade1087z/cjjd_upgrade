@@ -17,7 +17,7 @@ const Query: React.FC = () => {
     };
     const usePostsInfiniteQuery = () => {
         return useInfiniteQuery({
-            queryKey: ['posts'],
+            queryKey: ['postslist'],
             queryFn: fetchPosts,
             getNextPageParam: (lastPage, allPages) => {
                 const nextPage = allPages.length + 1;

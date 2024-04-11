@@ -5,11 +5,12 @@ import postAll from "../../../axios/post/list/listAll";
 import { useQuery } from "@tanstack/react-query";
 
 const RecentList: React.FC = () => {
-    const { data, error, isLoading } = useQuery<Post[], Error>({queryKey: ['posts'], queryFn: postAll});
+    const { data=[], error, isLoading } = useQuery<Post[], Error>({queryKey: ['posts'], queryFn: postAll, placeholderData: []});
     
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>An error occurred</div>;
-
+    if (!Array.isArray(data)) return <div>Data is not an array</div>;
+    console.log(data)
     return (
         <div className="best_list boxStyle roundCorner shaDow">
             <h4>
