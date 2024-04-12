@@ -5,6 +5,8 @@ import { RootState } from '../../../reducer/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { handleImageChange } from '../../../axios/user/handleImageChange';
+
+
 const banner = require("../../../assets/img/mypage_header.jpg")
 
 const Mypage: React.FC = () => {
@@ -12,9 +14,9 @@ const Mypage: React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
     const myMemberId = user?.myMemberId;
     const navigate = useNavigate();
-
+    console.log(user)
     useEffect(() => {
-        if (!user) {
+        if (myMemberId === 0) {
             alert('로그인을 진행해주세요.');
             navigate('/login');
         }

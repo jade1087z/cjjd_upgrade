@@ -10,6 +10,7 @@ export const bestPost = async (): Promise<Post[]> => {
         .get<PostResponse>("/api/post/bestpost")
         .then((res) => {
             if (res.status === 200) {
+                console.log('i am bestPost norecent')
                 return res.data.postList.map(post => ({
                     ...post, 
                     regTime: format(new Date(post.regTime), 'MM,dd')

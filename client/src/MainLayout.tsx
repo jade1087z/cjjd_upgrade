@@ -17,7 +17,6 @@ import AsideNot from './components/layout/AsideNot';
 import Authors from './components/commu/list/Authors';
 import MyList from './components/commu/list/MyList';
 import MyComment from './components/comment/MyComment';
-import Query from './components/commu/list/Query';
 
 const MainLayout:React.FC = () => {
     const user = useSelector((state: RootState) => state.user)
@@ -32,7 +31,7 @@ const MainLayout:React.FC = () => {
                 <section id="main_contents">
                     <Routes>
                         <Route path="/" element={<Main />} />
-                        <Route path="/community" element={<Query />} />
+                        <Route path="/community" element={<Community />} />
                         <Route path="/Authors/:boardAuthor" element={<Authors />} />
                         <Route path="/myList/:youId" element={<MyList />} />
                         <Route path="/myComment/:youId" element={<MyComment />} />

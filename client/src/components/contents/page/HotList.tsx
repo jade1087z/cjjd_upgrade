@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { Post } from "../../../interface/post/postInterface";
 import bestPost from "../../../axios/post/list/bestList";
 import { useQuery } from "@tanstack/react-query";
+import DataList from "./dataFatching/DataList";
+import { MainPageSkeleton } from "../../../skeleton/postlist/PostListSkeleton";
 
-interface PostResponse {
-    postList: Post[];
-}
 const HotList: React.FC = () => {
 
     // useEffect(() => {
@@ -23,32 +21,15 @@ const HotList: React.FC = () => {
     //     fetchPostList();
     // }, [postList]);
 
-    const {data=[], error, isLoading } = useQuery<Post[], Error>({queryKey: ['posts'], queryFn: bestPost, placeholderData: []});
-    console.log(data)
-    if (isLoading) return <div>Loading...</div>;
+    const { data = [], error, isLoading, isFetching } = useQuery<Post[], Error>({ queryKey: ['bestPost'], queryFn: bestPost, placeholderData: [] });
+    console.log(isLoading)
     if (error) return <div>An error occurred</div>;
     if (!Array.isArray(data)) return <div>Data is not an array</div>;
-    
+
     return (
-        <div className="best_list boxStyle roundCorner shaDow">
-            <h4>
-                인기 게시글 <span>HOT</span>
-            </h4>
-            <ul className="board_w100">
-                {data && data.map((post, key) => (
-                    <li key={key}>
-                        <Link to={`/view/${post.boardId}`}>
-                            <div className="board_info">
-                                <div className="board_title textCut">{post.boardTitle} </div>
-                                <div className="board_author textCut">{post.boardAuthor}</div>
-                                <div className="board_date">{post.regTime instanceof Date ? post.regTime.toISOString() : post.regTime}</div>
-                                <div className="board_view">조회수: {post.boardView}</div>
-                                <div className="board_comment">댓글: {post.boardComment}</div>
-                            </div>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+        <div className="mainpage best_list boxStyle roundCorner shaDow">
+        <h4>인기 게시글 <span>HOT</span></h4>
+        {isFetching ? (<MainPageSkeleton />) : (<DataList data={data} /> )}
         </div>
     );
 };

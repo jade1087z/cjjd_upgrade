@@ -9,6 +9,7 @@ export const postAll = async (): Promise<Post[]> => {
         .get<PostResponse>("/api/post/list")
         .then((res) => {
             if (res.status === 200) {
+                console.log('i am postAll recent')
                 return res.data.postList.map(post => ({
                     ...post,
                     regTime: format(new Date(post.regTime),'MM,dd')

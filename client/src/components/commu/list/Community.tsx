@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { Post } from '../../../interface/post/postInterface';
-import { format } from 'date-fns';
 import postAllpage from '../../../axios/post/list/pageList';
 import TopBtn from './TopBtn';
-import { useInfiniteQuery, useQuery, InfiniteData } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
+import { MainPageSkeleton } from '../../../skeleton/postlist/PostListSkeleton';
+import PostList from './DataList/PostList';
 
 const Community: React.FC = () => {
     // const [postList, setPostList] = useState<Post[]>([]);
@@ -47,35 +48,35 @@ const Community: React.FC = () => {
     //     if(hasMore) fetchPostList(page)
     // }, [page, hasMore]);
 
+    const usePostsInfiniteQuery = () => {
+        return useInfiniteQuery({
+            queryKey: ['postslist'],
+            queryFn: postAllpage,
+            getNextPageParam: (lastPage, allPages) => {
+                const nextPage = allPages.length + 1;
+                console.log(nextPage)
+                return nextPage;
+            },
+            initialPageParam: 1
+        });
+    };
+    const { data, fetchNextPage, hasNextPage, isFetching } = usePostsInfiniteQuery()
+    const { ref, inView } = useInView()
+
+    useEffect(() => {
+        if (inView && hasNextPage) {
+            fetchNextPage()
+        }
+    }, [inView, hasNextPage, fetchNextPage])
+
+
     return (
         <>
-            {/* <div className="best_list boxStyle roundCorner shaDow">
+            <div className="best_list boxStyle roundCorner shaDow">
                 <h4>자유 게시판</h4>
-                <ul className="board_w100">
-                    {postList &&
-                        postList.map((post, key) => (
-                            <li key={key}>
-                                <Link to={`/view/${post.boardId}`}>
-                                    <div className="board_info">
-                                        <div className="board_title textCut">
-                                            {post.boardTitle}
-                                        </div>
-                                        <div className="board_author textCut">
-                                            {post.boardAuthor}
-                                        </div>
-                                        <div className="board_date">
-                                            {post.regTime instanceof Date ? post.regTime.toISOString() : post.regTime}
-                                        </div>
-                                        <div className="board_view">
-                                            {post.boardView}
-                                        </div>
-                                    </div>
-                                </Link>
-                            </li>
-                        ))}
-                </ul>
+                {isFetching ? (<MainPageSkeleton />) : (<PostList data={data} />)}
             </div>
-            <TopBtn pageEnd={pageEnd} /> */}
+            <TopBtn ref={ref} />
         </>
     );
 }

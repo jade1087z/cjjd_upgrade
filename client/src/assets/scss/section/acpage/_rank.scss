@@ -25,7 +25,7 @@
             transition: all 0.3s;
             max-height: 400px;
 
-            > span {
+            .rankedIn {
                 display: block;
                 width: 40px;
                 height: 40px;
@@ -39,10 +39,7 @@
                 z-index: 2;
                 background-color: #5e5e5e;
                 transition: all 0.3s;
-
-                &.rankedIn {
-                    background-color: var(--mcolor);
-                }
+                background-color: var(--mcolor);
             }
 
             img {
