@@ -29,5 +29,6 @@
     "@common/*": [
       "src/common/*"
     ] // 예시 경로, 실제 경로에 맞게 조정 필요
-  }
+  },
+  "typeRoots": ["node_modules/@types"]
 }

@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowJs": true
+  },
+  "include": ["**/*.ts", "./router/uploadjs.js"],
+  "exclude": ["node_modules"],
+}
