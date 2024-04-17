@@ -27,10 +27,7 @@
                     display: inline-flex;
                     align-items: center;
                     padding-bottom: 10px;
-                    .selectBox3 {
-                        @include selectBox3;
-                    }
-
+                  
                     .link {
                         display: inline-flex;
                         align-items: center;

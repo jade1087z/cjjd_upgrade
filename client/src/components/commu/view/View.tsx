@@ -13,7 +13,7 @@ import deletePost from "../../../axios/post/deletPost";
 import CmmentWrite from "../../comment/CmmentWrite";
 
 const View: React.FC = () => {
-    const user = useSelector((state:RootState) => state.user)
+    const user = useSelector((state: RootState) => state.user)
     const myMemberId = user?.myMemberId
     const { boardId } = useParams<RouteParams>();
     const params: number | string | undefined = boardId === undefined ? undefined : (isNaN(Number(boardId)) ? boardId : Number(boardId));
@@ -22,22 +22,22 @@ const View: React.FC = () => {
     const [btnLike, setBtnLike] = useState<boolean>(false)
     const [commentUpdate, setCommentUpdate] = useState<boolean>(false)
     const [type, setType] = useState<string>('board')
-   
+
     useEffect(() => {
         let isMounted = true
         const fetchPost = async () => {
-            const data: Post | undefined = await boardDetail({params, setBtnLike, myMemberId});
+            const data: Post | undefined = await boardDetail({ params, setBtnLike, myMemberId });
             if (data && isMounted) {
                 try {
-                    const formattedPost: Post | undefined  = {
+                    const formattedPost: Post | undefined = {
                         ...data,
                         regTime: format(new Date(data.regTime), "MM.dd"),
                     };
-                    setPost(formattedPost);    
+                    setPost(formattedPost);
                 } catch (error) {
                     console.error('Error formatting date:', error);
                 }
-            } 
+            }
         };
         fetchPost();
         return () => {
@@ -50,55 +50,19 @@ const View: React.FC = () => {
         <>
             <div className="board_view boxStyle roundCorner shaDow">
                 <h4><Link to="/community">자유게시판</Link></h4>
-                
-                {post && <PostData post={post} params={params} btnLike={btnLike} setBtnLike={setBtnLike} setPost={setPost} myMemberId={myMemberId}/>}
+
+                {post && <PostData post={post} params={params} btnLike={btnLike} setBtnLike={setBtnLike} setPost={setPost} myMemberId={myMemberId} />}
 
                 <div className="comment_summary">
                     <div className="button_list">
-                        <button className="delete" onClick={(e) => deletePost(e, params,myMemberId)}>삭제하기</button>
-                        <button className="modify" onClick={(e) => updateCheck(e, params,myMemberId)}>수정하기</button>
-                        <button className="good" onClick={(e) => goodBtn({e, params, btnLike, setBtnLike, setPost, myMemberId})}>추천하기</button>
+                        <button className="delete" onClick={(e) => deletePost(e, params, myMemberId)}>삭제하기</button>
+                        <button className="modify" onClick={(e) => updateCheck(e, params, myMemberId)}>수정하기</button>
+                        <button className="good" onClick={(e) => goodBtn({ e, params, btnLike, setBtnLike, setPost, myMemberId })}>추천하기</button>
                     </div>
                 </div>
             </div>
-                
-                {post && <CommentArea params={params}  commentUpdate={commentUpdate} myMemberId={myMemberId} setCommentUpdate={setCommentUpdate} type={type}/>}
-                <CmmentWrite myMemberId={myMemberId} params={params} setCommentUpdate={setCommentUpdate} type={type}/>
-            
-
-            {/* <div className="boxStyle roundCorner shaDow">
-                <ul className="board_w100">
-                    <li className="<?= $thisId ?>">
-                        <Link to="/">
-                            <div className="board_info">
-                                <div className="board_title textCut"></div>
-                                <div className="board_author textCut"></div>
-                                <div className="board_date"></div>
-                                <div className="board_view">
-                                    <span></span>
-                                </div>
-                            </div>
-                        </Link>
-                    </li>
-                </ul>
-
-                <div className="board_page_option">
-                    <div className="board_pages">
-                        <ul className="pages_list">
-                            <li className="prev">
-                                <Link to="/">&lt;</Link>
-                            </li>
-
-                            <li className="active">
-                                <Link to="/">1</Link>
-                            </li>
-                            <li className="next">
-                                <Link to="/">&gt;</Link>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div> */}
+            {post && <CommentArea params={params} commentUpdate={commentUpdate} myMemberId={myMemberId} setCommentUpdate={setCommentUpdate} type={type} />}
+            <CmmentWrite myMemberId={myMemberId} params={params} setCommentUpdate={setCommentUpdate} type={type} />
         </>
     );
 };

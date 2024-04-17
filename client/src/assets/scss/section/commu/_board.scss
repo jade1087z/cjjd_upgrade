@@ -40,9 +40,6 @@
     display: flex;
     justify-content: center;
 
-    .selectBox2 {
-        @include selectBox2;
-    }
     .board_search_box {
         margin-left: 10px;
         position: relative;
