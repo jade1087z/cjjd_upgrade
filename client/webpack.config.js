@@ -7,7 +7,10 @@ module.exports = {
             "http": require.resolve("stream-http"),
             "https": require.resolve("https-browserify"),
             "buffer": require.resolve("buffer/"),
-        }
+        },
+        alias: { '@components': path.resolve(__dirname, 'src/components') },
+        extensions: ['.ts', '.js'],
+        optimization: { splitChunks: { chunks: 'all' } }
     },
     module: {
         rules: [
@@ -27,7 +30,4 @@ module.exports = {
             }
           ]
     },
-    resolve: {
-        extensions: ['.ts', '.js']
-      }
 };
