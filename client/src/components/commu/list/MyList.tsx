@@ -36,7 +36,7 @@ const MyList: React.FC = () => {
             initialPageParam: 1
         });
     };
-    const { data, fetchNextPage, hasNextPage, isFetching } = usePostsInfiniteQuery()
+    const { data, fetchNextPage, hasNextPage } = usePostsInfiniteQuery()
     const { ref, inView } = useInView()
 
     useEffect(() => {
@@ -48,7 +48,7 @@ const MyList: React.FC = () => {
     return (
         <div className="best_list boxStyle roundCorner shaDow">
             <h4>내가 쓴 게시글</h4>
-            {isFetching ? (<MainPageSkeleton />) : (<PostList data={data}/>)}
+            <PostList data={data}/>
             <TopBtn ref={ref} />
         </div>
     )

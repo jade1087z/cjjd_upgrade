@@ -27,11 +27,13 @@ app.listen(port, () => {
 
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
+    // res.sendFile(path.join(__dirname, "/home/ubuntu/cjjd_upgrade/client/build/index.html"));
   });
   
   app.get("*", (req: Request, res: Response, next: NextFunction) => {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
+    // res.sendFile(path.join(__dirname, "/home/ubuntu/cjjd_upgrade/client/build/index.html"));
+
   });
-// router
 
 

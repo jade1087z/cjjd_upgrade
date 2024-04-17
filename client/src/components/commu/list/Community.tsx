@@ -60,7 +60,7 @@ const Community: React.FC = () => {
             initialPageParam: 1
         });
     };
-    const { data, fetchNextPage, hasNextPage, isFetching } = usePostsInfiniteQuery()
+    const { data, fetchNextPage, hasNextPage } = usePostsInfiniteQuery()
     const { ref, inView } = useInView()
 
     useEffect(() => {
@@ -74,7 +74,7 @@ const Community: React.FC = () => {
         <>
             <div className="best_list boxStyle roundCorner shaDow">
                 <h4>자유 게시판</h4>
-                {isFetching ? (<MainPageSkeleton />) : (<PostList data={data} />)}
+                <PostList data={data} />
             </div>
             <TopBtn ref={ref} />
         </>

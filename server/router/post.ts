@@ -1,10 +1,7 @@
-import { ImageFile } from './../../client/src/interface/post/ImageFile.interface';
 import express, { Request, Response } from 'express';
 import con from '../util/db';
-import { CustomFile } from '../interface/postInterface/file.interface';
 import { BoardResult } from '../interface/postInterface/board.interface';
 import { checkResults } from '../interface/postInterface/check.interface';
-const setUpload = require('../util/multerS3')
 const logger = require("../util/logger");
 const router = express.Router();
 

@@ -1,9 +1,7 @@
 import express, { Request, Response } from 'express';
 import con from '../util/db'
 import { alcohol } from '../interface/acInterface/ac.Interface';
-import { commentResult } from '../interface/commentInterface/commentResult';
 import { checkResults } from '../interface/postInterface/check.interface';
-import { User } from '../interface/userInterface/user.interface';
 const router = express.Router();
 const logger = require("../util/logger")
 
