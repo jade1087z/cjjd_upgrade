@@ -1,4 +1,6 @@
 \*\* 
+배포 링크 ec2-52-79-246-105.ap-northeast-2.compute.amazonaws.com
+
 스켈레톤 ui 적용하고 배포 seo 검색
 추가 개선 -> 캐싱, seo, 랜더링시 스켈레톤 ui
 캐싱: 리액트 쿼리
