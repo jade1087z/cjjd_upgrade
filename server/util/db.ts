@@ -9,5 +9,5 @@ const con = mysql
         database: "cjjd",
     })
     .promise();
-
+// ip-172-31-6-95
 export default con;

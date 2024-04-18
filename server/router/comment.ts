@@ -2,24 +2,9 @@ import express, { Request, Response } from 'express';
 import con from '../util/db';
 import { commentResult } from '../interface/commentInterface/commentResult';
 import { User } from '../interface/userInterface/user.interface';
+import { BoardResult } from '../interface/postInterface/board.interface';
 const router = express.Router();
 const logger = require("../util/logger");
-
-interface BoardResult {
-    boardId: number;
-    myMemberId: number;
-    boardCategory: string;
-    boardTitle: string;
-    boardContents: string;
-    boardAuthor: string;
-    boardView: number;
-    boardLike: number;
-    boardComment: number;
-    boardImgFile: string | null;
-    boardImgSize: string | null;
-    boardDelete: number;
-    regTime: Date | string;
-}
 
 router.post('/write/:boardId', async (req: Request, res: Response) => {
     const id = req.params.boardId; // boardId 또는 acId

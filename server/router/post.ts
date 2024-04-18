@@ -9,7 +9,7 @@ router.post('/write/:mymemberId', async (req: Request, res: Response) => {
     const myMemberId = req.params.mymemberId;
     const { boardTitle, boardContents, boardAuthor } = req.body
     try {
-        const sql = `INSERT INTO drinkBoard(myMemberId, boardTitle, boardContents, boardAuthor) VALUES (?, ?, ?, ?)`;
+        const sql = `INSERT INTO drinkboard(myMemberId, boardTitle, boardContents, boardAuthor) VALUES (?, ?, ?, ?)`;
     let values = [myMemberId, boardTitle, boardContents, boardAuthor];
         await con.query(sql, values);
         res.status(200).json({ success: true });
@@ -123,8 +123,8 @@ router.get(`/view/:boardId`, async (req: Request, res: Response) => {
 
     let checkSql = "SELECT * FROM drinklikes WHERE myMemberId = ? AND boardId = ?";
     let valueForCheckSql = [myMemberId, boardId]
-    let updateSql = `UPDATE drinkBoard SET boardView = boardView + 1 WHERE boardId = ? AND boardDelete = 0`;
-    let sql = `SELECT * FROM drinkBoard WHERE boardId = ? AND boardDelete = 0`;
+    let updateSql = `UPDATE drinkboard SET boardView = boardView + 1 WHERE boardId = ? AND boardDelete = 0`;
+    let sql = `SELECT * FROM drinkboard WHERE boardId = ? AND boardDelete = 0`;
     let value = boardId;
 
     try {
@@ -199,42 +199,6 @@ router.get('/check/:boardId', async (req: Request, res: Response) => {
         res.status(500).json({ success: false, message: "서버 오류가 발생했습니다." });
     }
 })
-
-// router.patch('/update/:boardId', (req, res, next) => setUpload('cjjdup/post')(req, res, next), async (req: Request, res: Response) => {
-//     const boardId = req.params.boardId;
-//     const { boardTitle, boardContents, newRange } = req.body
-//     console.log(newRange)
-
-//     function isCustomFile(file: any): file is CustomFile {
-//         return file && typeof file === 'object' && 'location' in file;
-//     }
-
-//     let location: string | undefined = undefined;
-//     let size: number | undefined = undefined;
-
-//     if (isCustomFile(req.file)) {
-//         // if문 안에서 선언된 변수에 값 할당
-//         location = req.file.location;
-//         size = req.file.size;
-//     }
-
-//     console.log(req.file, 'reqfile')
-//     console.log(location, 'location update')
-//     console.log(size, 'siz')
-
-
-//     try {
-//         const sql = 'UPDATE drinkboard SET boardTitle = ?, boardContents = ?, boardImgFile = ?, boardImgSize = ?, boardImgRange = ? WHERE boardId = ?';
-//         const values = [boardTitle, boardContents, location, size, newRange, boardId]
-//         await con.query(sql, values)
-
-//         res.status(200).json({ success: true });
-//     } catch (error) {
-//         logger.error(error)
-//         res.status(500).json({ success: false, message: "서버 오류가 발생했습니다." });
-//     }
-
-// })
 
 // 게시글 삭제 부분 
 router.delete('/delete/:boardId', async (req: Request, res: Response) => {

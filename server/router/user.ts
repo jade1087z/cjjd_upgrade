@@ -6,21 +6,6 @@ const jwt = require("../util/jwt");
 import bcrypt from 'bcryptjs';
 const setUpload = require('../util/multerS3')
 
-interface User {
-    youId: string;
-    youPass: string;
-    youName: string;
-    youNick: string;
-    youEmail: string;
-    youBirth: string;
-    youAddress: string | null;
-    youImgFile: string | null;
-    youImgSize: string | null;
-    memberDelete: number;
-    regTime: string | Date;
-}
-
-
 router.post('/register', async (req: Request, res: Response) => {
     console.log(req.body)
     try {
@@ -72,6 +57,7 @@ router.post('/login', async (req: Request, res: Response) => {
                     exp: Math.floor(Date.now() / 1000) + (600 * 60),
                 }
                 const accessToken = jwt.generateToken(payload)
+                console.log(accessToken, 'accessto')
                 res.status(200).json({ success: true, accessToken: accessToken, user: user })
 
             } else {

@@ -19,7 +19,7 @@ export const post = async ({ e, title, contents, myMemberId, author}: postProps)
             .then((res) => {
                 if (res.data.success) {
                     alert("글 작성이 완료되었습니다.");
-                    // window.location.href= '/community'
+                    window.location.href= '/community'
                 } else {
                     console.log("axios false");
                 }

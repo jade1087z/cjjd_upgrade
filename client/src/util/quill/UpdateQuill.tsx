@@ -1,7 +1,5 @@
 import ReactQuill, { Quill } from 'react-quill';
 import { useMemo } from 'react';
-import { imageHandler } from './imageHandle';
-
 const Font = Quill.import('formats/font');
 Font.whitelist = [
     'sans-serif',
@@ -30,11 +28,6 @@ const UpdateQuillEditor = ({ quillRef, onChange, placeholder, contents }) => {
                     ['image', 'video'],
                     ['clean'],
                 ],
-                handlers: { image: () => imageHandler(quillRef), },
-            },
-            ImageResize: {
-                parchment: Quill.import('parchment'),
-                modules: ['Resize', 'DisplaySize'],
             },
         }
     }, [quillRef])

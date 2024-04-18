@@ -1,6 +1,5 @@
 import ReactQuill, { Quill } from 'react-quill';
-import {  useMemo } from 'react';
-import { imageHandler } from './imageHandle';
+import { useMemo } from 'react';
 
 const Font = Quill.import('formats/font');
 Font.whitelist = [
@@ -13,7 +12,6 @@ Font.whitelist = [
   'lucida',
 ];
 Quill.register(Font, true);
-
 
 const QuillEditor = ({ quillRef, onChange, placeholder }) => {
 
@@ -31,11 +29,6 @@ const QuillEditor = ({ quillRef, onChange, placeholder }) => {
           ['image', 'video'],
           ['clean'],
         ],
-        handlers: { image: () => imageHandler(quillRef), },
-      },
-      ImageResize: {
-        parchment: Quill.import('parchment'),
-        modules: ['Resize', 'DisplaySize'],
       },
     }
   }, [quillRef])
