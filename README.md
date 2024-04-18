@@ -1,6 +1,6 @@
 \*\* 
 배포 링크 
-<a href='ec2-52-79-246-105.ap-northeast-2.compute.amazonaws.com'>취중진담 웹사이트 </a>
+<a href='http://ec2-52-79-246-105.ap-northeast-2.compute.amazonaws.com'>취중진담 웹사이트 </a>
 
 
 스켈레톤 ui 적용하고 배포 seo 검색
